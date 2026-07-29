@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আমার বুকমার্ক ড্যাশবোর্ড</title>
+    <link rel="icon" href="spm.ico" />
+    <!-- Google Fonts: Hind Siliguri for Bengali -->
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" language="javascript"> 
+    $(function () { $(this).bind("contextmenu", function (e) { e.preventDefault(); }); }); 
+</script>
+<script>
+    document.onkeydown = function(e) {
+        if (e.ctrlKey && (e.keyCode === 85 )) {
+            return false;
+        }
+    };
+</script>
+    
+    <style>
+        :root {
+            --primary-color: #ef6c57; 
+            --bg-light: #f4f7f6;
+            --text-dark: #333;
+            --text-muted: #666;
+            --border-color: #e0e0e0;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Graphy Icon Style */
+        .graphy-icon {
+            width: 18px;
+            height: 18px;
+            border-radius: 3px;
+            background: white;
+            padding: 1px;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+        }
+
+        aside {
+            width: 240px;
+            background: var(--white);
+            border-right: 1px solid var(--border-color);
+            padding: 20px 0;
+            overflow-y: auto;
+        }
+
+        .sidebar-item {
+            padding: 12px 25px;
+            display: block;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .sidebar-item:hover {
+            background: #fff5f3;
+            color: var(--primary-color);
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .toolbar {
+            margin-bottom: 25px;
+        }
+
+        .toolbar h2 {
+            font-size: 24px;
+            color: #222;
+        }
+
+        .bookmark-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 8px;
+            border-top: 4px solid var(--primary-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 18px;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .category-header h3 {
+            font-size: 18px;
+            color: #444;
+        }
+
+        .bookmark-list {
+            list-style: none;
+        }
+
+        .bookmark-wrapper {
+            margin-bottom: 18px;
+        }
+
+        .bookmark-item {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #222;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .bookmark-item:hover {
+            color: var(--primary-color);
+        }
+
+        .icon-circle {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 11px;
+            color: #555;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Note Styling - Supporting Multi-line */
+        .bookmark-note {
+            display: block;
+            margin-top: 5px;
+            margin-left: 38px;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+            white-space: pre-line; /* Allows multi-line via code breaks */
+        }
+
+        .site-footer {
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 14px;
+            color: var(--premium-brown);
+            opacity: 0.7;
+            font-weight: 400;
+        }
+
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            aside {
+                width: 100%;
+                display: flex;
+                overflow-x: auto;
+                padding: 10px;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .nav-links { display: none; }
+            .bookmark-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<BODY oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-heart"></i> বুকমার্কস
+        </div>
+        <div class="nav-links">
+            <a href="https://spmukherjee.co.in/" target="_blank"><i class="fa-regular fa-user"></i> শিবা</a>
+            
+            <!-- Graphy Icon Implementation -->
+            <a href="https://spm.graphy.com/s/store" target="_blank">
+                <img src="https://www.graphy.com/favicon.ico" alt="Graphy" class="graphy-icon"> শিবার ডিজিট্যাল ক্রিয়েসনস
+            </a>
+            
+            <a href="#"><i class="fa-regular fa-circle-question"></i> সহায়তা</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside>
+            <a href="https://sivahqpw.github.io/spm/bangla-bookmark-link-genie-v1.html" target="_blank" class="sidebar-item">বুকমার্ক লিঙ্ক জিনি</a>
+            <a href="https://spmohq.github.io/shoot/link-genie.html" target="_blank" class="sidebar-item"> লিঙ্ক জিনি</a>
+            <a href="https://sivahqpw.github.io/spm/text-mechanic-lite.html" target="_blank" class="sidebar-item">টেক্সট ম্যাকানিক</a>
+            <a href="https://sivahqpw.github.io/spm/req-to-pgp.html" target="_blank" class="sidebar-item">পিজিপি জিনি প্রম্পট</a>
+            <a href="https://sivahqpw.github.io/spm/about-me.html" target="_blank" class="sidebar-item">অ্যাবাউট মি</a>
+            <li><a href="https://spmohq.github.io/shoot/master-workflow.html" target="_blank" class="sidebar-item">লিড ম্যাগনেট জিনি</a></li>
+            <li><a href="https://sivahqpw.github.io/spm/extract-style-layer.html" target="_blank" class="sidebar-item">রাইটিং স্টাইল এক্সট্রাকটর</a></li>
+            <li><a href="https://sivahqpw.github.io/spm/english-localization-layer.html" target="_blank" class="sidebar-item">Eng Language Layer</a></li>
+        </aside>
+
+        <main>
+            <div class="toolbar">
+                <h2>এডু মিডিয়া প্রোডাকশন সিস্টেম</h2>
+            </div>
+
+            <div class="bookmark-grid">
+                
+                <!-- Market Ready -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <h3><i class="fa-solid fa-chevron-down"></i> নোটস</h3>
+                    </div>
+                    <div class="bookmark-list">
+                        
+<div class="bookmark-wrapper">
+    <a href="https://sivahqpw.github.io/spm/bengali-localization-layer.html" target="_blank" class="bookmark-item">
+        <span class="icon-circle">১</span> BENGALI LAYER
+    </a>
+    <div class="bookmark-note">প্রম্পট লেয়ার
+
+  </div>
+</div>
+
+<div class="bookmark-wrapper">
+    <a href="https://sivahqpw.github.io/spm/icprmart-details.html" target="_blank" class="bookmark-item">
+        <span class="icon-circle">২</span> ICPRMART Details
+    </a>
+    <div class="bookmark-note">From: আপলোডেড ফাইল 
+
+  </div>
+</div>
+
+
+
+                    </div>
+                </div>
+
+                <!-- Tips Posts -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <h3><i class="fa-solid fa-chevron-down"></i> মেম্বারশিপ</h3>
+                    </div>
+                    <div class="bookmark-list">
+                        <div class="bookmark-wrapper">
+    <a href="https://sivahqpw.github.io/spm/membership-with-low-ticket-pdf-product.html" target="_blank" class="bookmark-item">
+        <span class="icon-circle">১</span> মেম্বারশিপ প্ল্যান অ্যান্ড অ্যাসেটস
+    </a>
+    <div class="bookmark-note">From: The uploaded document
+To:  প্ল্যান, কনটেন্ট পিলার্স, অ্যান্ড অ্যাসেটস
+  </div>
+</div>
+                    </div>
+                </div>
+
+                <!-- Insider Leak -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <h3><i class="fa-solid fa-chevron-down"></i> ChatGPT Work</h3>
+                    </div>
+
+                    <div class="bookmark-list">
+<div class="bookmark-wrapper">
+    <a href="https://sivahqpw.github.io/spm/chatgpt-work-step-1.html" target="_blank" class="bookmark-item">
+        <span class="icon-circle">১</span> মেথড ও ইমপ্লিমেনটেসন প্রসেস
+    </a>
+    <div class="bookmark-note">From: আপলোডেড ডক
+To:  প্রথমে মেথড, তারপরে প্রসেস
+  </div>
+</div>
+
+<div class="bookmark-wrapper">
+    <a href="https://sivahqpw.github.io/spm/chatgpt-work-step-2.html" target="_blank" class="bookmark-item">
+        <span class="icon-circle">২</span> টু ডু জিনি
+    </a>
+</div>
+
+<div class="bookmark-wrapper">
+    <a href="https://sivahqpw.github.io/spm/chatgpt-work-step-3.html" target="_blank" class="bookmark-item">
+        <span class="icon-circle">3</span> Individual Step
+    </a>
+</div>
+
+<div class="bookmark-wrapper">
+    <a href="https://sivahqpw.github.io/spm/chatgpt-work-step-4.html" target="_blank" class="bookmark-item">
+        <span class="icon-circle">4</span> Individual Lesson
+    </a>
+</div>
+
+<div class="bookmark-wrapper">
+    <a href="https://sivahqpw.github.io/spm/course-title-genie.html" target="_blank" class="bookmark-item">
+        <span class="icon-circle">5</span> Course Title
+    </a>
+</div>
+
+<div class="bookmark-wrapper">
+    <a href="https://sivahqpw.github.io/spm/course-assets.html" target="_blank" class="bookmark-item">
+        <span class="icon-circle">6</span> Course Assets
+    </a>
+</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="padding-bottom: 20px;"></div>
+
+            <div class="toolbar">
+                <h2>এডু মিডিয়া প্রোডাকশন সিস্টেম</h2>
+            </div>
+
+            <div class="bookmark-grid">
+                
+                <!-- Market Ready -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <h3><i class="fa-solid fa-chevron-down"></i> মার্কেট রেডি</h3>
+                    </div>
+                    <div class="bookmark-list">
+                        
+                        <div class="bookmark-wrapper">
+                            <a href="https://chat.openai.com" target="_blank" class="bookmark-item">
+                                <span class="icon-circle">C</span> ChatGPT - ICA কেমিস্ট
+                            </a>
+                            <div class="bookmark-note">
+                                এটি রসায়ন রিপোর্ট তৈরি করতে ব্যবহার করুন।
+                                আইসিএ প্রম্পটগুলো সঠিকভাবে এখানে কাজ করবে।
+                            </div>
+                        </div>
+
+                        <div class="bookmark-wrapper">
+                            <a href="https://chat.openai.com" target="_blank" class="bookmark-item">
+                                <span class="icon-circle">C</span> 4A কন্টেন্ট জেনারেটর
+                            </a>
+                            <div class="bookmark-note">
+                                সোশ্যাল মিডিয়া কন্টেন্ট তৈরির প্রধান টুল।
+                                এটি বর্তমানে আপডেট করা হয়েছে।
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Tips Posts -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <h3><i class="fa-solid fa-chevron-down"></i> টিপস পোস্ট</h3>
+                    </div>
+                    <div class="bookmark-list">
+                        <div class="bookmark-wrapper">
+                            <a href="#" class="bookmark-item">
+                                <span class="icon-circle">T</span> টিপস পোস্ট জিনি
+                            </a>
+                            <div class="bookmark-note">
+                                প্রতিদিনের শিক্ষামূলক টিপস তৈরির জন্য।
+                                নোট: পোস্ট করার আগে বানান চেক করে নেবেন।
+                            </div>
+                        </div>
+                    <div class="bookmark-list">
+                        <div class="bookmark-wrapper">
+                            <a href="#" class="bookmark-item">
+                                <span class="icon-circle">T</span> টিপস পোস্ট জিনি
+                            </a>
+                            <div class="bookmark-note">
+                                প্রতিদিনের শিক্ষামূলক টিপস তৈরির জন্য।
+                                নোট: পোস্ট করার আগে বানান চেক করে নেবেন।
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Insider Leak -->
+                <div class="category-card">
+                    <div class="category-header">
+                        <h3><i class="fa-solid fa-chevron-down"></i> ইনসাইডার লিক পোস্ট</h3>
+                    </div>
+                    <div class="bookmark-list">
+                        <div class="bookmark-wrapper">
+                            <a href="#" class="bookmark-item">
+                                <span class="icon-circle">1</span> ইনসাইডার লিক জিনি
+                            </a>
+                            <div class="bookmark-note">
+                                শুধুমাত্র মেম্বারদের জন্য এক্সক্লুসিভ পোস্ট মেকার।
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+        </main>
+    </div>
+<footer class="site-footer">
+    <p>Copyright © <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.</p>
+</footer>
+</body>
+</html>
