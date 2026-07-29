@@ -1,0 +1,1252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ai Radical Content</title>
+	<style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #F5F7FA;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #000000;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Title */
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #FFFFFF;
+        }
+
+        /* Form */
+        label {
+            color: #FFFFFF; 
+            font-size: 16px; 
+            font-weight: bold; 
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        select:focus, input:focus {
+            border-color: #D83234;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #40CAFA;
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #40CAFA;
+        }
+
+        /* Output Section */
+        .output-section {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .output-section h3 {
+            margin-bottom: 10px;
+            color: #000000;
+        }
+
+        .output-section p, .output-section ul {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .output-section ul {
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Logo */
+        .logo {
+            width: 300px;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+        }
+		.copy-btn {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #000000; /* Black background */
+    color: #FFFFFF; /* white text */
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+    background-color: #40CAFA; /* Dark gray on hover */
+}
+
+.output-section {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background-color: #ffffff; /* White background */
+    color: #000000; /* Black text */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.output-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.output-section pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background: #f4f4f4; /* Light gray background */
+    padding: 10px;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    color: #333333;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://actionactivated.com/wp-content/uploads/radicalsaas.png" alt="Content Generator Logo" class="logo">
+        <label for="style">Select a Technique:</label>
+		<select id="style" size="10">
+<option value="burn_it_down_list">The "Burn It Down" List</option>
+			<option value="underdog_advantage">The Underdog Advantage</option>
+            <option value="red_flag_marketing">Red Flag Content</option>
+			<option value="if_youre_still_doing_this_post">If You’re Still Doing This</option>
+            <option value="challenge_conventional_wisdom">Challenge Conventional Wisdom</option>
+			<option value="the_real_secret_no_one_tells_you">The Real Secret No One Tells You</option>
+			<option value="the_anti_guide">The Anti-Guide</option>
+			<option value="the_most_overhyped_myths">The Most Overhyped Myths</option>
+			<option value="the_wrong_way_vs_the_right_way">The Wrong Way vs. The Right Way</option>
+            <option value="reverse_engineer_the_failures">Reverse-Engineer the Failures</option>
+			<option value="the_price_of_ignoring_this">The Price of Ignoring This</option>
+			<option value="the_hidden_opportunity">The Hidden Opportunity</option>
+			<option value="youve_been_lied_to">You’ve Been Lied To</option>
+			<option value="the_painful_mistakes">The Painful Mistakes</option>
+			<option value="over_the_top_exaggeration">Over-the-Top Exaggeration</option>
+			<option value="worst_advice_compilation">Worst Advice Compilation</option>
+			<option value="the_unexpected_shortcut">The Unexpected Shortcut</option>
+			<option value="the_contrarian_strategy">The Contrarian Strategy</option>
+			<option value="one_question_solution">One-Question Solution</option>
+			<option value="whats_missing_campaign">What’s Missing? Style</option>
+			<option value="the_false_choice">The False Choice</option>
+			<option value="the_domino_effect">The Domino Effect</option>
+			<option value="the_iceberg_effect">The Iceberg Effect</option>
+			<option value="from_overwhelm_to_clarity">From Overwhelm to Clarity</option>
+			<option value="the_evolution_of_success">The Evolution of Success</option>
+			<option value="the_reverse_roadmap">The Reverse Roadmap</option>
+			<option value="the_one_thing_that_changes_everything">The One Thing That Changes Everything</option>
+			<option value="the_hidden_trap">The Hidden Trap</option>
+			<option value="the_secret_ingredient">The Secret Ingredient</option>
+			<option value="the_myth_of_more">The Myth of More</option>
+			<option value="the_bare_minimum_method">The Bare Minimum Method</option>
+			<option value="the_thing_youre_overlooking">The Thing You’re Overlooking</option>
+			<option value="what_they_dont_want_you_to_know">What They Don’t Want You to Know</option>
+			<option value="the_zero_to_one_leap">The Zero-to-One Leap</option>
+			<option value="the_mindset_shift">The Mindset Shift</option>
+			<option value="the_big_reveal">The Big Reveal</option>
+			<option value="the_most_overlooked_shortcut">The Most Overlooked Shortcut</option>
+			<option value="the_24_hour_challenge">The 24-Hour Challenge</option>
+			<option value="the_niche_insider">The Niche Insider</option>
+			<option value="the_rule_breaker">The Rule Breaker</option>
+			<option value="the_what_if_game">The ‘What If?’ Game</option>
+			<option value="the_road_less_taken">The Road Less Taken</option>
+			<option value="the_expert_myth">The Expert Myth</option>
+			<option value="the_time_machine">The Time Machine</option>
+			<option value="the_myth_of_effort">The Myth of Effort</option>
+			<option value="the_hidden_trade_off">The Hidden Trade-Off</option>
+			<option value="the_leapfrog_strategy">The Leapfrog Strategy</option>
+			<option value="the_rebellion_rule">The Rebellion Rule</option>
+			<option value="the_filter_test">The Filter Test</option>
+			<option value="the_reset_myth">The Reset Myth</option>
+			<option value="the_fast_forward_hack">The Fast-Forward Hack</option>
+			<option value="the_results_pyramid">The Results Pyramid</option>
+			<option value="the_anti_hack">The Anti-Hack</option>
+			<option value="the_backdoor_strategy">The Backdoor Strategy</option>
+			<option value="the_snowglobe_shake_up">The Snowglobe Shake-Up</option>
+			<option value="the_energy_leak">The Energy Leak</option>
+			<option value="the_reverse_obstacle_course">The Reverse Obstacle Course</option>
+			<option value="the_blank_canvas">The Blank Canvas</option>
+			<option value="the_unwritten_rule">The Unwritten Rule</option>
+			<option value="the_anti_perfection_plan">The Anti-Perfection Plan</option>
+			<option value="the_opportunity_window">The Opportunity Window</option>
+			<option value="the_unseen_hero">The Unseen Hero</option>
+			<option value="the_end_of_the_line">The End of the Line</option>
+			<option value="the_comfort_zone_trap">The Comfort Zone Trap</option>
+			<option value="the_reflection_paradox">The Reflection Paradox</option>
+			<option value="the_infinite_loop_of_doubt">The Infinite Loop of Doubt</option>
+			<option value="the_hidden_war">The Hidden War</option>
+			<option value="the_silent_revolution">The Silent Revolution</option>
+			<option value="the_weight_of_assumptions">The Weight of Assumptions</option>
+			<option value="the_forgotten_timeline">The Forgotten Timeline</option>
+			<option value="the_illusion_of_stability">The Illusion of Stability</option>
+			<option value="the_ripple_youll_never_see">The Ripple You’ll Never See</option>
+			<option value="the_silent_saboteur">The Silent Saboteur</option>
+			<option value="the_mirror_effect">The Mirror Effect</option>
+			<option value="the_illusion_of_time">The Illusion of Time</option>
+			<option value="the_lightbulb_moment">The Lightbulb Moment</option>
+			<option value="the_power_of_giving_up">The Power of Giving Up</option>
+			<option value="the_wisdom_of_forgetting">The Wisdom of Forgetting</option>
+			<option value="the_reward_of_stopping">The Reward of Stopping</option>
+			<option value="the_invisible_milestone">The Invisible Milestone</option>
+
+        </select>
+        <label for="keyword">Enter Enter Your Niche, Keyword or Pain Point:</label>
+        <input type="text" id="keyword" placeholder="e.g., Forex Trading">
+        <button onclick="generateContent()">GENERATE</button>
+        <div id="output" class="output-section"></div>
+    </div>
+    <footer>
+    <a href="https://www.facebook.com/groups/markhesscustomergroup/" target="_blank" style="text-decoration: none; color: #fff; background-color: #4267B2; padding: 10px 20px; border-radius: 5px; font-weight: bold; display: inline-block; margin-bottom: 10px;">Join My Facebook Group</a>
+    <div>&copy; Ai Radical Content - All Rights Reserved - Created by Mark Hess</div>
+</footer>
+
+    <script>
+        const CONTENT_STYLES = {
+	underdog_advantage: {
+    name: "The Underdog Advantage",
+    summary: "Show how being an underdog in [keyword] can be a surprising advantage and path to success.",
+    examples: [
+        "Feel like the underdog in [keyword]? Good. Underdogs win by being scrappy and focused.",
+        "The underdog advantage in [keyword]: You have nothing to lose, so go all in and win big."
+    ],
+    long_prompt: "Write the most compelling, high-impact 1000-word piece about 'The Underdog Advantage' as a transformative mindset and strategy for thriving in [keyword]. Open with an unforgettable, emotionally charged anecdote of an underdog triumphing in [keyword], immediately pulling the reader in with high stakes and visceral storytelling. Then, unveil 3-5 powerful ways that being an underdog creates unique advantages—such as the ability to take risks without fear, an unstoppable work ethic forged through adversity, or an outsider perspective that fuels innovation. Dive deep into these concepts with real-world examples, expert insights, and psychological principles that prove why underdogs win. Maintain an empowering, highly motivational tone that challenges readers to embrace their perceived disadvantages as their greatest assets. Seamlessly weave in actionable strategies that readers can implement immediately to leverage their underdog status for success. End with an electrifying call-to-action, urging readers to own their journey, defy the odds, and rewrite their story. Every sentence should captivate, inspire, and push the reader toward breakthrough thinking."
+},
+
+simplify_challenge: {
+    name: "The Simplify Challenge",
+    summary: "Challenge your audience to simplify their approach to [keyword] by removing unnecessary steps or complexity.",
+    examples: [
+        "Take the [keyword] simplify challenge: Cut your process in half and see better results.",
+        "Think [keyword] has to be complicated? Strip it down to the essentials and thrive."
+    ],
+    long_prompt: "Write the ultimate 1000-word piece about 'The Simplify Challenge' and how it can revolutionize the way people approach [keyword]. Begin with an engaging personal story or case study illustrating the trap of overcomplication in [keyword]—how it wastes time, leads to frustration, and kills progress. Introduce 'The Simplify Challenge' as the game-changing mindset shift that forces people to strip away the noise, eliminate unnecessary steps, and focus on what truly matters. Provide a step-by-step breakdown of how to apply this challenge, packed with concrete examples, counterintuitive insights, and expert-backed principles. Use a bold, empowering, and conversational tone, injecting rhetorical questions, sharp analogies, and dynamic storytelling to maintain reader engagement. Layer in powerful social proof or real-life success stories to reinforce credibility. Close with a persuasive, action-driven conclusion that compels readers to take the challenge today and experience life-changing results in [keyword]. Every paragraph should deliver maximum impact, cutting through clutter and pushing the reader toward transformation."
+},
+
+red_flag_marketing: {
+    name: "Red Flag Marketing",
+    summary: "Highlight the most common 'red flags' people encounter in [keyword] space, emphasizing why avoiding them is critical. Position your solution as the safe, trustworthy option without explicitly selling.",
+    examples: [
+        "Red Flag: Promises of ‘instant results.’ Real solutions take effort and time. Know the difference before it’s too late.",
+        "Red Flag: Free trials that lock you into expensive plans. Avoid traps—here’s how to navigate [keyword] smarter."
+    ],
+    long_prompt: "Write the definitive 1000-word piece on 'Red Flag Marketing' to expose the most dangerous and deceptive traps in [keyword]. Start with an attention-grabbing introduction that hooks readers with a jaw-dropping statistic or shocking real-life example of someone getting scammed, misled, or trapped in [keyword]. Lay out 5-7 of the biggest red flags, each with a bold, attention-commanding subheading. For every red flag, deliver a compelling breakdown of why it’s a problem, how it works, and what the consequences are—backed by data, expert insights, or powerful storytelling. Maintain a tone that’s sharp, authoritative, and slightly provocative to command attention. For each red flag, immediately follow up with a smart, solution-driven counterpoint that subtly reinforces why your approach, methodology, or perspective is the reliable, trustworthy choice—without sounding like a sales pitch. Wrap up with a strong, empowering closing that urges readers to become smarter, savvier decision-makers in [keyword]. This should read like a wake-up call, equipping readers with the knowledge to avoid common pitfalls and take control of their success."
+},
+
+challenge_conventional_wisdom: {
+    name: "Challenge Conventional Wisdom",
+    summary: "Challenge conventional wisdom by offering counterintuitive or 'unpopular' takes about [keyword]. This positions your message as fresh and insightful, grabbing attention from those tired of mainstream advice.",
+    examples: [
+        "Unpopular Opinion: Hustle culture is a lie. You don’t need to grind 24/7 to win in [keyword]. Work smarter, not harder.",
+        "Unpopular Opinion: Most tools for [keyword] are unnecessarily complicated. Simplicity wins every time."
+    ],
+    long_prompt: "Write the most thought-provoking, high-impact 1000-word piece on 'Challenging Conventional Wisdom' in [keyword]. Open with a bold, contrarian statement that immediately challenges mainstream thinking—something that stops readers in their tracks and forces them to reconsider what they thought they knew. Set the stage by explaining why conventional wisdom is often flawed, outdated, or misleading in [keyword]. Then, systematically present 3-5 unconventional, counterintuitive insights that break traditional rules and offer a smarter, more effective way forward. Each insight should be backed by compelling logic, real-world case studies, or psychological principles to make the argument undeniable. Maintain a tone that’s confident, slightly provocative, and infused with intellectual curiosity—this should feel like a masterclass in critical thinking, not mindless contrarianism. Use punchy, quotable lines, vivid storytelling, and rhetorical techniques that make readers question everything they thought they knew. End with a rousing call-to-action, urging readers to embrace independent thinking, test these new ideas, and challenge their own biases in [keyword]. Every sentence should feel like a revelation, packed with value and impossible to ignore."
+},
+the_most_overhyped_myths: {
+    name: "The Most Overhyped Myths",
+    summary: "Debunk the biggest myths in the [keyword] space to build trust and position your approach as grounded in reality.",
+    examples: [
+        "Overhyped Myth: You need to invest thousands to succeed in [keyword]. Truth: Smarter strategies beat expensive tools every time.",
+        "Overhyped Myth: [keyword] success is about luck. Reality: It’s about using proven methods consistently."
+    ],
+    long_prompt: "Write a high-impact 1000-word piece that exposes and debunks the most overhyped myths in [keyword]. Open with a compelling introduction that explains why these myths persist, how they mislead people, and why a more grounded perspective is essential. Present 3-5 widely believed myths, each introduced with a bold subheading. For each myth, state the false belief, explain why it is misleading, and provide a reality-based truth backed by evidence, expert insights, or practical examples. Maintain a confident, slightly contrarian tone that positions your perspective as more reliable and pragmatic. Use clear, digestible arguments that resonate with the reader and inspire them to question misleading industry narratives. End with a strong call-to-action that encourages readers to adopt a more fact-based and results-driven approach in [keyword]."
+},
+
+the_wrong_way_vs_the_right_way: {
+    name: "The Wrong Way vs. The Right Way",
+    summary: "Present side-by-side comparisons of ineffective versus effective approaches to [keyword], emphasizing the benefits of doing it the right way.",
+    examples: [
+        "Wrong Way: Spend hours Googling how to [keyword]. Right Way: Use a proven method and save time.",
+        "Wrong Way: Overcomplicate [keyword] with endless tools. Right Way: Simplify and focus on what matters."
+    ],
+    long_prompt: "Write a powerful 1000-word piece contrasting ineffective versus effective strategies in [keyword]. Begin with an engaging introduction that highlights the importance of recognizing bad habits or misconceptions and choosing better approaches. Present 3-5 direct comparisons, each formatted as 'Wrong Way: [Mistake]' followed by 'Right Way: [Solution].' For each, explain why the wrong way is ineffective, the consequences of following it, and then contrast it with a smarter, results-driven alternative. Use compelling examples and practical takeaways to reinforce each comparison. Maintain an empowering tone that motivates readers to shift their thinking and take action toward the right way. Conclude with an urgent yet inspiring message that encourages immediate application of these principles in [keyword]."
+},
+
+reverse_engineer_the_failures: {
+    name: "Reverse-Engineer the Failures",
+    summary: "Analyze the biggest reasons people fail at [keyword], breaking down where they go wrong and how to avoid those pitfalls.",
+    examples: [
+        "Why most people fail at [keyword]: They focus on shortcuts instead of learning the basics. Master the foundation, and success follows.",
+        "Common failure in [keyword]: Trying to reinvent the wheel. Proven frameworks work for a reason—start there."
+    ],
+    long_prompt: "Write a deep-dive 1000-word piece that dissects the most common reasons people fail at [keyword] and how to avoid those pitfalls. Open with a powerful introduction that highlights the value of learning from failure and how understanding these patterns can lead to faster success. Identify 3-5 major failure points, each introduced with a bold subheading like 'Failure Point: [Mistake].' For each, break down why this failure happens, the hidden costs of falling into this trap, and actionable steps to overcome it. Maintain an empathetic yet motivating tone, ensuring readers feel empowered rather than discouraged. Use real-world examples or psychological insights to reinforce the lessons. Close with a compelling message that challenges readers to reflect on their own mistakes, adapt, and take smarter actions in [keyword]."
+},
+
+ the_price_of_ignoring_this: {
+    name: "The Price of Ignoring This",
+    summary: "Emphasize the risks, costs, or missed opportunities of not addressing [keyword] effectively, motivating your audience to take action.",
+    examples: [
+        "The cost of ignoring [keyword]: Missed opportunities, wasted time, and staying stuck in the same place.",
+        "The price of inaction? Watching others succeed at [keyword] while you stay on the sidelines."
+    ],
+    long_prompt: "Write a high-stakes 1000-word piece that outlines the real costs and consequences of ignoring [keyword]. Begin with an engaging introduction that sets up the urgency—why neglecting this area leads to regret, lost potential, or failure. Present 3-5 significant risks, costs, or missed opportunities, each introduced with a bold subheading. For each, vividly describe the negative impact, using data, real-life scenarios, or psychological insights to drive the point home. Maintain an urgent, motivational tone that stirs action while avoiding fear-mongering. Use persuasive storytelling and logic to make the consequences feel immediate and personal. Conclude with a compelling message that inspires readers to act now and take control of their success in [keyword] before the cost of inaction becomes irreversible."
+},
+the_hidden_opportunity: {
+    name: "The Hidden Opportunity",
+    summary: "Reveal a lesser-known or often-overlooked opportunity in the [keyword] niche that could lead to unexpected success.",
+    examples: [
+        "Hidden Opportunity: Most people overlook [specific niche detail]. Yet, those who master it achieve success 10x faster.",
+        "The secret to thriving in [keyword]? Focus on [unique angle]—it’s where most people fail to look."
+    ],
+    long_prompt: "Write a compelling 1000-word piece revealing lesser-known opportunities in [keyword]. Open with an intriguing introduction that explains why most people overlook these opportunities and the potential benefits of recognizing them. Present 3-5 hidden opportunities, each introduced with a bold subheading. For each, describe the overlooked or underutilized aspect, explain why it holds immense value, and illustrate its potential impact with real-world examples, data, or success stories. Use a tone that builds intrigue and excitement, making readers feel like they’re uncovering valuable secrets. End with an empowering message encouraging them to take action and capitalize on these hidden gems."
+},
+
+youve_been_lied_to: {
+    name: "You’ve Been Lied To",
+    summary: "Call out popular but misleading advice in [keyword], positioning your perspective as the refreshing and honest alternative.",
+    examples: [
+        "You’ve been lied to about [keyword]: Success isn’t about working harder—it’s about working smarter.",
+        "The truth no one tells you about [keyword]? Most of the advice out there is outdated and doesn’t work anymore."
+    ],
+    long_prompt: "Write a bold 1000-word piece that exposes misleading advice in [keyword]. Open with a strong, attention-grabbing introduction that calls out false narratives and positions your insights as the refreshing, honest alternative. Identify 3-5 common lies or misleading beliefs, each introduced with a bold subheading. For each, break down why the advice is flawed, the consequences of following it, and the reality that leads to real success. Use data, examples, or personal insights to build credibility and establish authority. Maintain a direct, no-nonsense tone that challenges conventional thinking while remaining approachable and informative. End with an empowering message encouraging readers to reject the misinformation and embrace a more effective approach to [keyword]."
+},
+
+the_painful_mistakes: {
+    name: "The Painful Mistakes",
+    summary: "Highlight common mistakes people make in [keyword] to tap into their frustration and position your solution as the way to avoid these pitfalls.",
+    examples: [
+        "Think trying to figure out [keyword] on your own will save money? It’s the fastest way to waste time and stay stuck.",
+        "Believing free advice on [keyword] will get you results? That’s the exact trap keeping you from progress."
+    ],
+    long_prompt: "Write a high-impact 1000-word piece highlighting painful mistakes people make in [keyword]. Begin with an empathetic introduction that validates the reader’s struggles and positions learning from mistakes as a powerful tool for progress. Present 3-5 major mistakes, each introduced with a bold subheading. For each, explain why it’s a common trap, how it negatively impacts progress, and what a smarter approach looks like. Use relatable examples, case studies, or expert insights to reinforce key points. Maintain a tone that blends empathy with tough love, encouraging readers to recognize and correct their mistakes. End with a strong message that motivates them to take proactive steps toward success."
+},
+
+over_the_top_exaggeration: {
+    name: "Over-the-Top Exaggeration",
+    summary: "Use satire or absurd claims to poke fun at unrealistic expectations in the [keyword] niche, making your content stand out while building trust.",
+    examples: [
+        "Want to master [keyword] instantly? Just wave a magic wand, click your heels, and—oh, wait, it doesn’t work that way.",
+        "Achieve [keyword] success in 10 seconds by doing absolutely nothing! Yeah, that’s a lie. Here’s what really works."
+    ],
+    long_prompt: "Write a humorous, attention-grabbing 1000-word piece that satirizes unrealistic expectations in [keyword]. Start with a playful introduction that sets the stage for why exaggerated claims are so common and how they mislead people. Present 3-5 over-the-top claims, each introduced with a bold subheading. For each, humorously describe the claim, explain why it’s absurd, and contrast it with a grounded reality that leads to actual success. Use sarcasm, satire, and wit to entertain while educating. Maintain a lighthearted yet insightful tone that keeps readers engaged. End with an honest message encouraging them to focus on practical, proven strategies instead of gimmicks."
+},
+
+worst_advice_compilation: {
+    name: "Worst Advice Compilation",
+    summary: "Compile the worst advice people receive about [keyword] and debunk it with humor or blunt honesty.",
+    examples: [
+        "Bad advice: ‘[keyword] success is effortless.’ Nope, it takes focus and persistence.",
+        "Terrible tip: ‘All you need is luck to make it in [keyword].’ Luck isn’t a strategy."
+    ],
+    long_prompt: "Write a blunt, entertaining 1000-word piece that compiles and debunks the worst advice about [keyword]. Open with a punchy introduction explaining why bad advice spreads so easily and how it holds people back. Present 3-5 terrible pieces of advice, each introduced with a bold subheading. For each, mock the advice humorously or expose its flaws with sharp logic, then follow up with the truth that actually works. Use a mix of humor, sarcasm, and blunt honesty to engage readers and keep them entertained. End with a motivational message encouraging them to filter out nonsense and focus on proven methods for success."
+},
+the_unexpected_shortcut: {
+    name: "The Unexpected Shortcut",
+    summary: "Reveal a surprising, lesser-known strategy in [keyword] that can save time or effort while delivering great results.",
+    examples: [
+        "Most people spend months learning [keyword], but they overlook this one simple trick that can fast-track success.",
+        "Want to master [keyword] faster? Forget the hard way—use this proven shortcut instead."
+    ],
+    long_prompt: "Write a compelling 1000-word piece that uncovers surprising shortcuts in [keyword]. Open with an engaging introduction that explains why most people take the long road and how recognizing shortcuts can transform their results. Present 3-5 unexpected shortcuts, each introduced with a bold subheading. For each, explain why it’s effective, how it saves time or effort, and what kind of impact it can have. Use real-world examples, expert insights, or success stories to illustrate the value. Maintain an engaging tone that builds intrigue and encourages curiosity. End with an empowering message prompting readers to explore and implement these shortcuts."
+},
+
+the_contrarian_strategy: {
+    name: "The Contrarian Strategy",
+    summary: "Highlight a counterintuitive approach to [keyword] that challenges conventional wisdom, offering a fresh perspective.",
+    examples: [
+        "Everyone says to focus on [traditional strategy for keyword], but the real key to success is doing the opposite.",
+        "Want better results in [keyword]? Stop following the crowd and try this unconventional approach instead."
+    ],
+    long_prompt: "Write a thought-provoking 1000-word piece that challenges conventional wisdom in [keyword]. Start with a compelling introduction that highlights why mainstream advice often leads to mediocrity and how unconventional strategies can deliver superior results. Present 3-5 counterintuitive strategies, each introduced with a bold subheading. For each, explain the traditional approach, why it falls short, and how the contrarian strategy provides better outcomes. Use compelling arguments, case studies, or expert insights to build credibility. Maintain a confident, slightly provocative tone that inspires readers to rethink their approach. Conclude with a strong message encouraging them to embrace unconventional wisdom for success."
+},
+
+one_question_solution: {
+    name: "One-Question Solution",
+    summary: "Position a single, thought-provoking question as the key to unlocking success in [keyword], sparking curiosity and introspection.",
+    examples: [
+        "Struggling with [keyword]? Ask yourself this one question: ‘What if I stopped overcomplicating it?’ The answer changes everything.",
+        "The secret to mastering [keyword] starts with one question: ‘Am I focusing on the right things?’ Here’s how to find out."
+    ],
+    long_prompt: "Write an introspective 1000-word piece that presents a single, transformative question as the key to success in [keyword]. Open with an engaging introduction explaining how powerful questions can reshape thinking and drive breakthroughs. Present 3-5 key questions, each introduced with a bold subheading. For each, explain why the question matters, how it challenges assumptions, and the potential impact of answering it honestly. Use relatable examples, personal anecdotes, or expert insights to reinforce its significance. Maintain an empowering tone that encourages deep reflection. End with a call-to-action inspiring readers to apply these questions for greater clarity and success."
+},
+
+whats_missing_campaign: {
+    name: "What’s Missing? Campaign",
+    summary: "Highlight what’s often missing in the [keyword] space and how addressing it can create transformative results.",
+    examples: [
+        "What’s missing in your [keyword] strategy? Consistency. It’s the secret sauce no one talks about.",
+        "Most [keyword] advice skips one critical piece: Actionable steps you can follow today."
+    ],
+    long_prompt: "Write a high-impact 1000-word piece that uncovers critical gaps in [keyword] and how addressing them leads to success. Start with an engaging introduction explaining why identifying missing elements is essential for achieving better results. Present 3-5 missing elements, each introduced with a bold subheading. For each, describe the gap, why it matters, and how addressing it can lead to breakthroughs. Use case studies, data, or real-world examples to reinforce key points. Maintain a direct, solution-oriented tone that drives action. End with an empowering message urging readers to identify and fill these gaps in their own approach."
+},
+
+the_false_choice: {
+    name: "The False Choice",
+    summary: "Challenge the idea that people need to choose between two ineffective options in [keyword], and introduce a better third alternative.",
+    examples: [
+        "Think you have to choose between expensive tools or endless trial-and-error for [keyword]? There’s a smarter way.",
+        "In [keyword], it’s not about picking the lesser of two evils. It’s about finding a solution that actually works."
+    ],
+    long_prompt: "Write a 1000-word piece that exposes common false choices in [keyword] and introduces smarter alternatives. Open with an engaging introduction that explains how people are often trapped into thinking they must choose between two ineffective options. Present 3-5 false choices, each introduced with a bold subheading. For each, explain the flawed logic behind the options, why they don’t work, and introduce a third, more effective alternative. Use compelling arguments, real-world examples, or expert insights to illustrate key points. Maintain an insightful, empowering tone that encourages readers to think beyond limiting choices. Conclude with a motivating message urging them to seek better solutions."
+},
+the_domino_effect: {
+    name: "The Domino Effect",
+    summary: "Show how solving one key problem in [keyword] can create a chain reaction of positive outcomes.",
+    examples: [
+        "Fix this one issue in [keyword], and watch everything else fall into place like dominoes.",
+        "The key to [keyword] success? Start with this small change—it has the power to transform everything."
+    ],
+    long_prompt: "Write a compelling 1000-word piece that demonstrates how addressing one key problem in [keyword] triggers a chain reaction of positive changes. Open with an engaging introduction that explains the concept of the domino effect and how a small shift can lead to massive improvements. Present 3-5 key problems, each introduced with a bold subheading. For each, describe the initial issue, explain why it matters, and outline the positive ripple effect that follows when it’s resolved. Use relatable examples, case studies, or data to reinforce the transformative power of starting with a single change. Conclude with an inspiring message urging readers to take the first step and set their own domino effect in motion."
+},
+
+the_iceberg_effect: {
+    name: "The Iceberg Effect",
+    summary: "Explain how most of what matters in [keyword] is hidden beneath the surface, and how uncovering it makes all the difference.",
+    examples: [
+        "Success in [keyword] is like an iceberg. The visible parts are just the beginning—the real work is underneath.",
+        "Most people in [keyword] focus on what’s visible, but the hidden layers are where results happen."
+    ],
+    long_prompt: "Write an eye-opening 1000-word piece that reveals the hidden layers of success in [keyword]. Open with a compelling introduction that introduces the iceberg metaphor, emphasizing how much of what matters is beneath the surface. Present 3-5 critical but overlooked aspects, each introduced with a bold subheading. For each, compare the visible and hidden elements, explain why the unseen factors are crucial, and illustrate their impact with real-world examples or data. Maintain an enlightening tone that sparks curiosity and encourages deeper exploration. Conclude with a motivating message that challenges readers to go beyond surface-level thinking and uncover the hidden drivers of success in [keyword]."
+},
+
+from_overwhelm_to_clarity: {
+    name: "From Overwhelm to Clarity",
+    summary: "Acknowledge the confusion in the [keyword] niche and position your content as the solution to cut through the noise.",
+    examples: [
+        "Overwhelmed by all the [keyword] advice out there? Simplify your strategy and focus on what works.",
+        "Clarity beats confusion every time. Here’s how to master [keyword] without feeling overwhelmed."
+    ],
+    long_prompt: "Write a 1000-word piece designed to help readers move from overwhelm to clarity in [keyword]. Begin with an empathetic introduction that validates their frustration and highlights the importance of simplifying the process. Present 3-5 major sources of overwhelm, each introduced with a bold subheading. For each, explain why it’s confusing, describe its impact, and offer a clear, actionable solution. Use step-by-step guidance, practical examples, or expert insights to make the content easy to follow. Maintain a supportive and empowering tone that reassures readers they can break through the noise. Conclude with a motivational message that encourages them to embrace simplicity and gain clarity in [keyword]."
+},
+
+the_evolution_of_success: {
+    name: "The Evolution of Success",
+    summary: "Show how strategies for [keyword] have evolved and why outdated methods no longer work.",
+    examples: [
+        "What worked for [keyword] in 2010 won’t cut it today. Here’s how to stay ahead of the curve.",
+        "The evolution of [keyword]: Stop relying on outdated methods and embrace strategies built for today."
+    ],
+    long_prompt: "Write a 1000-word piece that explores the evolution of success in [keyword] and why modern strategies outperform outdated ones. Open with an engaging introduction that highlights how change is constant and why adapting is key to staying relevant. Present 3-5 major shifts in the niche, each introduced with a bold subheading. For each, explain the outdated method, why it’s no longer effective, and the modern approach that works better. Use compelling examples, industry trends, or data to illustrate the transformation. Maintain a forward-thinking tone that positions adaptation as essential. Conclude with a strong message encouraging readers to embrace innovation and stay ahead of the curve in [keyword]."
+},
+
+the_reverse_roadmap: {
+    name: "The Reverse Roadmap",
+    summary: "Start at the desired outcome in [keyword] and work backward, showing how to get there step-by-step.",
+    examples: [
+        "Want to [keyword goal]? Start here, then reverse-engineer the steps to get there.",
+        "The reverse roadmap to [keyword success]: Begin with the end in mind and follow these steps."
+    ],
+    long_prompt: "Write a structured 1000-word piece that reverse-engineers success in [keyword]. Open with an introduction that explains the power of starting with the end goal and working backward to identify the necessary steps. Present a key goal and break it down into 3-5 logical steps, each introduced with a bold subheading. For each step, describe its role in the process, explain how it connects to the next, and offer actionable guidance for execution. Use a clear, results-oriented tone that simplifies complex strategies. Conclude with a motivating message that encourages readers to apply this reverse roadmap method to achieve their own success in [keyword]."
+},
+the_one_thing_that_changes_everything: {
+    name: "The One Thing That Changes Everything",
+    summary: "Focus on one transformative idea or strategy in [keyword] that creates a ripple effect of success.",
+    examples: [
+        "The one thing that changes everything in [keyword]: Stop guessing and start focusing on what matters.",
+        "If you only fix one thing in your [keyword] strategy, let it be this. It changes everything."
+    ],
+    long_prompt: "Write a powerful 1000-word piece that introduces a single transformative idea in [keyword] that creates a ripple effect of success. Open with a compelling introduction that explains the power of focusing on one key strategy rather than spreading effort too thin. Present this idea, breaking it down into 3-5 ways it triggers positive change, each introduced with a bold subheading. For each, explain how it simplifies challenges, amplifies results, or creates momentum. Use bold, inspiring language and real-world examples to illustrate its impact. Conclude with a strong call-to-action urging readers to embrace this one thing and see how it changes everything."
+},
+
+the_hidden_trap: {
+    name: "The Hidden Trap",
+    summary: "Expose sneaky pitfalls in the [keyword] niche that hold people back and position your strategy as the way out.",
+    examples: [
+        "The hidden trap in [keyword]? Overthinking every step. Simplicity is the real shortcut.",
+        "Most people in [keyword] fall into this trap: Trying to do everything at once. Here’s how to avoid it."
+    ],
+    long_prompt: "Write an eye-opening 1000-word piece that exposes hidden traps in [keyword] that prevent success. Open with an engaging introduction that explains why these traps often go unnoticed and how they silently hold people back. Present 3-5 common traps, each introduced with a bold subheading. For each, describe the trap, why it’s dangerous, and the negative impact it has. Follow up with a smart, practical way to escape it. Use real-life examples, psychological insights, or industry mistakes to reinforce the points. Conclude with an empowering call-to-action encouraging readers to recognize and avoid these pitfalls."
+},
+
+the_secret_ingredient: {
+    name: "The Secret Ingredient",
+    summary: "Highlight one overlooked or underappreciated factor that can transform success in [keyword].",
+    examples: [
+        "The secret ingredient for [keyword] success? Consistency—it’s the game-changer no one talks about.",
+        "Want better results in [keyword]? Add this one thing: Clarity of purpose."
+    ],
+    long_prompt: "Write a captivating 1000-word piece that uncovers a powerful yet overlooked element of success in [keyword]. Open with an intriguing introduction that explains why the most impactful strategies are often hidden in plain sight. Present 3-5 'secret ingredients,' each introduced with a bold subheading. For each, explain why it’s underappreciated, how it transforms results, and practical ways to implement it. Use compelling examples, success stories, or expert insights to illustrate its power. Conclude with a motivating message encouraging readers to integrate these secret ingredients into their [keyword] journey."
+},
+
+the_myth_of_more: {
+    name: "The Myth of More",
+    summary: "Challenge the idea that success in [keyword] requires more time, tools, or effort, and emphasize the power of focus.",
+    examples: [
+        "The myth of more: You don’t need more tools or time to master [keyword]. You need focus.",
+        "Think more effort means better results in [keyword]? It’s not about doing more—it’s about doing the right things."
+    ],
+    long_prompt: "Write a game-changing 1000-word piece that debunks the belief that success in [keyword] comes from doing more. Open with an engaging introduction that sets up the myth of 'more' and why it leads people in the wrong direction. Present 3-5 aspects of this myth, each introduced with a bold subheading. For each, explain why the belief is flawed and how focusing on simplicity, strategy, or leverage produces better results. Use data, case studies, or logical arguments to reinforce key points. Conclude with a strong message urging readers to shift their mindset from 'more' to 'better.'"
+},
+
+the_bare_minimum_method: {
+    name: "The Bare Minimum Method",
+    summary: "Highlight how doing just enough in [keyword] can still deliver impressive results.",
+    examples: [
+        "Too busy for [keyword]? The bare minimum method gets you results without the overwhelm.",
+        "Success in [keyword] doesn’t mean overworking yourself. The bare minimum, done right, can be enough."
+    ],
+    long_prompt: "Write a 1000-word piece that redefines success in [keyword] by showing how a 'bare minimum' approach can still yield great results. Open with an introduction that challenges the notion that success requires burnout and overwork. Present 3-5 'bare minimum' strategies, each introduced with a bold subheading. For each, explain why this approach works, how it simplifies the process, and the type of results it produces. Use relatable examples, efficiency principles, or success stories to make the case. Conclude with a practical call-to-action encouraging readers to embrace the bare minimum method in [keyword] without sacrificing results."
+},
+the_thing_youre_overlooking: {
+    name: "The Thing You’re Overlooking",
+    summary: "Draw attention to a critical but often ignored aspect of [keyword] that could be the missing piece to success.",
+    examples: [
+        "Struggling with [keyword]? Chances are, you’re overlooking this one simple detail.",
+        "The key to [keyword] success? It’s not what you think. Here’s what you’re missing."
+    ],
+    long_prompt: "Write a 1000-word piece that reveals an often-overlooked element of success in [keyword]. Open with an engaging introduction explaining how small, ignored details can make a significant impact. Present 3-5 overlooked elements, each introduced with a bold subheading. For each, explain what it is, why it’s crucial, and how addressing it can create breakthroughs. Use real-world examples or data to reinforce its importance. Conclude with an inspiring call-to-action encouraging readers to identify and leverage what they’ve been overlooking."
+},
+
+the_zero_to_one_leap: {
+    name: "The Zero-to-One Leap",
+    summary: "Focus on the critical first step in [keyword] and how taking it can create momentum for success.",
+    examples: [
+        "The hardest part of [keyword] is going from zero to one. Here’s how to take that first step with confidence.",
+        "Ready to start [keyword]? The zero-to-one leap is all you need to build momentum."
+    ],
+    long_prompt: "Write a 1000-word piece that guides readers in making the crucial first step in [keyword]. Open with a compelling introduction about why starting is often the hardest part and how momentum follows that initial step. Present 3-5 strategies to take that first step, each introduced with a bold subheading. For each, explain its importance, how it builds momentum, and practical ways to implement it. Use motivational examples, relatable stories, or data to inspire confidence. Conclude with a strong call-to-action urging readers to take the leap and move forward in [keyword]."
+},
+
+the_mindset_shift: {
+    name: "The Mindset Shift",
+    summary: "Focus on how changing the way people think about [keyword] can unlock new opportunities.",
+    examples: [
+        "The biggest breakthrough in [keyword] isn’t a tool or a trick—it’s shifting your mindset.",
+        "Think [keyword] is complicated? Shift your perspective, and you’ll see how simple it can be."
+    ],
+    long_prompt: "Write a 1000-word piece that highlights how shifting perspectives can unlock success in [keyword]. Open with an introduction explaining the role of mindset in achieving breakthroughs. Present 3-5 mindset shifts, each introduced with a bold subheading. For each, contrast the old mindset with the new perspective and explain how it changes everything. Use real-world examples, personal experiences, or motivational language to make the shifts relatable and impactful. Conclude with a call-to-action encouraging readers to embrace these mindset shifts for success in [keyword]."
+},
+
+the_big_reveal: {
+    name: "The Big Reveal",
+    summary: "Build suspense by teasing a surprising or counterintuitive truth about [keyword], then reveal the insight.",
+    examples: [
+        "What if everything you’ve learned about [keyword] is wrong? Here’s the truth no one’s telling you.",
+        "The surprising secret to [keyword]: It’s simpler than you think, but only if you know where to start."
+    ],
+    long_prompt: "Write a 1000-word piece that captivates readers with a surprising or counterintuitive truth about [keyword]. Open with an introduction that teases the reveal and builds suspense. Present 3-5 surprising insights, each introduced with a bold subheading. For each, build anticipation, then reveal the truth with an explanation that shifts perspectives. Use storytelling, examples, or data to reinforce the insights. Conclude with a compelling call-to-action urging readers to apply these new truths in their [keyword] journey."
+},
+
+the_most_overlooked_shortcut: {
+    name: "The Most Overlooked Shortcut",
+    summary: "Reveal a little-known shortcut in [keyword] that can save time and effort.",
+    examples: [
+        "The most overlooked shortcut in [keyword]? It’s not what you think, but it works every time.",
+        "Stop doing things the hard way. This [keyword] shortcut changes everything."
+    ],
+    long_prompt: "Write a 1000-word piece that uncovers overlooked shortcuts in [keyword] that simplify success. Open with an introduction explaining why people tend to overlook simple yet powerful strategies. Present 3-5 shortcuts, each introduced with a bold subheading. For each, explain why it’s often ignored, how it works, and the results it delivers. Use examples, case studies, or relatable anecdotes to reinforce the effectiveness of these shortcuts. Conclude with a call-to-action encouraging readers to embrace these underutilized strategies in [keyword]."
+},
+the_thing_youre_overlooking: {
+    name: "The Thing You’re Overlooking",
+    summary: "Draw attention to a critical but often ignored aspect of [keyword] that could be the missing piece to success.",
+    examples: [
+        "Struggling with [keyword]? Chances are, you’re overlooking this one simple detail.",
+        "The key to [keyword] success? It’s not what you think. Here’s what you’re missing."
+    ],
+    long_prompt: "Write a 1000-word piece that reveals an often-overlooked element of success in [keyword]. Open with an engaging introduction explaining how small, ignored details can make a significant impact. Present 3-5 overlooked elements, each introduced with a bold subheading. For each, explain what it is, why it’s crucial, and how addressing it can create breakthroughs. Use real-world examples or data to reinforce its importance. Conclude with an inspiring call-to-action encouraging readers to identify and leverage what they’ve been overlooking."
+},
+
+the_zero_to_one_leap: {
+    name: "The Zero-to-One Leap",
+    summary: "Focus on the critical first step in [keyword] and how taking it can create momentum for success.",
+    examples: [
+        "The hardest part of [keyword] is going from zero to one. Here’s how to take that first step with confidence.",
+        "Ready to start [keyword]? The zero-to-one leap is all you need to build momentum."
+    ],
+    long_prompt: "Write a 1000-word piece that guides readers in making the crucial first step in [keyword]. Open with a compelling introduction about why starting is often the hardest part and how momentum follows that initial step. Present 3-5 strategies to take that first step, each introduced with a bold subheading. For each, explain its importance, how it builds momentum, and practical ways to implement it. Use motivational examples, relatable stories, or data to inspire confidence. Conclude with a strong call-to-action urging readers to take the leap and move forward in [keyword]."
+},
+
+the_mindset_shift: {
+    name: "The Mindset Shift",
+    summary: "Focus on how changing the way people think about [keyword] can unlock new opportunities.",
+    examples: [
+        "The biggest breakthrough in [keyword] isn’t a tool or a trick—it’s shifting your mindset.",
+        "Think [keyword] is complicated? Shift your perspective, and you’ll see how simple it can be."
+    ],
+    long_prompt: "Write a 1000-word piece that highlights how shifting perspectives can unlock success in [keyword]. Open with an introduction explaining the role of mindset in achieving breakthroughs. Present 3-5 mindset shifts, each introduced with a bold subheading. For each, contrast the old mindset with the new perspective and explain how it changes everything. Use real-world examples, personal experiences, or motivational language to make the shifts relatable and impactful. Conclude with a call-to-action encouraging readers to embrace these mindset shifts for success in [keyword]."
+},
+
+the_big_reveal: {
+    name: "The Big Reveal",
+    summary: "Build suspense by teasing a surprising or counterintuitive truth about [keyword], then reveal the insight.",
+    examples: [
+        "What if everything you’ve learned about [keyword] is wrong? Here’s the truth no one’s telling you.",
+        "The surprising secret to [keyword]: It’s simpler than you think, but only if you know where to start."
+    ],
+    long_prompt: "Write a 1000-word piece that captivates readers with a surprising or counterintuitive truth about [keyword]. Open with an introduction that teases the reveal and builds suspense. Present 3-5 surprising insights, each introduced with a bold subheading. For each, build anticipation, then reveal the truth with an explanation that shifts perspectives. Use storytelling, examples, or data to reinforce the insights. Conclude with a compelling call-to-action urging readers to apply these new truths in their [keyword] journey."
+},
+
+the_most_overlooked_shortcut: {
+    name: "The Most Overlooked Shortcut",
+    summary: "Reveal a little-known shortcut in [keyword] that can save time and effort.",
+    examples: [
+        "The most overlooked shortcut in [keyword]? It’s not what you think, but it works every time.",
+        "Stop doing things the hard way. This [keyword] shortcut changes everything."
+    ],
+    long_prompt: "Write a 1000-word piece that uncovers overlooked shortcuts in [keyword] that simplify success. Open with an introduction explaining why people tend to overlook simple yet powerful strategies. Present 3-5 shortcuts, each introduced with a bold subheading. For each, explain why it’s often ignored, how it works, and the results it delivers. Use examples, case studies, or relatable anecdotes to reinforce the effectiveness of these shortcuts. Conclude with a call-to-action encouraging readers to embrace these underutilized strategies in [keyword]."
+},
+
+the_24_hour_challenge: {
+    name: "The 24-Hour Challenge",
+    summary: "Create a time-sensitive challenge to encourage immediate action in [keyword].",
+    examples: [
+        "Can you improve your [keyword] strategy in just 24 hours? Take the challenge and find out.",
+        "In the next 24 hours, you could completely change how you approach [keyword]. Ready to try?"
+    ],
+    long_prompt: "Write a 1000-word piece that introduces a 24-hour challenge to create rapid progress in [keyword]. Open with an engaging introduction explaining the power of focused, time-sensitive action. Present 3-5 specific challenges, each introduced with a bold subheading. For each, describe the challenge, why it’s effective, and the results it can achieve in a short timeframe. Use real-life examples or testimonials to inspire participation. Conclude with an energizing call-to-action inviting readers to commit to the challenge and transform their approach to [keyword]."
+},
+the_expert_myth: {
+    name: "The Expert Myth",
+    summary: "Challenge the belief that only experts can succeed in [keyword], and show how beginners can thrive too.",
+    examples: [
+        "Think you need to be an expert to win at [keyword]? The truth is, beginners often have the edge.",
+        "The expert myth: You don’t need years of experience to succeed in [keyword]. You just need the right start."
+    ],
+    long_prompt: "Write a 1000-word piece that challenges the belief that expertise is required for success in [keyword]. Start with an introduction that exposes the myth and explains why beginners often have advantages. Present 3-5 beginner-friendly strategies, each introduced with a bold subheading. For each, explain why it works, how beginners can use it effectively, and how it levels the playing field. Use motivational language, relatable examples, or data to build confidence. Conclude with a strong call-to-action encouraging readers to take action in [keyword] today."
+},
+
+the_time_machine: {
+    name: "The Time Machine",
+    summary: "Ask your audience to imagine their future self thanking them for taking action on [keyword] today.",
+    examples: [
+        "Imagine your future self, a year from now, saying, ‘I’m so glad you started [keyword] today.’",
+        "Fast forward a year: Where could you be in [keyword] if you took action right now?"
+    ],
+    long_prompt: "Write a 1000-word piece that inspires readers to take action in [keyword] by visualizing their future success. Begin with an introduction that paints a vivid picture of where they could be if they start today. Present 3-5 future-focused scenarios, each introduced with a bold subheading. For each, describe the potential success, how taking action today contributes to it, and the long-term benefits. Use visionary and motivational language to connect with readers’ goals. Conclude with a compelling call-to-action urging them to take their first step in [keyword] now."
+},
+
+the_myth_of_effort: {
+    name: "The Myth of Effort",
+    summary: "Dispel the belief that succeeding in [keyword] requires constant, exhausting effort, and highlight smarter approaches.",
+    examples: [
+        "The myth of effort: Success in [keyword] isn’t about working harder—it’s about working smarter.",
+        "Think you need to grind endlessly to master [keyword]? Here’s how to get results without the burnout."
+    ],
+    long_prompt: "Write a 1000-word piece that debunks the idea that constant effort is required for success in [keyword]. Begin with an introduction that addresses the common belief in 'hustling' and its drawbacks. Present 3-5 smarter strategies, each introduced with a bold subheading. For each, explain why the myth of effort is flawed, describe the smarter approach, and highlight the benefits of efficiency. Use reassuring and strategic language to inspire confidence. Conclude with a call-to-action encouraging readers to adopt more sustainable strategies in [keyword]."
+},
+
+the_hidden_trade_off: {
+    name: "The Hidden Trade-Off",
+    summary: "Reveal the sacrifices people unknowingly make by following traditional advice in [keyword] and offer a better way.",
+    examples: [
+        "Think the grind is worth it in [keyword]? The hidden trade-off is your time and energy. Here’s how to work smarter instead.",
+        "Traditional [keyword] advice costs you more than you think. Stop trading your freedom for outdated methods."
+    ],
+    long_prompt: "Write a 1000-word piece exposing the hidden costs of traditional approaches in [keyword]. Start with an introduction explaining how common advice often comes with unseen sacrifices. Present 3-5 hidden trade-offs, each introduced with a bold subheading. For each, describe the trade-off, its negative impact, and the smarter alternative that avoids it. Use eye-opening examples and empowering language to encourage readers to rethink their approach. Conclude with a call-to-action motivating readers to embrace more efficient and fulfilling methods in [keyword]."
+},
+
+the_leapfrog_strategy: {
+    name: "The Leapfrog Strategy",
+    summary: "Show how to bypass traditional steps in [keyword] by leveraging smarter, faster strategies.",
+    examples: [
+        "Why take the long way in [keyword] when you can leapfrog ahead with this simple strategy?",
+        "Skip the struggle in [keyword] and leapfrog your way to success."
+    ],
+    long_prompt: "Write a 1000-word piece that explains how to bypass traditional methods for faster success in [keyword]. Start with an introduction explaining the inefficiencies of conventional approaches and the power of leapfrogging. Present 3-5 leapfrog strategies, each introduced with a bold subheading. For each, describe the traditional approach, why it’s inefficient, and how the leapfrog strategy achieves better results in less time. Use bold and innovative language to inspire action and confidence. Conclude with a call-to-action encouraging readers to skip unnecessary steps and embrace smarter strategies in [keyword]."
+},
+the_fast_forward_hack: {
+    name: "The Fast-Forward Hack",
+    summary: "Share a technique in [keyword] that speeds up the process and minimizes unnecessary steps.",
+    examples: [
+        "Fast-forward your [keyword] success with this quick hack—why wait months for results?",
+        "Want to skip the trial-and-error in [keyword]? Here’s the fast-forward approach that works."
+    ],
+    long_prompt: "Write a 1000-word piece that presents techniques for accelerating success in [keyword]. Open with an introduction explaining why minimizing unnecessary steps is crucial. Present 3-5 fast-forward strategies, each introduced with a bold subheading. For each, describe how it eliminates delays, saves time, and enhances results. Use real-world applications or case studies to reinforce effectiveness. Conclude with a compelling call-to-action urging readers to implement these hacks for quicker success."
+},
+
+the_results_pyramid: {
+    name: "The Results Pyramid",
+    summary: "Introduce a layered approach to [keyword], showing how each layer builds on the last for maximum impact.",
+    examples: [
+        "Master [keyword] with the results pyramid: Start at the base, and every step builds your success.",
+        "The results pyramid in [keyword]: Foundation first, strategy second, execution last—it all works together."
+    ],
+    long_prompt: "Write a 1000-word piece that introduces a structured, layered approach to success in [keyword]. Open with an introduction explaining the results pyramid model and why stacking strategic layers leads to sustainable success. Present 3-5 pyramid layers, each introduced with a bold subheading. For each, describe its purpose, how it supports the next layer, and its role in achieving the final goal. Use a structured and logical tone, supported by examples or frameworks. Conclude with a call-to-action encouraging readers to apply the results pyramid method to their [keyword] journey."
+},
+
+the_anti_hack: {
+    name: "The Anti-Hack",
+    summary: "Call out ineffective hacks in [keyword] and promote sustainable, long-term strategies instead.",
+    examples: [
+        "Forget the hacks in [keyword]. Real success comes from this sustainable approach.",
+        "Think [keyword] hacks will save you time? Most only waste it. Here’s what works instead."
+    ],
+    long_prompt: "Write a 1000-word piece that debunks ineffective hacks in [keyword] and promotes sustainable strategies. Open with an introduction discussing the appeal of hacks and why many fail in the long run. Present 3-5 common ineffective hacks, each introduced with a bold subheading. For each, explain why it falls short, how it misleads people, and introduce a long-term alternative. Use practical insights and examples to reinforce credibility. Conclude with a call-to-action urging readers to focus on sustainable strategies for lasting success in [keyword]."
+},
+
+the_backdoor_strategy: {
+    name: "The Backdoor Strategy",
+    summary: "Introduce a creative, under-the-radar way to achieve success in [keyword].",
+    examples: [
+        "The backdoor strategy for [keyword]: Skip the lines and go straight to what works.",
+        "Most people in [keyword] take the front door, but the backdoor gets you there faster."
+    ],
+    long_prompt: "Write a 1000-word piece that presents unconventional, under-the-radar methods for success in [keyword]. Open with an introduction explaining how backdoor strategies bypass traditional obstacles. Present 3-5 backdoor strategies, each introduced with a bold subheading. For each, describe how it works, why it’s effective, and provide real-world applications. Use a strategic and creative tone to engage readers. Conclude with a call-to-action encouraging readers to explore these alternative pathways in [keyword]."
+},
+
+the_rebellion_rule: {
+    name: "The Rebellion Rule",
+    summary: "Inspire people to reject conventional wisdom in [keyword] and forge their own path.",
+    examples: [
+        "Rebel against the outdated rules of [keyword]—it’s time to do things your way.",
+        "Think you have to follow the crowd in [keyword]? Break the rules, and see better results."
+    ],
+    long_prompt: "Write a 1000-word piece that challenges conventional wisdom in [keyword] and inspires readers to create their own approach. Open with an introduction discussing how outdated norms can limit success. Present 3-5 outdated rules, each introduced with a bold subheading. For each, describe why it’s ineffective, what a better alternative looks like, and how it leads to superior results. Use a bold and empowering tone to inspire action. Conclude with a call-to-action encouraging readers to embrace their unique path in [keyword]."
+},
+the_filter_test: {
+    name: "The Filter Test",
+    summary: "Show how to filter out bad advice, tools, or strategies in [keyword] to focus only on what works.",
+    examples: [
+        "Not everything in [keyword] is worth your time. Here’s how to filter out the noise and focus on the best strategies.",
+        "Use this filter test in [keyword]: Does it save time, simplify, or deliver results? If not, skip it."
+    ],
+    long_prompt: "Write a 1000-word piece explaining how to apply a filtering system to eliminate bad advice, ineffective tools, or outdated strategies in [keyword]. Begin with an introduction about the problem of information overload and why filtering is essential. Outline 3-5 practical steps for applying a filter test, each introduced with a bold subheading. For each step, explain its purpose, how to use it effectively, and provide examples of good vs. bad selections. End with a motivating call-to-action encouraging readers to refine their approach using this filtering process."
+},
+
+the_reset_myth: {
+    name: "The Reset Myth",
+    summary: "Dispel the myth that you need to wait for the perfect moment to restart your [keyword] journey.",
+    examples: [
+        "The reset myth: You don’t need a clean slate to start over in [keyword]. Begin where you are, and you’ll make progress.",
+        "Waiting for the perfect moment to restart [keyword]? Start now—the best time is today."
+    ],
+    long_prompt: "Write a 1000-word piece debunking the myth that a fresh start requires perfect conditions in [keyword]. Begin with an introduction about why people hesitate to restart. Present 3-5 actionable strategies for resetting without waiting, each introduced with a bold subheading. For each, explain how to implement it immediately, share real-life examples, and highlight the benefits of taking action now. Conclude with an encouraging call-to-action motivating readers to break free from the ‘reset myth’ and take control of their journey today."
+},
+
+the_anti_guide: {
+    name: "The Anti-Guide",
+    summary: "Flip traditional how-to guides by telling your audience what not to do, while subtly teaching them the best practices for [keyword].",
+    examples: [
+        "The Anti-Guide to [keyword]: Step 1—Waste money on overpriced solutions. Step 2—Ignore proven strategies. Want better results? Here’s what actually works.",
+        "Avoid these 3 mistakes in [keyword]: Chasing trends, relying on guesswork, and ignoring data. Success is simpler than you think."
+    ],
+    long_prompt: "Write a 1000-word piece that reverses the typical how-to guide by focusing on mistakes to avoid in [keyword]. Open with an engaging introduction on why avoiding common pitfalls is just as important as following best practices. List 3-5 major mistakes, each introduced with a bold subheading. For each, describe why it’s a mistake, its consequences, and subtly introduce a better approach. Use humor, anecdotes, or cautionary tales to keep readers engaged. Conclude with a strong call-to-action urging readers to rethink their strategy and focus on smarter choices."
+},
+
+what_they_dont_want_you_to_know: {
+    name: "What They Don’t Want You to Know",
+    summary: "Leverage intrigue by exposing hidden truths or strategies in the [keyword] niche that are intentionally overlooked or kept secret by competitors.",
+    examples: [
+        "What they don’t want you to know about [keyword]: Most tools are designed to make you dependent, not successful. Learn how to break free.",
+        "What they don’t want you to know: The simplest solutions for [keyword] are often the most effective."
+    ],
+    long_prompt: "Write a 1000-word piece revealing hidden truths or strategies in [keyword] that competitors don’t openly share. Open with an engaging introduction that teases why these insights are kept under wraps. Present 3-5 ‘secrets,’ each introduced with a bold subheading. For each, expose the hidden truth, explain why it’s overlooked, and describe how readers can use it to their advantage. Include real-world examples or supporting data to build credibility. Conclude with an empowering call-to-action urging readers to apply these insights for greater success."
+},
+
+the_real_secret_no_one_tells_you: {
+    name: "The Real Secret No One Tells You",
+    summary: "Share a hidden truth or lesser-known insight about [keyword] to intrigue your audience. Present this secret as the key to overcoming their challenges.",
+    examples: [
+        "The real secret to [keyword]? It’s not about doing more—it’s about doing the right things at the right time.",
+        "What no one tells you about [keyword]: Most people fail because they overcomplicate it. Keep it simple, and success follows."
+    ],
+    long_prompt: "Write a 1000-word piece that unveils a little-known secret about [keyword] that can dramatically improve results. Start with an intriguing introduction that sets up the ‘secret’ as a game-changing insight. Present 3-5 key explanations of this secret, each introduced with a bold subheading. For each, describe why it’s overlooked, how it simplifies success, and how readers can implement it effectively. Use anecdotes, case studies, or thought-provoking questions to keep readers engaged. End with a motivational call-to-action urging them to apply this secret and transform their approach."
+},
+the_anti_perfection_plan: {
+    name: "The Anti-Perfection Plan",
+    summary: "Emphasize that perfection isn’t necessary for success in [keyword]; progress is what counts.",
+    examples: [
+        "Waiting to be perfect in [keyword]? Stop. Progress beats perfection every time.",
+        "The anti-perfection plan for [keyword]: Start messy, learn fast, and grow big."
+    ],
+    long_prompt: "Write a 1000-word piece that helps readers break free from perfectionism in [keyword] and focus on progress instead. Open with an engaging introduction that explains how perfectionism leads to hesitation, procrastination, and missed opportunities. Present 3-5 practical ways to shift from a perfectionist mindset to a progress-driven approach, each introduced with a bold subheading. For each, describe why perfectionism holds people back, how taking imperfect action leads to better results, and provide actionable strategies to overcome the fear of making mistakes. Use relatable examples, motivational insights, or expert perspectives to reinforce the message. Conclude with an encouraging call-to-action urging readers to embrace imperfection, take immediate action, and move forward in their [keyword] journey."
+},
+
+the_opportunity_window: {
+    name: "The Opportunity Window",
+    summary: "Highlight a time-sensitive opportunity in [keyword] to create urgency and excitement.",
+    examples: [
+        "The opportunity window in [keyword] is wide open—but it won’t stay that way forever.",
+        "Now’s the time to act in [keyword]. This opportunity won’t wait."
+    ],
+    long_prompt: "Write a 1000-word piece that emphasizes the urgency of seizing opportunities in [keyword] before they disappear. Open with a compelling introduction that explains how success often comes to those who recognize and act on opportunities quickly, rather than waiting for the perfect moment. Present 3-5 time-sensitive opportunities or trends in [keyword], each introduced with a bold subheading. For each, describe why the opportunity exists, what makes it time-sensitive, and how taking action now can lead to significant advantages. Use case studies, statistics, or real-world examples to illustrate the impact of timely decision-making. Conclude with a powerful call-to-action that encourages readers to stop hesitating, recognize the current window of opportunity, and take decisive steps in their [keyword] journey."
+},
+
+the_unseen_hero: {
+    name: "The Unseen Hero",
+    summary: "Highlight a little-known tool, mindset, or strategy in [keyword] as the unsung hero of success.",
+    examples: [
+        "The unseen hero of [keyword] success? A strategy so simple, it’s often overlooked.",
+        "Most people in [keyword] miss this unsung hero—it’s the secret to real results."
+    ],
+    long_prompt: "Write a 1000-word piece that uncovers an overlooked but powerful factor in [keyword] success. Start with an engaging introduction that explains how people often focus on popular strategies while missing a crucial yet underrated element. Present 3-5 ‘unseen heroes’ in [keyword], each introduced with a bold subheading. For each, describe what it is, why it’s often ignored, and how incorporating it can lead to significant results. Use examples, expert insights, or personal anecdotes to emphasize the importance of these overlooked tools, strategies, or mindsets. Conclude with an inspiring call-to-action encouraging readers to embrace these unseen heroes and integrate them into their [keyword] approach."
+},
+
+the_end_of_the_line: {
+    name: "The End of the Line",
+    summary: "Push your audience to reflect on where their current [keyword] efforts will lead if they don’t make a change.",
+    examples: [
+        "If you keep doing [keyword] the same way, where will you end up? It’s time to find a new destination.",
+        "Your current [keyword] path is taking you nowhere fast. Let’s rewrite the journey."
+    ],
+    long_prompt: "Write a 1000-word piece that challenges readers to reflect on the long-term consequences of staying on their current path in [keyword]. Open with a thought-provoking introduction that asks readers to consider where their habits, strategies, or beliefs in [keyword] are leading them. Present 3-5 key reflection points, each introduced with a bold subheading. For each, describe a common but ineffective approach in [keyword], the potential negative outcome of continuing down that road, and a better alternative for achieving real success. Use compelling language, real-world examples, or motivational insights to push readers toward self-assessment and action. Conclude with an urgent call-to-action that invites readers to take control of their [keyword] journey before they reach a dead end."
+},
+
+the_comfort_zone_trap: {
+    name: "The Comfort Zone Trap",
+    summary: "Explain how staying comfortable in [keyword] prevents growth and success.",
+    examples: [
+        "The comfort zone is where [keyword] dreams go to die. Step out, and watch your results take off.",
+        "If you’re comfortable with your [keyword] strategy, you’re not growing. Let’s change that."
+    ],
+    long_prompt: "Write a 1000-word piece that challenges readers to step out of their comfort zones in [keyword] and embrace growth. Begin with an introduction explaining how staying comfortable leads to stagnation and limits progress. Present 3-5 comfort zone traps, each introduced with a bold subheading. For each, describe how these traps keep people stuck, the risks of avoiding change, and actionable steps to break free. Use inspiring examples, psychological insights, or motivational stories to encourage readers to take bold steps outside their comfort zones. Conclude with a call-to-action urging readers to embrace discomfort as a sign of progress and commit to continuous growth in their [keyword] journey."
+},
+the_filter_test: {
+    name: "The Filter Test",
+    summary: "Show how to filter out bad advice, tools, or strategies in [keyword] to focus only on what works.",
+    examples: [
+        "Not everything in [keyword] is worth your time. Here’s how to filter out the noise and focus on the best strategies.",
+        "Use this filter test in [keyword]: Does it save time, simplify, or deliver results? If not, skip it."
+    ],
+    long_prompt: "Write a 1000-word piece that helps readers develop a filtering system to identify and eliminate bad advice, ineffective tools, or misleading strategies in [keyword]. Open with an introduction that highlights the overwhelming amount of information available and the need for a structured way to separate the useful from the useless. Present 3-5 steps for applying an effective filter test, each introduced with a bold subheading. For each, explain how it works, provide examples of good vs. bad selections, and share practical tips for making smarter choices. Conclude with a call-to-action encouraging readers to refine their approach using this filtering process to ensure they focus only on what truly delivers results."
+},
+
+the_reset_myth: {
+    name: "The Reset Myth",
+    summary: "Dispel the myth that you need to wait for the perfect moment to restart your [keyword] journey.",
+    examples: [
+        "The reset myth: You don’t need a clean slate to start over in [keyword]. Begin where you are, and you’ll make progress.",
+        "Waiting for the perfect moment to restart [keyword]? Start now—the best time is today."
+    ],
+    long_prompt: "Write a 1000-word piece that challenges the belief that people must wait for the perfect circumstances before restarting in [keyword]. Begin with an introduction that explains why this mindset holds people back and how progress starts from wherever they are. Present 3-5 actionable ways to reset and move forward without waiting, each introduced with a bold subheading. For each, describe how it works, provide real-world examples, and highlight the benefits of taking immediate action. Conclude with an encouraging call-to-action inspiring readers to break free from the ‘reset myth’ and take control of their journey today, no matter their starting point."
+},
+
+the_anti_guide: {
+    name: "The Anti-Guide",
+    summary: "Flip traditional how-to guides by telling your audience what not to do, while subtly teaching them the best practices for [keyword].",
+    examples: [
+        "The Anti-Guide to [keyword]: Step 1—Waste money on overpriced solutions. Step 2—Ignore proven strategies. Want better results? Here’s what actually works.",
+        "Avoid these 3 mistakes in [keyword]: Chasing trends, relying on guesswork, and ignoring data. Success is simpler than you think."
+    ],
+    long_prompt: "Write a 1000-word piece that takes a reverse approach by focusing on what not to do in [keyword], allowing readers to learn from common mistakes. Open with an engaging introduction that explains why avoiding bad practices can be just as important as following good ones. Present 3-5 major mistakes that people make, each introduced with a bold subheading. For each, explain why it’s a mistake, the consequences of following it, and subtly introduce a smarter alternative. Use humor, cautionary tales, or real-world examples to make the content engaging. Conclude with a call-to-action urging readers to rethink their approach and focus on making smarter choices in [keyword]."
+},
+
+what_they_dont_want_you_to_know: {
+    name: "What They Don’t Want You to Know",
+    summary: "Leverage intrigue by exposing hidden truths or strategies in the [keyword] niche that are intentionally overlooked or kept secret by competitors.",
+    examples: [
+        "What they don’t want you to know about [keyword]: Most tools are designed to make you dependent, not successful. Learn how to break free.",
+        "What they don’t want you to know: The simplest solutions for [keyword] are often the most effective."
+    ],
+    long_prompt: "Write a 1000-word piece that uncovers hidden truths or strategies in [keyword] that competitors, industry leaders, or mainstream sources rarely discuss. Open with an introduction that teases why these insights are kept secret and how they can provide a competitive advantage. Present 3-5 ‘hidden truths,’ each introduced with a bold subheading. For each, expose what makes it valuable, explain why it’s overlooked, and describe how readers can apply it to get ahead. Use supporting data, case studies, or examples to build credibility. Conclude with a call-to-action that motivates readers to use these insights to gain an edge in [keyword]."
+},
+
+the_real_secret_no_one_tells_you: {
+    name: "The Real Secret No One Tells You",
+    summary: "Share a hidden truth or lesser-known insight about [keyword] to intrigue your audience. Present this secret as the key to overcoming their challenges.",
+    examples: [
+        "The real secret to [keyword]? It’s not about doing more—it’s about doing the right things at the right time.",
+        "What no one tells you about [keyword]: Most people fail because they overcomplicate it. Keep it simple, and success follows."
+    ],
+    long_prompt: "Write a 1000-word piece that reveals a lesser-known but powerful insight about [keyword] that can significantly improve results. Start with an attention-grabbing introduction that sets up the ‘real secret’ as a game-changer that most people overlook. Present 3-5 explanations or supporting ideas that reinforce this secret, each introduced with a bold subheading. For each, describe why it’s not widely known, how it simplifies success, and practical steps readers can take to implement it. Use thought-provoking questions, examples, or case studies to make the secret feel undeniable. Conclude with a motivational call-to-action inspiring readers to embrace this insight and transform their approach to [keyword]."
+},
+the_snowglobe_shake_up: {
+    name: "The Snowglobe Shake-Up",
+    summary: "Challenge your audience to shake up their current [keyword] strategy and see what sticks when the dust settles.",
+    examples: [
+        "What if you shook up your [keyword] approach? Sometimes, chaos reveals the best strategies.",
+        "Stop playing it safe in [keyword]. Shake things up, and discover what really works."
+    ],
+    long_prompt: "Write a 1000-word piece that encourages readers to disrupt their usual approach to [keyword] and explore new possibilities. Open with an introduction comparing conventional strategies to a settled snowglobe and explain how shaking things up can lead to fresh insights. Present 3-5 unconventional approaches, each introduced with a bold subheading. For each, describe the method, explain why it’s effective, and outline the potential benefits of embracing change. Use daring and playful language to make the process feel exciting. Conclude with a call-to-action motivating readers to experiment with new approaches and uncover unexpected breakthroughs in [keyword]."
+},
+
+the_energy_leak: {
+    name: "The Energy Leak",
+    summary: "Show how wasted effort in [keyword] drains results and how to plug the leaks.",
+    examples: [
+        "Your [keyword] energy is leaking into all the wrong places. Here’s how to focus and win.",
+        "Fix the leaks in your [keyword] strategy, and watch your results skyrocket."
+    ],
+    long_prompt: "Write a 1000-word piece that helps readers identify and eliminate wasted effort in [keyword] to improve efficiency. Begin with an introduction explaining how energy leaks reduce success and lead to burnout. Present 3-5 common energy leaks, each introduced with a bold subheading. For each, describe the issue, show how it negatively impacts results, and provide actionable solutions to fix it. Use practical and energizing language to encourage readers to optimize their efforts. Conclude with a motivating call-to-action, urging readers to refocus their energy on what truly matters in [keyword]."
+},
+
+the_reverse_obstacle_course: {
+    name: "The Reverse Obstacle Course",
+    summary: "Flip the script by removing barriers in [keyword] before starting, creating a clear path to success.",
+    examples: [
+        "Imagine tackling [keyword] with no obstacles in your way. Let’s clear the path before you begin.",
+        "Why struggle through barriers in [keyword]? Remove them first, and success gets simpler."
+    ],
+    long_prompt: "Write a 1000-word piece that helps readers eliminate barriers in [keyword] before they begin, making success more attainable. Start with an introduction explaining the concept of reversing the traditional approach to challenges by removing obstacles upfront. Present 3-5 common barriers, each introduced with a bold subheading. For each, describe the barrier, its negative impact, and provide a strategy for eliminating it. Use strategic and innovative language to help readers see the benefits of a smoother path. Conclude with a call-to-action encouraging them to clear the way for success in [keyword] before taking their next step."
+},
+
+the_blank_canvas: {
+    name: "The Blank Canvas",
+    summary: "Encourage your audience to approach [keyword] as an opportunity to create something completely new.",
+    examples: [
+        "What if you could start your [keyword] strategy with a blank canvas? Imagine the possibilities.",
+        "Your [keyword] success isn’t painted yet—it’s a blank canvas. Start creating today."
+    ],
+    long_prompt: "Write a 1000-word piece that inspires readers to see [keyword] as a blank canvas filled with endless opportunities. Open with an introduction that frames [keyword] as a space where they have the freedom to create something unique. Present 3-5 areas where they can take bold action, each introduced with a bold subheading. For each, explain the opportunity, why it matters, and how to approach it with creativity. Use visionary and optimistic language to excite readers about the possibilities. Conclude with a call-to-action encouraging them to take the first step in crafting their own unique success story in [keyword]."
+},
+
+the_unwritten_rule: {
+    name: "The Unwritten Rule",
+    summary: "Reveal an unspoken principle in [keyword] that separates success from failure.",
+    examples: [
+        "The unwritten rule of [keyword] success? Most people never notice it, but it changes everything.",
+        "There’s an unwritten rule in [keyword] that only the pros know. Here’s how to master it."
+    ],
+    long_prompt: "Write a 1000-word piece that uncovers an essential but often unspoken principle in [keyword] that leads to success. Begin with an introduction explaining the idea of unwritten rules—how they quietly shape outcomes but are rarely discussed. Present 3-5 unwritten rules, each introduced with a bold subheading. For each, describe what the rule is, why it’s important, and how following it can lead to better results. Use insightful and authoritative language to build credibility and trust. Conclude with a call-to-action encouraging readers to recognize and apply these powerful but overlooked principles in their [keyword] journey."
+},
+the_silent_revolution: {
+    name: "The Silent Revolution",
+    summary: "Position an emerging trend or overlooked method in [keyword] as a quiet but powerful force for change.",
+    examples: [
+        "A silent revolution is happening in [keyword]. The question is: Will you be ahead of it?",
+        "Most people don’t see the shift in [keyword] until it’s too late. Here’s how to stay ahead."
+    ],
+    long_prompt: "Write a 1000-word piece that introduces readers to emerging trends or overlooked strategies in [keyword] that are quietly reshaping the landscape. Begin with an introduction explaining how silent revolutions unfold and why recognizing them early creates an advantage. Present 3-5 key trends or shifts, each introduced with a bold subheading. For each, describe what’s changing, why it’s been overlooked, and how readers can position themselves ahead of the curve. Use forward-thinking and urgent language to inspire action. Conclude with a call-to-action motivating readers to embrace these shifts before they become mainstream."
+},
+
+the_weight_of_assumptions: {
+    name: "The Weight of Assumptions",
+    summary: "Explore how false assumptions in [keyword] create unnecessary burdens and how to lighten the load.",
+    examples: [
+        "What assumptions about [keyword] are weighing you down? Let go of what’s not true, and you’ll move faster.",
+        "The heaviest part of [keyword] success isn’t the work—it’s the false beliefs you carry."
+    ],
+    long_prompt: "Write a 1000-word piece that explores how false assumptions in [keyword] hold people back and how letting go of them leads to greater success. Begin with an introduction discussing how assumptions shape actions and create unnecessary burdens. Present 3-5 common false assumptions, each introduced with a bold subheading. For each, describe the assumption, explain its negative impact, and offer a more empowering belief or perspective to replace it. Use freeing and empowering language to encourage readers to release limiting beliefs. Conclude with a call-to-action urging readers to reassess their assumptions and move forward with clarity."
+},
+
+the_forgotten_timeline: {
+    name: "The Forgotten Timeline",
+    summary: "Challenge people to think about where they would be now if they had started [keyword] earlier—and inspire them to start today.",
+    examples: [
+        "If you’d started [keyword] six months ago, where would you be today? The next best time to start is now.",
+        "Imagine if you’d taken action on [keyword] last year. What’s stopping you from starting now?"
+    ],
+    long_prompt: "Write a 1000-word piece that uses the concept of a 'forgotten timeline' to inspire readers to take action in [keyword] immediately. Begin with an introduction prompting readers to reflect on how their progress might look if they had started earlier. Present 3-5 scenarios that highlight the impact of waiting, each introduced with a bold subheading. For each, describe the missed opportunity, the potential results of having started sooner, and why now is the best time to begin. Use reflective yet forward-focused language to motivate action. Conclude with a call-to-action encouraging readers to stop delaying and commit to starting their [keyword] journey today."
+},
+
+the_illusion_of_stability: {
+    name: "The Illusion of Stability",
+    summary: "Confront the myth that staying still in [keyword] is safe, showing how inaction is often the riskiest choice.",
+    examples: [
+        "Stability in [keyword] is an illusion. The world moves forward whether you act or not.",
+        "Think staying still in [keyword] is the safe choice? It’s where opportunities go to die."
+    ],
+    long_prompt: "Write a 1000-word piece that challenges the belief that maintaining the status quo in [keyword] is a safe option. Begin with an introduction explaining how perceived stability often leads to stagnation and missed opportunities. Present 3-5 ways inaction creates hidden risks, each introduced with a bold subheading. For each, describe the false sense of security, explain the real dangers of doing nothing, and offer an alternative approach that promotes progress. Use thought-provoking and challenging language to inspire readers to break free from inaction. Conclude with a call-to-action motivating readers to take bold steps in their [keyword] journey."
+},
+
+the_ripple_youll_never_see: {
+    name: "The Ripple You’ll Never See",
+    summary: "Highlight how taking action in [keyword] creates ripple effects that impact others in ways the audience may never realize.",
+    examples: [
+        "Every step you take in [keyword] sends ripples you’ll never see—changing lives in ways you can’t imagine.",
+        "The true impact of [keyword] isn’t what you gain—it’s the ripples you create for others."
+    ],
+    long_prompt: "Write a 1000-word piece that explores how even small actions in [keyword] create lasting ripple effects beyond what’s immediately visible. Begin with an introduction explaining how unseen influence extends further than most people realize. Present 3-5 examples of ripple effects, each introduced with a bold subheading. For each, describe the action, its immediate outcomes, and the broader impact on others. Use profound and uplifting language to help readers see the deeper meaning behind their efforts. Conclude with a call-to-action inspiring readers to take action in [keyword] with the understanding that their efforts create waves of positive change."
+},
+the_reflection_paradox: {
+    name: "The Reflection Paradox",
+    summary: "Invite your audience to reflect on how their current [keyword] strategy is a mirror of their internal mindset.",
+    examples: [
+        "Your [keyword] results are a reflection of your beliefs. Change the way you think, and the results will follow.",
+        "If your [keyword] strategy feels broken, ask yourself this: What does it say about what you believe is possible?"
+    ],
+    long_prompt: "Write a 1000-word piece that explores the connection between mindset and strategy in [keyword]. Begin with an introduction explaining how internal beliefs shape external outcomes. Present 3-5 reflections, each introduced with a bold subheading. For each, describe the mindset pattern, how it manifests in strategy, and how shifting perspective leads to better results. Use introspective and profound language to challenge readers' thinking. Conclude with a call-to-action encouraging them to examine their mindset and transform their approach in [keyword]."
+},
+
+the_infinite_loop_of_doubt: {
+    name: "The Infinite Loop of Doubt",
+    summary: "Highlight how self-doubt traps people in repetitive cycles in [keyword] and how to break free.",
+    examples: [
+        "Doubt in [keyword] is a loop. It keeps you stuck in the same place, afraid to move forward. Here’s how to escape.",
+        "Most [keyword] failures aren’t from lack of skill—they’re from never believing you could succeed."
+    ],
+    long_prompt: "Write a 1000-word piece that exposes the cycle of self-doubt in [keyword] and how to escape it. Begin with an introduction explaining how doubt keeps people trapped in hesitation. Present 3-5 common doubt loops, each introduced with a bold subheading. For each, describe how the loop forms, its consequences, and actionable ways to break it. Use compassionate and inspiring language to instill confidence. Conclude with a call-to-action encouraging readers to take their first step out of doubt and into progress."
+},
+
+the_hidden_war: {
+    name: "The Hidden War",
+    summary: "Discuss the silent battles people fight internally while trying to master [keyword].",
+    examples: [
+        "The hardest part of [keyword] isn’t the strategy—it’s the war inside your mind.",
+        "Most people in [keyword] are fighting a hidden battle with themselves. Here’s how to win it."
+    ],
+    long_prompt: "Write a 1000-word piece that delves into the internal struggles people face in [keyword]. Begin with an introduction acknowledging the unseen battles that often go unspoken. Present 3-5 common struggles, each introduced with a bold subheading. For each, describe the nature of the battle, why it arises, and practical ways to overcome it. Use raw and deeply empathetic language to resonate with readers. Conclude with a call-to-action encouraging them to confront their inner battles and move forward with strength."
+},
+
+the_power_of_giving_up: {
+    name: "The Power of Giving Up",
+    summary: "Flip the script on perseverance by suggesting that quitting the wrong [keyword] strategies is the key to finding success.",
+    examples: [
+        "Sometimes, the smartest move in [keyword] is giving up—on what doesn’t work.",
+        "Success in [keyword] isn’t about never quitting. It’s about knowing what to quit and when."
+    ],
+    long_prompt: "Write a 1000-word piece that redefines perseverance in [keyword] by showing the value of strategic quitting. Begin with an introduction explaining how letting go of the wrong approach is a path to success. Present 3-5 situations where quitting is beneficial, each introduced with a bold subheading. For each, describe the flawed approach, why it's worth quitting, and what should be done instead. Use bold and counterintuitive language to challenge conventional wisdom. Conclude with a call-to-action encouraging readers to identify what they should let go of to move forward."
+},
+
+the_wisdom_of_forgetting: {
+    name: "The Wisdom of Forgetting",
+    summary: "Challenge the focus on learning more in [keyword] by emphasizing the importance of unlearning outdated methods.",
+    examples: [
+        "In [keyword], forgetting old habits is just as important as learning new ones.",
+        "What you need isn’t more knowledge in [keyword]—it’s the wisdom to let go of what no longer serves you."
+    ],
+    long_prompt: "Write a 1000-word piece that explores the power of unlearning in [keyword]. Begin with an introduction explaining why forgetting outdated methods is essential for growth. Present 3-5 outdated practices, each introduced with a bold subheading. For each, explain why the method is ineffective, what should replace it, and how this shift accelerates progress. Use reflective and forward-thinking language to inspire action. Conclude with a call-to-action encouraging readers to identify and unlearn habits that are holding them back in [keyword]."
+},
+the_reward_of_stopping: {
+    name: "The Reward of Stopping",
+    summary: "Highlight the benefits of stepping away from [keyword], even temporarily, to gain perspective and reset.",
+    examples: [
+        "Sometimes, the best way to move forward in [keyword] is to stop. Step back, and the path will reveal itself.",
+        "In [keyword], stopping isn’t quitting—it’s recalibrating for a stronger comeback."
+    ],
+    long_prompt: "Write a 1000-word piece that explores the benefits of stepping away from [keyword] to reset and gain perspective. Begin with an introduction explaining why strategic pauses can lead to better clarity and performance. Present 3-5 scenarios where stopping is beneficial, each introduced with a bold subheading. For each, describe the situation, how taking a break helps, and what shifts when perspective is regained. Use calming and reassuring language to ease reader anxiety. Conclude with a call-to-action encouraging readers to embrace pauses as part of their [keyword] journey."
+},
+
+the_invisible_milestone: {
+    name: "The Invisible Milestone",
+    summary: "Turn the focus away from big milestones in [keyword] to celebrate the unnoticed but crucial steps along the way.",
+    examples: [
+        "The invisible milestones in [keyword] matter most—the quiet wins no one claps for.",
+        "Think success in [keyword] is about the big moments? It’s built on the small ones you don’t even notice."
+    ],
+    long_prompt: "Write a 1000-word piece that highlights the value of small, unnoticed milestones in [keyword]. Begin with an introduction explaining why these invisible achievements are essential for long-term success. Present 3-5 overlooked milestones, each introduced with a bold subheading. For each, describe the milestone, its importance, and how recognizing it can fuel motivation. Use thoughtful and encouraging language to shift readers’ perspectives. Conclude with a call-to-action urging readers to celebrate their progress in [keyword], even when it’s not immediately visible."
+},
+
+the_silent_saboteur: {
+    name: "The Silent Saboteur",
+    summary: "Explore the hidden habits or beliefs that quietly sabotage success in [keyword] without people even realizing it.",
+    examples: [
+        "Your biggest obstacle in [keyword] isn’t external—it’s the silent saboteur inside your mind.",
+        "Most [keyword] strategies fail because of what people don’t notice. Here’s how to stop the sabotage."
+    ],
+    long_prompt: "Write a 1000-word piece that reveals the hidden forces that sabotage success in [keyword]. Begin with an introduction explaining the concept of the silent saboteur and its subtle impact. Present 3-5 self-sabotaging habits or beliefs, each introduced with a bold subheading. For each, describe how it manifests, its consequences, and practical ways to overcome it. Use insightful and revealing language to help readers identify their blind spots. Conclude with a call-to-action encouraging readers to confront these silent barriers and take control of their success in [keyword]."
+},
+
+the_mirror_effect: {
+    name: "The Mirror Effect",
+    summary: "Position [keyword] as a mirror that reflects your audience’s priorities, habits, and values, urging them to align their actions with their goals.",
+    examples: [
+        "Your [keyword] results mirror your habits. What do they say about what you prioritize?",
+        "In [keyword], the results you see are the reflection of the effort you give. Make the reflection count."
+    ],
+    long_prompt: "Write a 1000-word piece that explores how [keyword] acts as a mirror of a person’s choices, priorities, and values. Begin with an introduction explaining how external results often reflect internal behaviors. Present 3-5 mirrored patterns, each introduced with a bold subheading. For each, describe the behavior it reflects, its impact on success, and steps to align habits with desired outcomes. Use introspective and empowering language to inspire readers. Conclude with a call-to-action urging them to evaluate their reflections and make meaningful adjustments in [keyword]."
+},
+
+the_illusion_of_time: {
+    name: "The Illusion of Time",
+    summary: "Confront the idea that people have 'plenty of time' to succeed in [keyword], emphasizing the urgency of starting now.",
+    examples: [
+        "The illusion of time in [keyword] is the biggest lie we tell ourselves. The best time to start is already gone—the next best time is now.",
+        "Think you’ll get to [keyword] eventually? The clock doesn’t wait, and neither should you."
+    ],
+    long_prompt: "Write a 1000-word piece that challenges the illusion that there’s always enough time to succeed in [keyword]. Begin with an introduction explaining how delaying action creates missed opportunities. Present 3-5 ways time constraints affect success, each introduced with a bold subheading. For each, describe the illusion, why time is more limited than it seems, and practical steps to take immediate action. Use urgent and thought-provoking language to inspire a sense of now. Conclude with a call-to-action urging readers to stop waiting and start prioritizing their [keyword] journey today."
+},
+the_lightbulb_moment: {
+    name: "The Lightbulb Moment",
+    summary: "Focus on the single insight or realization in [keyword] that has the power to change everything.",
+    examples: [
+        "In [keyword], one lightbulb moment can flip the switch from struggle to success. Are you ready for yours?",
+        "Most people fail in [keyword] because they haven’t found their lightbulb moment yet. Here’s how to spark it."
+    ],
+    long_prompt: "Write a 1000-word piece that explores transformative insights in [keyword] that can shift perspectives and accelerate success. Begin with an introduction describing the power of a lightbulb moment and how a single realization can change everything. Present 3-5 potential lightbulb moments, each introduced with a bold subheading. For each, describe the insight, its relevance, and how it can create immediate progress. Use enlightening and inspiring language to keep readers engaged. Conclude with a call-to-action encouraging them to recognize and act on their lightbulb moments in [keyword]."
+},
+
+burn_it_down_list: {
+    name: "The 'Burn It Down' List",
+    summary: "Identify outdated practices or beliefs about [keyword] and advocate for leaving them behind. This encourages your audience to embrace modern, effective alternatives.",
+    examples: [
+        "Burn It Down: Outdated formulas for [keyword] that haven’t worked in years. The future is here—don’t get left behind.",
+        "Burn It Down: The idea that success in [keyword] requires luck. It’s about strategy, not chance."
+    ],
+    long_prompt: "Write a 1000-word piece that challenges outdated beliefs and practices in [keyword] and advocates for smarter alternatives. Begin with an introduction that calls out the resistance to change and the need for evolution in [keyword]. Present 5 outdated practices, each introduced with a bold subheading. For each, describe the practice, why it no longer works, and the modern approach that delivers better results. Use compelling examples, data, or stories to highlight the benefits of change. Conclude with an empowering call-to-action urging readers to abandon ineffective methods and embrace the future of [keyword]."
+},
+
+if_youre_still_doing_this_post: {
+    name: "If You’re Still Doing This",
+    summary: "Call out ineffective habits or outdated methods people still rely on in [keyword], and redirect attention to better, more efficient approaches.",
+    examples: [
+        "If you’re still manually tracking [keyword task], you’re wasting hours every week. Here’s how to automate it in minutes.",
+        "If you’re still believing myths about [keyword], you’re holding yourself back. Break free with this approach."
+    ],
+    long_prompt: "Write a 1000-word piece that calls out outdated practices in [keyword] and offers better, more efficient alternatives. Begin with an introduction that acknowledges the difficulty of breaking old habits and why upgrading strategies is essential. Present 3-5 ineffective practices, each introduced with a bold subheading. For each, describe the practice, why it’s holding people back, and how to transition to a more effective solution. Use relatable examples, data, or humor to make the points impactful. Conclude with an assertive but supportive call-to-action, encouraging readers to break free from ineffective methods and embrace a smarter way to succeed in [keyword]."
+},
+the_niche_insider: {
+    name: "The Niche Insider",
+    summary: "Share insider knowledge about [keyword] that most people don’t know, positioning yourself as an expert.",
+    examples: [
+        "The insider secret to [keyword]: It’s not about working harder, it’s about knowing this one thing.",
+        "Most people in [keyword] have no idea about this game-changing insight. Get the inside scoop."
+    ],
+    long_prompt: "Write a 1000-word piece that shares little-known insider knowledge about [keyword] to position the author as an authority. Open with an introduction that explains how exclusive insights can create a powerful edge. Present 3-5 insider secrets, each introduced with a bold subheading. For each, describe the secret, why it’s rarely discussed, and how applying it can lead to significant results. Use examples, case studies, or expert-level commentary to build trust and demonstrate authority. Conclude with a call-to-action encouraging readers to implement these under-the-radar strategies in their own [keyword] journey."
+},
+
+the_rule_breaker: {
+    name: "The Rule Breaker",
+    summary: "Encourage your audience to break outdated rules in [keyword] and forge their own path to success.",
+    examples: [
+        "Break this rule in [keyword] and watch your results skyrocket.",
+        "Who says you have to follow the rules? Rewrite the playbook for [keyword] success."
+    ],
+    long_prompt: "Write a 1000-word piece that challenges outdated rules and encourages readers to redefine success in [keyword]. Start with a bold introduction on how following conventional wisdom can limit progress. Present 3-5 outdated rules, each introduced with a bold subheading. For each, describe the rule, why it no longer works, and the modern approach that’s more effective. Use rebellious, empowering language and real-world examples to encourage readers to break free from outdated thinking. Conclude with a call-to-action inspiring readers to forge their own rules in [keyword] and take bold steps forward."
+},
+
+the_what_if_game: {
+    name: "The ‘What If?’ Game",
+    summary: "Use a series of “What if?” scenarios to paint a compelling picture of the possibilities in [keyword].",
+    examples: [
+        "What if mastering [keyword] was simpler than you imagined? What if the solution was right in front of you?",
+        "What if you stopped hesitating and started seeing results in [keyword] today? What would change for you?"
+    ],
+    long_prompt: "Write a 1000-word piece that uses hypothetical 'What if?' scenarios to help readers unlock fresh thinking and new possibilities in [keyword]. Start with an introduction about the power of curiosity and reframing. Present 3-5 'What if?' prompts, each introduced with a bold subheading. For each, explore the scenario, the possibilities it reveals, and how it could reshape results. Use optimistic and thought-provoking language to expand the reader’s perspective. Conclude with an invitation to create their own 'What if?' statements and take inspired action in [keyword]."
+},
+
+the_road_less_taken: {
+    name: "The Road Less Taken",
+    summary: "Present an unconventional or rarely used path in [keyword] that offers unique benefits or untapped potential.",
+    examples: [
+        "The road less taken in [keyword] leads to better results. Why follow the crowd when this path works?",
+        "Success in [keyword] doesn’t mean doing what everyone else does. Take the road less traveled."
+    ],
+    long_prompt: "Write a 1000-word piece that highlights unconventional or underused approaches in [keyword] that lead to exceptional results. Open with an introduction about the risks of following the crowd and the potential in alternative strategies. Present 3-5 lesser-known tactics or philosophies, each introduced with a bold subheading. For each, describe the strategy, why it’s overlooked, and how it creates an edge. Use stories, data, or case studies to prove its effectiveness. End with an adventurous call-to-action inviting readers to step off the beaten path and take the road less traveled in [keyword]."
+}
+
+
+        };
+
+    const STATIC_PROMPTS = {
+    UndetectableAiRewritePrompt: `Rewrite the content you just wrote. Ensure the content generated includes controlled imperfections, such as minor grammar variations, occasional punctuation inconsistencies, and abrupt shifts in sentence structure and length. Introduce human-like cognitive jumps, including topic shifts, incomplete thoughts, and slight redundancies in phrasing, while injecting personal anecdotes and sensory details to add unpredictability. Use emotionally charged language that sometimes contradicts itself or over-exaggerates feelings, and ensure complex sentences are broken up with asides, parenthetical statements, or dashes. Vary the vocabulary by replacing predictable word choices with synonyms, while introducing analogies or metaphors that may not directly follow the subject matter. Include recent real-world references or updates, and manually adjust sections of the text by mixing formal language with casual expressions and occasionally breaking logical flow to mimic human creativity. Be sure to alternate between short and long paragraphs, maintaining overall coherence while introducing moments of ambiguity and abstract thoughts that AI would typically struggle to generate.`,
+    TitleSuggestionsPrompt: `You are a world-class content strategist, SEO expert, and master copywriter specializing in creating irresistible article titles that get ultra-high CRT. Based on the provided content, generate 10 exceptional article titles, each between 50-60 characters in length. Every title should spark curiosity, evoke emotion, and resonate deeply with the target audience. Use proven copywriting techniques that are impossible to ignore. Incorporate power words and relevant SEO-optimized keywords naturally, ensuring each title balances emotional appeal with search engine performance. Ensure every title captivates the reader and is designed to maximize engagement, clicks, and shareability.`,
+    ImageGenerationPrompt: `You are an expert in creating detailed and emotionally resonant prompts for AI image generation software specializing in ultra-realistic visuals that align perfectly with the tone, themes, and emotional core of content. Generate 5 distinct and richly descriptive prompts for ultra-realistic images that convey the key messages of the social media posts. Each prompt should focus on crafting immersive, lifelike scenes without including text, logos, or watermarks. Describe each image with exceptional detail, including the environment, atmosphere, lighting, and textures, to ensure the visuals evoke a strong emotional connection. Specify elements such as time of day, color palette, and mood while ensuring the setting, objects, or characters align with the overarching narrative. Incorporate natural human expressions, movements, and interactions where relevant, ensuring every aspect of the image feels authentic and relatable. Provide details on background elements, subtle actions, or symbolic objects that enhance depth and meaning without overwhelming the focal point. Each prompt should result in a unique and captivating image that tells a story and visually represents the emotions, challenges, or aspirations conveyed in the content. Ensure diversity in the scenes, highlighting different perspectives, styles, and compositions that evoke a range of emotions and maintain alignment with the core message. The output should prioritize creativity, emotional resonance, and visual sophistication, producing stunning, high-quality images that leave a lasting impression.`,
+
+};
+function generateContent() {
+    const style = document.getElementById("style").value; // Selected style
+    const keyword = document.getElementById("keyword").value.trim(); // User input keyword
+    const outputContainer = document.getElementById("output"); // Output container
+
+    if (!keyword) {
+        alert("Please enter a keyword!");
+        return;
+    }
+
+    // Clear previous output
+    outputContainer.innerHTML = "";
+
+    if (style === "randomize") {
+        // Randomize and display 10 techniques
+        const randomStyles = Object.keys(CONTENT_STYLES)
+            .sort(() => Math.random() - 0.5) // Shuffle
+            .slice(0, 10); // Take first 10
+
+        randomStyles.forEach(key => {
+            const randomStyle = CONTENT_STYLES[key];
+            const promptText = randomStyle.long_prompt.replace(/\[keyword\]/g, keyword);
+
+            outputContainer.innerHTML += `
+                <div class="output-section">
+                    <h3>${randomStyle.name}</h3>
+                    <p>${randomStyle.summary.replace(/\[keyword\]/g, keyword)}</p>
+                    <pre>${promptText}</pre>
+                    <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+                </div>
+            `;
+        });
+    } else {
+        // Display a single selected style
+        const selectedStyle = CONTENT_STYLES[style];
+        const promptText = selectedStyle.long_prompt.replace(/\[keyword\]/g, keyword);
+
+        outputContainer.innerHTML = `
+            <div class="output-section">
+                <h3>${selectedStyle.name}</h3>
+                <p>${selectedStyle.summary.replace(/\[keyword\]/g, keyword)}</p>
+                <h4>Examples</h4>
+                <ul>${selectedStyle.examples.map(ex => `<li>${ex.replace(/\[keyword\]/g, keyword)}</li>`).join("")}</ul>
+                <pre>${promptText}</pre>
+                <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+            </div>
+        `;
+    }
+
+    // Add static prompts
+    outputContainer.innerHTML += `
+        ${Object.entries(STATIC_PROMPTS).map(([label, prompt]) => `
+            <div class="output-section">
+                <strong>${label.replace(/Prompt$/, '').replace(/([A-Z])/g, ' $1')}:</strong>
+                <pre>${prompt.replace(/\[keyword\]/g, keyword)}</pre>
+                <button class="copy-btn" onclick="copyPrompt(this)">Copy Prompt</button>
+            </div>
+        `).join("")}
+    `;
+}
+
+// Copy to Clipboard Function
+function copyPrompt(button) {
+    const preElement = button.previousElementSibling; // Get the <pre> element
+    const textToCopy = preElement.innerText;
+
+    navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+            const originalText = button.innerText; // Save original button text
+            button.innerText = "Copied! Let's Go!"; // Update to "Copied!"
+            button.disabled = true; // Disable button temporarily
+
+            setTimeout(() => {
+                button.innerText = originalText; // Revert button text
+                button.disabled = false; // Enable button
+            }, 2000); // Revert after 2 seconds
+        })
+        .catch(err => console.error("Failed to copy text: ", err));
+}
+
+
+</script>
+</body>
+</html>
