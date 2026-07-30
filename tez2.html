@@ -1,0 +1,1888 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Radical Quick-Win Reports</title>
+  <style>
+    :root {
+      --red: #d71920;
+      --deep-red: #a80f16;
+      --soft-red: #fff0f1;
+      --soft-red-2: #ffe3e5;
+      --green: #138d24;
+      --deep-green: #0f6c1c;
+      --ink: #1e1e1e;
+      --muted: #666;
+      --paper: #ffffff;
+      --page-bg: #f7f4f2;
+      --line: #ead8d8;
+      --shadow: 0 18px 45px rgba(113, 16, 20, 0.14);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(215, 25, 32, 0.10), transparent 28%),
+        linear-gradient(180deg, #fff8f8 0%, var(--page-bg) 55%, #fff 100%);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    .page-wrap {
+      width: min(950px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 28px 0 60px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--red), var(--deep-red));
+      color: #fff;
+      border-radius: 30px;
+      padding: 34px 34px 38px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: "REPORT";
+      position: absolute;
+      right: -26px;
+      top: -50px;
+      font-size: 138px;
+      font-weight: 900;
+      letter-spacing: -9px;
+      opacity: 0.08;
+      line-height: 1;
+    }
+
+    .hero-logo {
+      display: block;
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      margin: 0 auto 14px;
+      filter: drop-shadow(0 12px 28px rgba(0,0,0,0.16));
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.34);
+      color: #fff;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero h1 {
+      margin: 18px auto 12px;
+      font-size: clamp(34px, 6vw, 58px);
+      line-height: 0.97;
+      letter-spacing: -0.05em;
+      max-width: 800px;
+    }
+
+    .subtitle {
+      margin: 0 auto;
+      font-size: 18px;
+      line-height: 1.55;
+      max-width: 780px;
+      color: rgba(255,255,255,0.94);
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.24);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .section-card,
+    .followup-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .section-card { overflow: hidden; }
+
+    .section-head {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 22px 24px;
+      background: linear-gradient(180deg, #fff, var(--soft-red));
+      border-bottom: 1px solid var(--line);
+    }
+
+    .step-number {
+      flex: 0 0 auto;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(180deg, var(--red), var(--deep-red));
+      box-shadow: 0 10px 20px rgba(215,25,32,0.18);
+    }
+
+    .section-head h2,
+    .followup-intro h2,
+    .launch-intro h2 {
+      margin: 0 0 5px;
+      font-size: 30px;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #8e1016;
+    }
+
+    .section-head p,
+    .followup-intro p,
+    .launch-intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .section-body {
+      padding: 24px;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #4a2022;
+    }
+
+    select,
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid #dfc6c8;
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px 16px;
+      font: inherit;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    select:focus,
+    input:focus,
+    textarea:focus {
+      border-color: #ca3c42;
+      box-shadow: 0 0 0 4px rgba(215,25,32,0.10);
+    }
+
+
+    select {
+      appearance: none;
+      min-height: 54px;
+      cursor: pointer;
+      background-image: linear-gradient(45deg, transparent 50%, #8e1016 50%), linear-gradient(135deg, #8e1016 50%, transparent 50%);
+      background-position: calc(100% - 22px) 23px, calc(100% - 16px) 23px;
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      padding-right: 46px;
+    }
+
+    .field-helper {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    textarea {
+      min-height: 210px;
+      resize: vertical;
+    }
+
+    .compact-textarea {
+      min-height: 180px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    button,
+    .link-button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 800;
+      transition: transform 0.15s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    button:hover,
+    .link-button:hover {
+      transform: translateY(-1px);
+    }
+
+    .primary-btn {
+      color: #fff;
+      background: linear-gradient(180deg, var(--red), var(--deep-red));
+      box-shadow: 0 12px 24px rgba(215,25,32,0.18);
+    }
+
+    .secondary-btn {
+      color: #8e1016;
+      background: #fff;
+      border: 1px solid #e1c4c7;
+      box-shadow: 0 8px 18px rgba(120,33,38,0.06);
+    }
+
+    .green-btn,
+    .copy-btn {
+      color: #fff;
+      background: #128422;
+      box-shadow: 0 12px 24px rgba(18,132,34,0.20);
+    }
+
+    .green-btn:hover,
+    .copy-btn:hover {
+      background: #0f701c;
+    }
+
+    .prompt-box { margin-top: 16px; }
+
+    .micro-note {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--soft-red);
+      color: #8a1b20;
+      font-size: 13px;
+      border: 1px solid #f0cccf;
+    }
+
+    .arrow-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 14px 0;
+    }
+
+    .down-arrow {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 28px;
+      font-weight: 900;
+      background: linear-gradient(180deg, var(--red), var(--deep-red));
+      box-shadow: 0 14px 26px rgba(160, 15, 22, 0.18);
+    }
+
+    .followup-intro,
+    .launch-intro {
+      margin: 28px 0 16px;
+      padding: 22px 24px;
+      background: #B61219;
+      border: 1px solid #B61219;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .followup-intro h2,
+    .launch-intro h2,
+    .followup-intro p,
+    .launch-intro p {
+      color: #FFFFFF;
+    }
+
+    .followup-grid,
+    .launch-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card-top {
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff, #fff7f7);
+    }
+
+    .card-top h3 {
+      margin: 0 0 4px;
+      font-size: 22px;
+      color: #8e1016;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+    }
+
+    .card-top p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .card-body textarea {
+      min-height: 320px;
+      background: #fffdfd;
+    }
+
+    .launch-grid .card-body textarea {
+      min-height: 310px;
+    }
+
+    .footer {
+      margin: 26px 0 0;
+      text-align: center;
+      font-size: 13px;
+      color: #865e62;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(12px);
+      background: #1f1f1f;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 20;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .section-divider {
+      margin-top: 28px;
+    }
+
+    @media (max-width: 780px) {
+      .hero {
+        padding: 26px 22px 30px;
+        border-radius: 24px;
+      }
+
+      .hero h1 {
+        font-size: clamp(30px, 10vw, 46px);
+      }
+
+      .section-head {
+        align-items: flex-start;
+        padding: 20px;
+      }
+
+      .section-body,
+      .followup-intro,
+      .launch-intro {
+        padding: 20px;
+      }
+
+      .followup-grid,
+      .launch-grid {
+        grid-template-columns: 1fr;
+      }
+
+      button,
+      .link-button {
+        width: 100%;
+      }
+
+      .hero-logo {
+        max-width: 230px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <header class="hero">
+ 
+      <h1>Create Must-Have Quick-Win Reports For ANY Niche In Minutes</h1>
+      <p class="subtitle">Turn any category, topic, keyword, niche, or URL into irresistible quick-win PDF products. Follow the steps below to create the ideas, finished report, and complete launch material.</p>
+    </header>
+
+    <section class="section-card">
+      <div class="section-head">
+        <div class="step-number">1</div>
+        <div>
+          <h2>Generate 3 Quick-Win Report Ideas</h2>
+          <p>Drop in a category, keyword, topic, niche, or URL. Copy one prompt and get 3 irresistible Quick-Win Report ideas, each with 5 short, hype-driven title choices.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <label for="categoryInput">Choose a category</label>
+        <select id="categoryInput"></select>
+        <div class="field-helper">Choose a proven category, or use the keyword or URL fields below.</div>
+
+        <label for="keywordInput" style="margin-top:14px;">Optional keyword, niche, or topic</label>
+        <input id="keywordInput" type="text" placeholder="Example: affiliate bonuses, Etsy printables, local dentist marketing, meal planning" />
+        <div class="field-helper">A keyword, niche, or topic overrides the dropdown category unless you also enter a URL.</div>
+
+        <label for="urlInput" style="margin-top:14px;">Optional URL</label>
+        <input id="urlInput" type="url" placeholder="Example: https://example.com/product-or-sales-page" />
+        <div class="field-helper">A URL takes priority and tells ChatGPT to create report ideas from the page, offer, audience, problems, and topic.</div>
+
+        <label for="brandInput" style="margin-top:14px;">Optional author or brand name</label>
+        <input id="brandInput" type="text" placeholder="Optional. Example: Mark Hess, Quick-Win Labs, GrowthLab" />
+        <div class="field-helper">Leave this blank if you don't want an author or brand name used. When provided, it can appear naturally on the report, ecover, and promotional images.</div>
+
+        <div class="button-row">
+          <button class="primary-btn" onclick="buildStep1()">Generate Step 1 Prompt</button>
+          <button class="copy-btn" onclick="copyText('step1Prompt')">Copy Step 1 Prompt</button>
+          <a class="link-button secondary-btn" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT</a>
+          <button class="secondary-btn" onclick="clearAll()">Clear All</button>
+        </div>
+        <div class="prompt-box">
+          <label for="step1Prompt">Step 1 Prompt</label>
+          <textarea id="step1Prompt" readonly></textarea>
+        </div>
+      </div>
+    </section>
+
+    <div class="arrow-wrap"><div class="down-arrow">↓</div></div>
+
+    <section class="section-card">
+      <div class="section-head">
+        <div class="step-number">2</div>
+        <div>
+          <h2>Create The Complete Quick-Win Report Outline</h2>
+          <p>Choose the title that grabs you, paste the matching Quick-Win Report idea, and copy one prompt. Step 2 creates a fully aligned five-part outline: Quick-Win Introduction, Setup, Method, Finish, and Wrap-Up.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <label for="titleInput">Final report title</label>
+        <input id="titleInput" type="text" placeholder="Paste one of the 5 title suggestions from your chosen idea" />
+        <div class="field-helper">Paste the exact title you selected from the 5 suggestions. This becomes the permanent official title used throughout the outline, finished report, ecover, and promotional assets.</div>
+
+        <label for="ideaInput" style="margin-top:14px;">Paste Your Chosen Report Idea</label>
+        <textarea id="ideaInput" class="compact-textarea" placeholder="Paste the complete Quick-Win Report direction from your chosen Step 1 idea here. Step 2 will turn it into the final five-part content outline..."></textarea>
+        <div class="button-row">
+          <button class="primary-btn" onclick="buildStep2()">Generate Step 2 Prompt</button>
+          <button class="copy-btn" onclick="copyText('step2Prompt')">Copy Step 2 Prompt</button>
+        </div>
+        <div class="prompt-box">
+          <label for="step2Prompt">Step 2 Prompt</label>
+          <textarea id="step2Prompt" readonly></textarea>
+        </div>
+      </div>
+    </section>
+
+    <div class="arrow-wrap"><div class="down-arrow">↓</div></div>
+
+    <div class="followup-intro section-divider">
+      <h2>Create The Report</h2>
+      <p>Copy and paste the prompts in order. The report moves through a Quick-Win Introduction, Setup, Method, Finish, and Wrap-Up, with required minimum word counts built into every writing prompt.</p>
+    </div>
+
+    <section class="followup-grid">
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>Copyright, Disclaimer &amp; Change Notice</h3>
+        </div>
+        <div class="card-body">
+          <textarea id="follow0" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('follow0')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>Quick-Win Introduction</h3>
+        </div>
+        <div class="card-body">
+          <textarea id="follow1" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('follow1')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>Quick-Win Setup</h3>
+        </div>
+        <div class="card-body">
+          <textarea id="follow2" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('follow2')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>Quick-Win Method</h3>
+        </div>
+        <div class="card-body">
+          <textarea id="follow3" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('follow3')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>Quick-Win Finish</h3>
+        </div>
+        <div class="card-body">
+          <textarea id="follow4" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('follow4')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>Quick-Win Wrap-Up</h3>
+        </div>
+        <div class="card-body">
+          <textarea id="follow5" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('follow5')">Copy Prompt</button></div>
+        </div>
+      </article>
+    </section>
+
+    <div class="arrow-wrap"><div class="down-arrow">↓</div></div>
+
+    <div class="launch-intro">
+      <h2>Launch &amp; Promote</h2>
+      <p>Keep copying and pasting. ChatGPT turns the finished report into a complete launch package with a matching 3D cover, sales material, Facebook graphics, emails, blog content, a product review, and more. The same exact 3D cover carries through every promotional image so the whole offer looks like one polished campaign.</p>
+    </div>
+
+    <section class="launch-grid">
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>1. 3D Report Ecover</h3>
+          <p>Creates the actual final product image</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch1" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch1')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>2. Product Description</h3>
+          <p>Headline plus 4 persuasive paragraphs</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch2" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch2')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>3. Sales Page Bonus Graphic</h3>
+          <p>Combines the 3D ecover and description into one finished graphic</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch3" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch3')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>4. Long-Form Sales Letter</h3>
+          <p>Simple, clear, benefit-driven sales copy</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch4" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch4')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>5. Facebook Promo Graphic</h3>
+          <p>Uses the exact official 3D ecover in the final square image</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch5" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch5')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>6. Facebook Cover</h3>
+          <p>Uses the exact official 3D ecover in the final Facebook cover</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch6" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch6')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>7. Advertisement Infographic</h3>
+          <p>Uses the exact official 3D ecover in the final infographic</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch7" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch7')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>8. Two Facebook Posts</h3>
+          <p>Short written promo posts</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch8" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch8')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>9. Two Marketing Emails</h3>
+          <p>Each with 3 subject line options</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch9" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch9')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>10. 1500 Word SEO Blog Post</h3>
+          <p>Informational article with a CTA</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch10" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch10')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>11. 1000 Word Product Review</h3>
+          <p>Credible review with strong positioning</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch11" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch11')">Copy Prompt</button></div>
+        </div>
+      </article>
+    </section>
+
+    <p class="footer">Footer</p>
+  </div>
+
+  <div id="toast" class="toast">Copied to clipboard</div>
+
+  <script>
+    const categories = [
+      "Free Traffic",
+      "PPC Traffic",
+      "Content Creation",
+      "Content Rewriting",
+      "SEO",
+      "Blogging",
+      "Email Marketing",
+      "Affiliate Promotions",
+      "Sales Page and Sales Funnels",
+      "Facebook Social Media",
+      "Instagram Social Media",
+      "LinkedIn Social Media",
+      "Pinterest Marketing",
+      "YouTube Marketing",
+      "TikTok Marketing",
+      "Webinar and Live Event Promotion",
+      "Market and Customer Research",
+      "Newsletter Creation and Marketing",
+      "Podcast Promotion",
+      "Content Repurposing",
+      "Local Business Marketing",
+      "Faith-Based Content",
+      "Self-Improvement Content",
+      "Health and Wellness Marketing",
+      "Digital Product Creation",
+      "Ecommerce Product Listings",
+      "Coaching and Consulting",
+      "MLM and Network Marketing",
+      "Business Opportunity Marketing"
+    ];
+
+    const categorySelect = document.getElementById('categoryInput');
+    categories.forEach((category) => {
+      const option = document.createElement('option');
+      option.value = category;
+      option.textContent = category;
+      categorySelect.appendChild(option);
+    });
+
+    function getSourceDetails() {
+      const category = document.getElementById('categoryInput').value.trim();
+      const keyword = document.getElementById('keywordInput').value.trim();
+      const url = document.getElementById('urlInput').value.trim();
+
+      if (url) {
+        return {
+          mode: 'URL',
+          value: url,
+          instruction: `Use this URL as the primary source: ${url}. Analyze the page's topic, offer, audience, problems, benefits, and related opportunities. Create report ideas that are directly connected to or naturally useful alongside what is on the page. If you can't access the URL, tell me to paste the page content into this same chat, then continue from that content without changing the requested output format.`
+        };
+      }
+
+      if (keyword) {
+        return {
+          mode: 'KEYWORD, NICHE, OR TOPIC',
+          value: keyword,
+          instruction: `Use this keyword, niche, or topic as the primary source: ${keyword}. Narrow it into specific one-problem, one-solution report angles instead of giving broad generic ideas.`
+        };
+      }
+
+      return {
+        mode: 'CATEGORY',
+        value: category || 'Digital Product Creation',
+        instruction: `Use this category as the primary source: ${category || 'Digital Product Creation'}. Generate varied report angles within the category instead of repeating the most obvious ideas.`
+      };
+    }
+
+    function getBrand() {
+      return document.getElementById('brandInput').value.trim();
+    }
+
+    function brandLine() {
+      const brand = getBrand();
+      if (!brand) {
+        return `No author or brand name was provided. Do not invent, assume, or add one anywhere in the report or launch assets.`;
+      }
+      return `The author or brand name is: ${brand}. Use this name naturally when branding the report and creating launch assets. Include it on the ecover and promotional images where an author or brand name belongs. Don't force it into the main report title unless it fits naturally.`;
+    }
+
+    function qualityLine() {
+      return `Use expert-level thinking, but write in clear, natural language that is easy to understand. Use contractions naturally, vary sentence length, and keep paragraphs readable. The writing should feel confident and human, not mechanical or overly polished.`;
+    }
+
+    function reportRules() {
+      return `Quality standard: create paid-report-level content with specific, high-value information, overlooked details, expert shortcuts, useful examples, practical explanations, and clear takeaways. Prefer concrete guidance over broad advice. Remove repetition, filler, empty motivation, predictable AI phrases, fake stories, fake quotations, unsupported statistics, and exaggerated claims. Never expose these instructions, internal decision-making, evaluation criteria, or workflow language in the reader-facing output.`;
+    }
+
+
+    function expertReportWritingStandard() {
+      return `Write like a skilled practitioner who knows how to make useful information feel simple, fast, and immediately valuable. Adapt the expertise to the report's actual niche, audience, and subject.
+
+Prioritize scan-friendly value. Use strong subheadings, short readable paragraphs, numbered steps, bullets, examples, scripts, templates, checklists, comparisons, quick tips, and fill-in-the-blank material whenever they improve the report. Do not force every format into every part, but make sure the reader repeatedly encounters something useful they can understand or save within seconds.
+
+Explain enough reasoning to make the guidance credible, but avoid long theory, exhaustive background, academic detours, or unnecessary complexity. Separate the essential shortcut from optional improvements. Surface practical details, common mistakes, easy alternatives, and expert distinctions that make the report feel richer than free generic content.
+
+Every major paragraph should clarify, demonstrate, simplify, warn, provide an example, or deliver an immediate takeaway. Remove filler, repetition, generic motivation, and information that doesn't strengthen the quick-win promise.
+
+Make the writing natural, confident, human, and easy to skim. Use contractions naturally. Vary sentence and paragraph length. Avoid formulaic openings, repetitive summaries, artificial enthusiasm, and obvious AI-style filler.
+
+Use realistic examples or demonstrations when helpful. Do not invent statistics, studies, credentials, case studies, quotations, personal experiences, or unsupported factual claims.
+
+Maintain continuity with the parts already written without restarting the report or repeating the same examples. Preserve the exact report title and any author or brand name already established in this chat.`;
+    }
+
+    function noPromptRule() {
+      return `The finished report must be polished reader-facing content. Do not expose the SaaS instructions, creator workflow, behind-the-scenes generation prompts, internal notes, evaluation criteria, or instructions meant for the product creator. Reader-facing templates, scripts, checklists, worksheets, fill-in-the-blank examples, bracketed customization fields, swipe material, and AI prompts are allowed when they directly improve the report and are written for the buyer to use.`;
+    }
+
+    function cleanOutputRule() {
+      return `Return only the requested finished output. Do not preface it with commentary, summarize your process, explain your choices, mention the workflow, or add notes after it.`;
+    }
+
+    function imageQualityRule() {
+      return `Create the actual best-and-final image now with your image generation capabilities. Do not return an image prompt, design brief, plan, code, instructions, or written description. Render one polished final image only.
+
+VISUAL QUALITY STANDARD:
+- Make the finished image feel premium, dramatic, professionally art-directed, and immediately attention-grabbing without becoming cluttered or gimmicky
+- Use a strong visual hierarchy so the main hook, report title, product visual, and supporting details are understood in seconds
+- Use bold composition, confident typography, purposeful contrast, dimensional lighting, depth, texture, and topic-relevant visual storytelling where appropriate
+- Make every design choice feel intentional, cohesive, and sales-page ready rather than like a generic template
+- Keep the image visually rich while preserving clean spacing, legibility, balance, and a clear focal point
+- Avoid weak stock-layout styling, random decorative elements, tiny text, excessive copy, flat presentation, muddy contrast, awkward empty areas, and visual noise
+- Adapt the visual direction to the actual niche and product promise. Do not force the same style, icons, imagery, or layout onto every topic
+
+ACCURACY AND TRUST RULES:
+- Preserve the exact report title and author or brand spelling from this chat
+- Check all visible text for spelling, readability, spacing, cropping, and accuracy before finalizing
+- Keep important text and visuals inside safe margins
+- Do not invent testimonials, prices, statistics, guarantees, badges, awards, endorsements, or claims that were not established in this conversation
+- Do not add filler text, placeholder text, duplicated words, nonsense lettering, accidental logos, or unrelated visual elements`;
+    }
+
+    function buildStep1() {
+      const source = getSourceDetails();
+      document.getElementById('step1Prompt').value = `You're an expert digital product strategist, direct-response product creator, buyer psychology analyst, product naming specialist, and PDF report creator.
+
+I want to create a sellable PDF report using the Radical Quick-Win Reports system.
+
+SOURCE TYPE: ${source.mode}
+SOURCE: ${source.value}
+
+${source.instruction}
+
+${brandLine()}
+
+Generate exactly 3 fresh, sales-page-ready Quick-Win Report ideas.
+
+CORE QUICK-WIN REACTION:
+Every idea must make a scrolling buyer immediately think:
+“I could get a real, useful result today.”
+
+The product must feel fast, easy, specific, low commitment, immediately useful, and worth buying or downloading now. Optimize for buyer desire and perceived usefulness. Do not turn the idea into a broad educational guide, complete course, long-term transformation, or complicated system.
+
+UNIVERSAL QUICK-WIN FORMULA:
+Create, get, find, fix, plan, write, organize, improve, choose, prepare, publish, or finish [one small visible outcome] in [one short believable timeframe] using [one simple method].
+
+Use the formula internally. Do not print it mechanically or force every title into the same pattern.
+
+UNIVERSAL SOURCE INTERPRETATION:
+Silently determine whether the source is a category, keyword, topic, niche, audience, product, offer, article, or URL.
+
+Then identify 3 different quick-win opportunities that remain unmistakably connected to the source:
+- CATEGORY: Choose 3 specific, desirable outcomes inside the category.
+- KEYWORD OR TOPIC: Find 3 small outcomes, fixes, assets, decisions, or shortcuts connected to it.
+- NICHE OR AUDIENCE: Identify 3 immediate wins that audience wants to own or complete.
+- PRODUCT OR OFFER: Create a focused companion asset, missing step, shortcut, setup, fix, or next result.
+- ARTICLE: Use the topic as context, then create sharper stand-alone Quick-Win Reports rather than summaries.
+- URL: Analyze the page's topic, audience, promise, problem, and adjacent opportunities. Do not copy or summarize the page.
+
+TOPIC ANCHORING:
+- Preserve the exact keyword, topic, niche, audience, or market wording when natural
+- Make every idea visibly belong to the selected market
+- At least 3 of the 5 titles for each idea must contain the source keyword or a clear niche-specific word
+- Make the 3 ideas meaningfully different in buyer moment, quick result, timeframe, and mechanism
+- Reject generic ideas that could fit unrelated markets without major changes
+
+QUICK-WIN PRODUCT STANDARD:
+Each idea must contain:
+- One recognizable frustrating moment
+- One small, desirable, visible outcome
+- One short, realistic-sounding timeframe
+- One simple mechanism that sounds easy to use
+- One immediate use for the finished result
+- One low-effort advantage
+- One reduced-risk or reduced-confusion angle
+- Enough substance for a Quick-Win Introduction, Setup, Method, Finish, and Wrap-Up
+
+The visible outcome can be a completed plan, list, outline, script, message, setup, decision, checklist, calendar, draft, asset, fix, improvement, first result, or ready-to-use resource.
+
+DESIRABILITY OVER EDUCATION:
+These are products people feel compelled to own. Favor ideas that sound collectible, satisfying, immediately useful, and easy to picture. The buyer should understand what they'll get within seconds.
+
+Use mechanisms such as:
+- checklist
+- shortcut
+- template
+- swipe file
+- simple framework
+- quick-start plan
+- fill-in-the-blank process
+- scorecard
+- filter
+- script
+- map
+- mini system
+- step-by-step sequence
+- ready-made examples
+
+Do not create:
+- broad “complete guides”
+- vague self-improvement topics
+- results requiring weeks or months
+- unrealistic income, health, legal, ranking, or guaranteed outcome claims
+- ideas that depend mainly on another person's response
+- products with multiple unrelated outcomes
+- titles that sound academic, bland, safe, or generic
+
+TIMEFRAME CONTROL RULE:
+The short timeframe must apply to an action, asset, decision, setup, draft, plan, improvement, or other outcome reasonably controlled by the reader. Never attach a short timeframe to sales, income, rankings, weight loss, client acquisition, approval, audience response, or another result that depends mainly on outside people, platforms, algorithms, health variables, or uncertain events.
+
+TITLE REQUIREMENTS:
+For each idea, provide exactly 5 final report title options.
+
+Every title must:
+- Be 4 words maximum
+- Be punchy, desirable, easy to understand, and strong enough to headline a sales page
+- Suggest speed, ease, immediacy, a finished asset, a first result, a shortcut, or a visible win
+- Avoid weak words such as guide, handbook, manual, basics, introduction, overview, fundamentals, strategies, secrets, blueprint, playbook, formula, framework, toolkit, roadmap, vault, masterclass, or system unless the word is absolutely necessary
+- Avoid using “The” unless it materially improves the title
+- Avoid repeating the same title construction across all ideas
+
+Exactly 2 of the 5 titles for each idea must use natural alliteration. The other 3 must be high-impact, must-have titles without forced alliteration.
+
+Strong naming patterns include:
+- Your First 10 Leads
+- 15-Minute Offer Angle
+- One-Hour Report Outline
+- Same-Day Lead Magnet
+- 20-Minute Content Plan
+- Fast Funnel Fix
+- Rapid Resume Rescue
+- Publish It Today
+- Plan Next Week
+- Ready-to-Send Email
+
+Do not copy these examples unless they perfectly fit the source.
+
+YOUR QUICK-WIN REPORT IDEA:
+Under the 5 title options, provide one complete direction the user can paste directly into Step 2.
+
+Include exactly these fields:
+
+**Topic or Market:** The exact topic, keyword, niche, audience, product, offer, or market.
+
+**Quick-Win Promise:** One sentence stating the small visible outcome, short timeframe, and simple method.
+
+**Painful Moment:** The frustrating moment that makes the buyer want this now.
+
+**Intended Buyer:** The specific person who wants the quick result.
+
+**Must-Have Hook:** One short, high-impact sales-page-ready line.
+
+**Visible Result:** The finished thing, improvement, decision, asset, list, plan, draft, or first result the buyer can picture.
+
+**Short Timeframe:** The believable timeframe that makes the outcome feel immediate.
+
+**Simple Mechanism:** The shortcut, checklist, template, swipe, script, filter, map, scorecard, routine, or process used.
+
+**Immediate Use:** How the result can be used right away.
+
+**Low-Effort Advantage:** Why it feels easier, faster, or less intimidating than the normal approach.
+
+**Reduced Risk:** What wasted effort, confusion, expense, embarrassment, delay, or common mistake it helps avoid.
+
+**Why It Sells:** In 1 or 2 short sentences, explain why a scrolling buyer would want to own it now.
+
+**Value Elements To Include:** One concise list-style sentence naming the best shortcuts, examples, templates, scripts, checklists, comparisons, mistakes, and takeaways to include.
+
+**What The Report Must Cover:** One concise list-style sentence covering the Quick-Win Introduction, Setup, Method, Finish, and Wrap-Up.
+
+**Keep It Focused:** State what the report must not expand into.
+
+QUALITY CONTROL:
+Before responding, silently verify that every idea:
+- Creates the immediate reaction “I could use this today”
+- Is unmistakably tied to the source
+- Offers one small visible result
+- Uses a short believable timeframe
+- Has a simple, attractive mechanism
+- Feels easy, collectible, and sales-page-ready
+- Has exactly 5 titles, exactly 2 alliterative, all 4 words maximum
+- Can support a useful five-part report without becoming broad
+
+Replace any idea that fails.
+
+Do not invent statistics, studies, testimonials, credentials, guarantees, scarcity, income claims, or unsupported proof.
+Do not explain your reasoning, score ideas, or add commentary outside the required format.
+
+${qualityLine()}
+${cleanOutputRule()}
+
+Use this exact structure and include nothing else:
+
+## Quick-Win Report Idea #1
+
+### Final report title options:
+1. [Title, 4 words maximum]
+2. [Title, 4 words maximum]
+3. [Title, 4 words maximum]
+4. [Title, 4 words maximum]
+5. [Title, 4 words maximum]
+
+### Your Quick-Win Report Idea:
+
+**Topic or Market:** [Exact topic, keyword, niche, audience, product, offer, or market]
+
+**Quick-Win Promise:** [Small visible outcome + short timeframe + simple method]
+
+**Painful Moment:** [Recognizable frustrating moment]
+
+**Intended Buyer:** [Specific buyer]
+
+**Must-Have Hook:** [Short sales-page-ready hook]
+
+**Visible Result:** [Finished result the buyer can picture]
+
+**Short Timeframe:** [Believable short timeframe]
+
+**Simple Mechanism:** [One concrete shortcut, checklist, template, swipe, script, filter, map, scorecard, routine, or process]
+
+**Immediate Use:** [How the result can be used now]
+
+**Low-Effort Advantage:** [Why it feels easier or faster]
+
+**Reduced Risk:** [What waste, confusion, delay, expense, or mistake it helps avoid]
+
+**Why It Sells:** [Why a scrolling buyer wants to own it now]
+
+**Value Elements To Include:** [Shortcuts, examples, templates, scripts, checklists, comparisons, mistakes, and takeaways]
+
+**What The Report Must Cover:** [Essential coverage for Quick-Win Introduction, Setup, Method, Finish, and Wrap-Up]
+
+**Keep It Focused:** [Subjects it must not expand into]
+
+Repeat this exact structure for ## Quick-Win Report Idea #2 and ## Quick-Win Report Idea #3.`;
+    }
+
+    function buildStep2() {
+      const idea = document.getElementById('ideaInput').value.trim() || '[PASTE THE COMPLETE QUICK-WIN REPORT DIRECTION FROM YOUR CHOSEN IDEA HERE]';
+      const chosenTitle = document.getElementById('titleInput').value.trim() || '[PASTE YOUR SELECTED FINAL REPORT TITLE HERE]';
+      document.getElementById('step2Prompt').value = `You're an expert Quick-Win PDF report creator, information-product designer, direct-response content strategist, developmental editor, and subject-matter synthesizer.
+
+${brandLine()}
+
+Continue working in this same chat.
+
+FINAL REPORT TITLE:
+${chosenTitle}
+
+The title above is the permanent official title for the outline, finished report, ecover, and every promotional asset created later in this chat. Preserve it exactly.
+
+PASTE-READY QUICK-WIN REPORT DIRECTION:
+${idea}
+
+Treat the pasted direction as the source of truth. Preserve the exact topic, buyer, quick-win promise, painful moment, visible result, timeframe, simple mechanism, immediate use, low-effort advantage, reduced-risk angle, value elements, required coverage, and focus boundary.
+
+Create the complete final five-part report outline now. There will not be another outline-strengthening step.
+
+CORE PURPOSE:
+Build a highly desirable, easy-to-consume Quick-Win Report that feels fast, useful, specific, and packed with immediately visible value. It should reward skimming while still containing enough substance to feel like a premium paid PDF.
+
+Do not broaden the topic, introduce a second core result, change the intended buyer, dilute the quick-win promise, or turn the report into a complete course.
+
+The outline must contain exactly these 5 structural parts:
+
+1. Quick-Win Introduction
+2. Quick-Win Setup
+3. Quick-Win Method
+4. Quick-Win Finish
+5. Quick-Win Wrap-Up
+
+Give each part a natural reader-facing title customized to the chosen topic. Do not use Quick-Win Introduction, Quick-Win Setup, Quick-Win Method, Quick-Win Finish, Quick-Win Wrap-Up, Opening, Main Part, Closing, Conclusion, or Section as the visible reader-facing title unless naturally necessary.
+
+FIVE-PART PROGRESSION:
+- Quick-Win Introduction: Make the buyer feel pleased they own the report, recognize the frustrating moment, see the promised result as close and easy, understand the simple mechanism, and become curious about the path ahead.
+- Quick-Win Setup: Give the minimum preparation, one or two easy decisions, a starting checklist, quick assessment, filter, template, or setup that removes confusion and creates immediate perceived progress.
+- Quick-Win Method: Deliver the central quick-win mechanism in the clearest order with concrete steps, examples, templates, scripts, swipe material, checklists, or fill-in-the-blank guidance.
+- Quick-Win Finish: Help the reader polish, check, adapt, save, publish, use, or improve the result through finishing touches, faster alternatives, common mistakes, variations, and ready-to-use examples.
+- Quick-Win Wrap-Up: Reinforce the easiest path, recap the most valuable shortcuts and assets, give a compact use-this-first checklist, and suggest one tiny immediate action without introducing a major new topic.
+
+All five parts must be distinct, progressive, non-overlapping, and filled with scan-friendly value.
+
+For each of the 5 parts, include only:
+- **Reader-Facing Title**
+- **Purpose**
+- **Key Points To Cover**
+- **Quick-Win Value Elements**
+- **Useful Example, Template, Or Demonstration**
+- **Immediate Takeaway**
+- **Natural Transition**
+
+OUTLINE DEPTH:
+- Give enough specific direction for later writing prompts to produce strong content without guessing
+- Keep it concise and usable rather than drafting the report
+- Quick-Win Introduction should contain 4 to 6 strong key points
+- Quick-Win Setup should contain 5 to 8 strong key points
+- Quick-Win Method should contain 7 to 10 strong key points and carry the most substance
+- Quick-Win Finish should contain 5 to 8 strong key points
+- Quick-Win Wrap-Up should contain 4 to 6 strong key points
+- Include frequent shortcuts, examples, templates, scripts, checklists, comparisons, mistakes, or ready-made takeaways where appropriate
+- Make the report easy to skim with clear subtopics and obvious moments of value
+- Build enough outline depth to support these mandatory minimums: Quick-Win Introduction 500 words, Quick-Win Setup 750 words, Quick-Win Method 1,000 words, Quick-Win Finish 750 words, and Quick-Win Wrap-Up 500 words
+
+QUICK-WIN WRITING STANDARD:
+- Prioritize clarity, speed, simplicity, immediate usefulness, and perceived value
+- Explain only the background needed to make the shortcut credible and understandable
+- Favor concrete instructions and ready-made material over long theory
+- Make every few paragraphs deliver another useful idea, shortcut, example, or takeaway
+- Include practical reasoning, but do not bury the reader in exhaustive detail
+- Keep essential material separate from optional improvements
+- Adapt language and examples to the actual niche
+- Do not invent facts, statistics, research, credentials, quotations, guarantees, or unsupported claims
+
+Do not add bonuses, appendices, worksheets, launch assets, or extra report parts.
+
+${noPromptRule()}
+${qualityLine()}
+${reportRules()}
+
+FINAL CHECK:
+- Preserve the official title exactly
+- Return exactly 5 report parts in this order: Introduction, Setup, Method, Finish, Wrap-Up
+- Make the report feel fast, easy, desirable, and immediately useful
+- Make all five parts distinct and progressive
+- Include strong scan-friendly value elements
+- Stay inside the focus boundary
+- Silently replace anything generic, repetitive, slow, academic, or overly broad
+
+${cleanOutputRule()}
+
+Return only the complete final report outline.`;
+    }
+
+    function setPrompt(id, text) {
+      document.getElementById(id).value = text;
+    }
+
+    function loadReportPrompts() {
+      setPrompt('follow0', `Create one polished all-in-one copyright, disclaimer, and change notice for the Quick-Win Report we've been building in this same chat. This notice will be placed on the first page of the finished report.
+
+Use the exact final report title already established earlier in this same chat and the author or brand name only if one was provided. If none was provided, do not invent one or leave a placeholder.
+
+The finished notice must:
+- State that the report is protected and provided for the purchaser's or authorized recipient's personal use only
+- Prohibit unauthorized copying, sharing, uploading, reselling, sublicensing, republishing, modifying, translating, distributing, or transmitting
+- State that no ownership, resale, PLR, master resale, redistribution, or reproduction rights are granted unless separately provided in writing
+- Explain that the information is educational and informational, not legal, financial, medical, tax, or other professional advice
+- State that results are not guaranteed and depend on individual circumstances, decisions, effort, and implementation
+- Encourage readers to verify important or time-sensitive information
+- State that the author or publisher may revise, replace, or discontinue the report without notice and has no obligation to provide updates
+- Reasonably limit liability for losses, damages, errors, omissions, outdated information, or actions taken based on the report
+- Avoid fake legal citations, exaggerated threats, and promises of complete legal protection
+
+Formatting rules:
+- Use a strong heading such as Copyright, Disclaimer & Change Notice
+- Write concise professional paragraphs suitable for the first page of a premium PDF
+- Do not include a year, date, placeholders, or process commentary
+- Return only the finished notice
+
+${cleanOutputRule()}`);
+
+      setPrompt('follow1', `We are now writing the finished Quick-Win Report part by part in this same chat.
+
+Write the finished Quick-Win Introduction now. Follow the Quick-Win Introduction portion of the complete final outline and turn it into polished reader-facing content.
+
+Purpose:
+- Begin with the buyer's recognizable frustrating moment or desired quick result
+- Make the promised result feel close, simple, and worth continuing for
+- Explain only enough about why the problem happens or why normal approaches feel difficult
+- Introduce the report's simple mechanism, shortcut, or easier path
+- Show what the reader will understand, possess, or be able to use by the end
+- Preview the path naturally and transition into the setup
+
+MANDATORY WORD COUNT:
+- Write a minimum of 500 words
+- This is a hard requirement, not a target or suggestion
+- Do not stop before reaching 500 words
+- Silently verify the section meets or exceeds 500 words before returning it
+
+Important rules:
+- Write only the finished Quick-Win Introduction
+- Use only the custom reader-facing title assigned in the outline
+- Do not label it Quick-Win Introduction, Opening, Introduction, or Section unless naturally part of the custom title
+- Use strong subheadings when helpful
+- Include at least 3 immediate takeaways, useful distinctions, or quick insights
+- Avoid clichés, broad history, dictionary definitions, and “In today's fast-paced world”
+- Do not include creator notes, process commentary, prompts, word-count commentary, or bracketed fields
+
+${expertReportWritingStandard()}
+${qualityLine()}
+${reportRules()}
+${noPromptRule()}
+${cleanOutputRule()}`);
+
+      setPrompt('follow2', `Continue the Quick-Win Report we've been creating in this same chat.
+
+Write the finished Quick-Win Setup now. Follow the Quick-Win Setup portion of the final outline and build naturally from the introduction.
+
+Purpose:
+- Give the reader the minimum preparation needed before using the main method
+- Create an immediate sense of progress through one or two easy decisions, a filter, assessment, checklist, template, or starting point
+- Clearly separate what the reader needs from what they do not need
+- Remove unnecessary preparation, friction, and confusion
+- Give the reader something useful to recognize, choose, save, organize, or prepare quickly
+- Lead directly into the central quick-win method
+
+MANDATORY WORD COUNT:
+- Write a minimum of 750 words
+- This is a hard requirement, not a target or suggestion
+- Do not stop before reaching 750 words
+- Silently verify the section meets or exceeds 750 words before returning it
+
+Important rules:
+- Write only the finished Quick-Win Setup
+- Use only its custom reader-facing title from the outline
+- Do not use Quick-Win Setup, Quick-Win Part 1, Main Part 1, or Section as a label unless naturally part of the custom title
+- Make it highly skimmable
+- Include a useful mix of steps, bullets, examples, checklists, quick tips, templates, or fill-in-the-blank guidance as appropriate
+- Deliver at least 5 distinct moments of practical value
+- Do not repeat the introduction or drift into the full central method too early
+- Do not include creator notes, process commentary, prompts, word-count commentary, or bracketed fields
+
+${expertReportWritingStandard()}
+${qualityLine()}
+${reportRules()}
+${noPromptRule()}
+${cleanOutputRule()}`);
+
+      setPrompt('follow3', `Continue the Quick-Win Report we've been creating in this same chat.
+
+Write the finished Quick-Win Method now. Follow the Quick-Win Method portion of the final outline and deliver the report's central mechanism.
+
+Purpose:
+- Teach the core shortcut, process, template, script, sequence, map, filter, checklist, or mini system
+- Present the method in the clearest and easiest order
+- Give concrete steps and explain just enough reasoning for the reader to understand why each one matters
+- Include ready-to-use examples, demonstrations, scripts, templates, swipe material, checklists, or fill-in-the-blank guidance where appropriate
+- Make this the most substantial, valuable, and save-worthy part of the report
+- Create obvious mini-results and natural checkpoints throughout
+
+MANDATORY WORD COUNT:
+- Write a minimum of 1,000 words
+- This is a hard requirement, not a target or suggestion
+- Do not stop before reaching 1,000 words
+- Silently verify the section meets or exceeds 1,000 words before returning it
+
+Important rules:
+- Write only the finished Quick-Win Method
+- Use only its custom reader-facing title from the outline
+- Do not use Quick-Win Method, Quick-Win Part 2, Main Part 2, or Section as a label unless naturally part of the custom title
+- Make it highly skimmable with clear subheadings
+- Include at least one complete example or demonstration
+- Include at least one ready-to-use checklist, script, template, sequence, or compact reference when appropriate to the topic
+- Deliver at least 7 distinct moments of practical value
+- Do not restart the report or reuse the same examples from earlier parts
+- Do not include creator notes, process commentary, prompts, word-count commentary, or bracketed fields
+
+${expertReportWritingStandard()}
+${qualityLine()}
+${reportRules()}
+${noPromptRule()}
+${cleanOutputRule()}`);
+
+      setPrompt('follow4', `Continue the Quick-Win Report we've been creating in this same chat.
+
+Write the finished Quick-Win Finish now. Follow the Quick-Win Finish portion of the final outline and make the result feel complete, polished, adaptable, and ready to use.
+
+Purpose:
+- Help the reader check, improve, polish, save, publish, send, apply, or otherwise use the result
+- Add finishing touches, faster alternatives, useful variations, and expert shortcuts
+- Show common mistakes and how to avoid them
+- Provide extra examples, ready-made options, or adaptations for different situations
+- Clearly separate essential finishing steps from optional improvements
+- Make the result feel complete without turning it into a giant project
+
+MANDATORY WORD COUNT:
+- Write a minimum of 750 words
+- This is a hard requirement, not a target or suggestion
+- Do not stop before reaching 750 words
+- Silently verify the section meets or exceeds 750 words before returning it
+
+Important rules:
+- Write only the finished Quick-Win Finish
+- Use only its custom reader-facing title from the outline
+- Do not use Quick-Win Finish, Quick-Win Part 3, Main Part 3, or Section as a label unless naturally part of the custom title
+- Make it highly skimmable
+- Include at least 5 useful finishing steps, enhancements, warnings, alternatives, examples, checks, or adaptations
+- Include a compact final-check or ready-to-use checklist when appropriate
+- Do not repeat the central method or turn this into the wrap-up
+- Do not include creator notes, process commentary, prompts, word-count commentary, or bracketed fields
+
+${expertReportWritingStandard()}
+${qualityLine()}
+${reportRules()}
+${noPromptRule()}
+${cleanOutputRule()}`);
+
+      setPrompt('follow5', `Continue the Quick-Win Report we've been creating in this same chat.
+
+Write the finished Quick-Win Wrap-Up now. Follow the Quick-Win Wrap-Up portion of the final outline and bring the report to a satisfying, useful conclusion.
+
+Purpose:
+- Reinforce the quick result, simple mechanism, and easiest path without summarizing every paragraph
+- Remind the reader of the most useful shortcuts, templates, scripts, checklists, examples, or decisions they now have
+- Include a compact use-this-first recap or mini checklist
+- Suggest one tiny immediate action without requiring the reader to complete the full process
+- Keep the report feeling simple, valuable, and worth saving
+- End with clarity and momentum, not a generic inspirational speech
+
+MANDATORY WORD COUNT:
+- Write a minimum of 500 words
+- This is a hard requirement, not a target or suggestion
+- Do not stop before reaching 500 words
+- Silently verify the section meets or exceeds 500 words before returning it
+
+Important rules:
+- Write only the finished Quick-Win Wrap-Up
+- Use only the custom reader-facing title assigned in the outline
+- Do not label it Quick-Win Wrap-Up, Closing, Conclusion, or Section unless naturally part of the custom title
+- Do not introduce a major new topic, mechanism, or project
+- Do not include creator notes, process commentary, prompts, word-count commentary, or bracketed fields
+
+${expertReportWritingStandard()}
+${qualityLine()}
+${reportRules()}
+${noPromptRule()}
+${cleanOutputRule()}`);
+
+    }
+
+    function loadLaunchPrompts() {
+      const title = document.getElementById('titleInput').value.trim() || '[FINAL REPORT TITLE]';
+      const brand = getBrand();
+      const brandInstruction = brand
+        ? `Author or brand name: ${brand}. Use this name naturally where appropriate and preserve the spelling exactly.`
+        : `No author or brand name was provided. Do not invent or add one.`;
+
+      setPrompt('launch1', `Based on the finished report created in this chat, create the actual final 3D report ecover image now. Use the exact final report title already established in this chat and the completed report content.
+
+This standalone 3D report ecover will be the official product visual for this report and must be the exact image reused in later assets created in this same chat, especially the sales page bonus graphic.
+
+Final report title: ${title}
+${brandInstruction}
+
+${imageQualityRule()}
+
+Design direction:
+- Create a jaw-dropping premium digital PDF report cover mockup that looks professionally designed, highly desirable, and strong enough to anchor an entire sales page
+- Build one bold visual concept around the report's exact problem, promised advantage, and niche rather than using generic topic icons or predictable stock imagery
+- Make the exact report title the dominant focal point with confident, highly readable typography and strong hierarchy
+- Add a concise subtitle only when it clearly strengthens the promise and remains readable at thumbnail size
+- Use sophisticated color relationships, purposeful contrast, crisp composition, dimensional lighting, realistic depth, and polished details that make the report feel valuable and collectible
+- Make the 3D perspective believable and premium. Use clean edges, realistic thickness, controlled shadows, and professional mockup proportions
+- Avoid weak clip art, generic template styling, crowded text, decorative filler, multiple competing focal points, or visuals that don't directly support the product promise
+- Use a solid pure white #FFFFFF background across the entire image canvas
+- Keep the background completely white and clean. Do not use transparency, gradients, colored backdrops, room scenes, dark backgrounds, environmental scenes, desks, shelves, hands, or lifestyle settings
+- Use only a subtle natural product shadow on the white canvas when it improves realism
+
+Before finalizing, verify that the title is exact, the front cover remains readable at thumbnail size, the 3D mockup looks realistic, and the product feels distinctive enough to serve as the official visual for every later asset.
+
+Final output: render one jaw-dropping, production-ready standalone 3D report ecover image on a solid pure #FFFFFF white background. This is the official product visual to carry forward in this same chat. Keep the full product comfortably inside the canvas with generous white space around it, and include no accidental extra text or duplicate objects.`);
+
+      setPrompt('launch2', `Based on the finished report created in this chat, write a strong product description for the sales page. Use the exact final report title already established earlier in this same chat, any author or brand name provided, and the completed report content. This product description will be used again immediately afterward in the same chat as the written source for the sales page bonus graphic, so make it specific, benefit-rich, and easy to pull key callouts from.
+
+Include:
+- A compelling headline
+- 4 persuasive paragraphs
+
+Important rules:
+- Focus on what the buyer gets, understands, avoids, or gains
+- Keep the writing clear, natural, and easy to follow
+- Use contractions where they fit naturally
+- Make the report feel useful, valuable, and easy to want
+- Avoid hype, fake scarcity, and generic copy
+- Don't mention prompts inside the report
+- Don't explain your process
+- Return only the finished asset with no setup commentary or closing notes`);
+
+      setPrompt('launch3', `Create the actual finished sales page graphic now using ChatGPT's image-generation capability.
+
+Generate the graphic as a polished image directly inside this chat, exactly like you generated the earlier standalone 3D report ecover. Do not use Python, HTML, CSS, SVG, canvas, presentation software, or any other code-based design method.
+
+Use the standalone 3D report ecover created earlier in this same chat as the required official product visual and visual reference for this image.
+
+The ecover must remain clearly recognizable as the same official cover. Preserve its title, subtitle, author name, artwork, colors, overall appearance, and 3D book presentation. Do not invent a different cover, create a second cover design, or replace it with a generic book mockup.
+
+Use the product description written immediately before this prompt to choose the strongest sales message.
+
+Final report title: ${title}
+${brandInstruction}
+
+${imageQualityRule()}
+
+COMPOSITION:
+- Use a wide 16:9 composition
+- Place the official 3D report ecover prominently on the left
+- Keep the full ecover visible with comfortable space around it
+- Use the right side for one bold benefit-driven headline
+- Add one short supporting sentence beneath the headline
+- Add exactly 3 short benefit callouts
+- Keep every callout to approximately 3 to 7 words
+- Use large, readable typography with generous spacing
+- Keep all text comfortably inside the canvas
+- Leave clear space along every edge
+- Make the ecover and headline the two dominant visual elements
+
+VISUAL DIRECTION:
+- Build the surrounding design from the official ecover's established colors, topic, visual atmosphere, and style
+- Create a cohesive campaign graphic rather than placing a plain text box beside the cover
+- Use dimensional lighting, subtle depth, polished visual effects, topic-relevant background details, and strong contrast
+- Make the design feel exciting, modern, substantial, and premium
+- Use visual imagery and atmosphere to communicate the benefits instead of relying on excessive text
+- Make it look like a professionally designed digital product sales graphic, not a presentation slide, web banner template, or coded layout
+
+TEXT RULES:
+- Use the exact report title only where naturally needed
+- Include the author or brand name once when provided
+- Use one headline, one supporting sentence, and exactly 3 benefit callouts
+- Do not use paragraphs
+- Do not repeat the product title unnecessarily
+- Do not place text at the extreme bottom or edges
+- Do not include the word Bonus unless specifically requested
+- Carefully check spelling and readability
+
+IMPORTANT:
+Generate the finished graphic as an image directly in the chat. Do not provide code, instructions, a design specification, or a downloadable HTML-created graphic.
+
+Return only one finished production-ready sales-page image.`);
+
+      setPrompt('launch4', `Continue in this same ChatGPT chat after the report, official title, product direction, finished content, 3D ecover, and product description have already been completed.
+
+Write the complete best-and-final long-form sales letter for the finished report now.
+
+Use the exact product intelligence already established in this conversation, including:
+- The exact problem the report solves
+- The intended reader and the situation they are in
+- The must-have hook
+- The promised advantage
+- The core solution and distinctive angle
+- The before-and-after transformation
+- The strongest overlooked insights, mistakes, examples, and practical takeaways from the finished report
+- The product description written earlier in this same chat
+
+Preserve the exact official report title and any author or brand name already established. Do not rename the report, invent a brand, or introduce a different promise.
+
+SALES-LETTER GOAL:
+Make the reader quickly recognize their problem, feel the cost or frustration of leaving it unresolved, understand why common approaches fall short, see the report as the focused solution they have been missing, and want immediate access because the product feels useful, specific, easy to consume, and worth owning.
+
+Write the sales letter in this natural progression:
+1. A strong, specific headline built around the most desirable advantage or relief
+2. A supporting subheadline that clarifies who it is for and what it helps them accomplish
+3. An opening that enters the reader's current situation without generic warm-up language
+4. A problem-agitation section that makes the frustration, missed opportunity, wasted effort, risk, or confusion feel recognizable without exaggeration
+5. A pattern interrupt that explains the overlooked reason common attempts fail or why the problem keeps happening
+6. A natural introduction of the report as the focused answer
+7. A clear explanation of the distinctive mechanism, approach, or angle taught inside
+8. A benefit-rich section showing what the buyer will understand, do, improve, avoid, simplify, or gain
+9. Strong bullet points based on the actual finished report, with each bullet communicating a useful advantage, insight, shortcut, protection, decision, or result
+10. A section that makes the report feel easy to use, practical, focused, and collection-worthy
+11. A who-this-is-for section grounded in the intended reader established earlier
+12. A value section explaining why the report saves more time, effort, frustration, uncertainty, or mistakes than trying to piece the solution together alone
+13. A clear call to action that reinforces the immediate practical payoff
+14. A concise closing section that leaves the reader with one final reason to act
+
+COPY STANDARDS:
+- Write like an elite direct-response copywriter who fully understands the completed product, but keep the language clear enough for an eighth-grade reader
+- Use contractions naturally throughout
+- Lead with advantages and buyer outcomes rather than describing chapters or merely listing content
+- Use specificity, contrast, curiosity, emotional recognition, and practical value without forced cleverness
+- Make the sales letter feel human, confident, conversational, and highly readable
+- Use short paragraphs, purposeful subheads, varied sentence length, and strong transitions
+- Make every section earn its place by increasing desire, clarity, trust, or perceived usefulness
+- Pull the strongest hooks and details from the actual product rather than inventing generic sales language
+- Keep the one-problem, one-solution positioning intact
+- Do not broaden the product into a larger promise than the report fulfills
+
+TRUTH AND SAFETY RULES:
+- Do not invent testimonials, customers, case studies, personal experiences, statistics, research findings, credentials, endorsements, bonuses, prices, discounts, scarcity, deadlines, guarantees, refund policies, or income claims
+- Do not claim the reader will definitely achieve a result
+- Do not use fake urgency, false scarcity, manipulative fear, exaggerated hype, or unsupported superlatives
+- Do not mention prompts, this workflow, ChatGPT, or how the asset was created
+- Do not explain your process or add setup commentary
+
+Final output: return only the polished, ready-to-use long-form sales letter with clean formatting, strong headings, persuasive bullets, and a clear call to action.`);
+
+      setPrompt('launch5', `Create the actual finished Facebook promotional graphic now using ChatGPT's image-generation capability.
+
+Generate the graphic as a polished image directly inside this chat. Do not use Python, HTML, CSS, SVG, canvas, presentation software, or any other code-based design method.
+
+Use the standalone 3D report ecover created earlier in this same chat as the required official product visual and visual reference. The ecover must remain clearly recognizable as the same official cover. Preserve its title, subtitle, author name, artwork, colors, overall appearance, and 3D book presentation. Do not invent a different cover, create a second cover design, or replace it with a generic mockup.
+
+Final report title: ${title}
+${brandInstruction}
+
+${imageQualityRule()}
+
+COMPOSITION:
+- Create one square 1080 by 1080 Facebook promotional image
+- Make the official 3D ecover a large, unmistakable hero element
+- Use one dominant scroll-stopping hook
+- Add no more than one short supporting line
+- Include one short call to action only when it improves clarity
+- Keep all important text large and readable on mobile
+- Keep all essential content inside generous safe margins
+- Use one clear focal point and one clear conversion message
+
+VISUAL DIRECTION:
+- Build the surrounding design from the official ecover's established colors, topic, visual atmosphere, and style
+- Use one bold topic-relevant visual idea instead of icon piles or stock-photo collages
+- Use premium lighting, controlled depth, strong contrast, and directional composition
+- Make the graphic feel custom art-directed and campaign-ready
+- Make it look like a professionally generated paid-social image, not a coded social template or presentation slide
+
+TEXT RULES:
+- Keep copy minimal
+- Use the exact report title only where naturally needed
+- Include the author or brand name once when provided
+- Do not use bullet lists, paragraphs, badge spam, fake proof, or multiple competing hooks
+- Do not place text near the extreme edges
+- Carefully check spelling and readability
+
+IMPORTANT:
+Generate the finished graphic as an image directly in the chat. Do not provide code, instructions, a design specification, or a downloadable HTML-created graphic.
+
+Return only one finished production-ready square Facebook promotional image.`);
+
+      setPrompt('launch6', `Create the actual finished Facebook cover image now using ChatGPT's image-generation capability.
+
+Generate the cover as a polished image directly inside this chat. Do not use Python, HTML, CSS, SVG, canvas, presentation software, or any other code-based design method.
+
+Use the standalone 3D report ecover created earlier in this same chat as the required official product visual and visual reference. The ecover must remain clearly recognizable as the same official cover. Preserve its title, subtitle, author name, artwork, colors, overall appearance, and 3D book presentation. Do not invent a different cover, create a second cover design, or replace it with a generic mockup.
+
+Final report title: ${title}
+${brandInstruction}
+
+${imageQualityRule()}
+
+COMPOSITION:
+- Create one wide Facebook cover image
+- Keep the official ecover, exact report title, and main hook inside the mobile-safe center area
+- Use the outer edges only for supporting atmosphere, motion, texture, or background imagery
+- Make the official ecover a clearly visible hero product element
+- Use one strong campaign idea and one short supporting line at most
+- Keep the banner clean, spacious, and readable after desktop and mobile cropping
+- Keep all critical text and focal visuals away from the extreme edges
+
+VISUAL DIRECTION:
+- Build the surrounding design from the official ecover's established colors, topic, visual atmosphere, and style
+- Use cinematic composition, premium typography, polished depth, controlled lighting, and topic-relevant visual storytelling
+- Make the design feel like the hero banner for a premium digital product launch
+- Keep the campaign visually cohesive with the earlier ecover and promotional graphic
+- Make it look like a professionally generated cover image, not a coded header template or presentation slide
+
+TEXT RULES:
+- Keep copy tight and powerful
+- Use the exact report title as the main message anchor
+- Include the author or brand name once when provided
+- Do not use bullet lists, paragraphs, tiny text, scattered focal points, or critical details near the edges
+- Carefully check spelling and readability
+
+IMPORTANT:
+Generate the finished Facebook cover as an image directly in the chat. Do not provide code, instructions, a design specification, or a downloadable HTML-created graphic.
+
+Return only one finished production-ready Facebook cover image.`);
+
+      setPrompt('launch7', `Create the actual finished advertisement infographic now using ChatGPT's image-generation capability.
+
+Generate the infographic as a polished image directly inside this chat. Do not use Python, HTML, CSS, SVG, canvas, presentation software, or any other code-based design method.
+
+Use the standalone 3D report ecover created earlier in this same chat as the required official product visual and visual reference. The ecover must remain clearly recognizable as the same official cover. Preserve its title, subtitle, author name, artwork, colors, overall appearance, and 3D book presentation. Do not invent a different cover, create a second cover design, or replace it with a generic mockup.
+
+Final report title: ${title}
+${brandInstruction}
+
+${imageQualityRule()}
+
+COMPOSITION:
+- Create one vertical 1080 by 1350 promotional infographic
+- Use the top section for one strong hook, the exact report title, and the official 3D ecover
+- Use exactly 3 short information panels below the hero section
+- Give each panel one brief heading and one concise supporting line
+- Create a clear top-to-bottom reading path
+- Keep all text large enough to read on mobile
+- Use generous spacing and safe margins throughout
+- Make the ecover and main hook the dominant visual elements
+
+CONTENT FLOW:
+- Panel 1: the recognizable problem or missed opportunity
+- Panel 2: the overlooked insight or distinctive mechanism
+- Panel 3: the practical advantage, result, or next step
+
+VISUAL DIRECTION:
+- Build the entire design from the official ecover's established colors, topic, visual atmosphere, and style
+- Use premium editorial composition, connecting flow, confident typography, subtle depth, and topic-relevant visual reinforcement
+- Make it substantial enough to save and share without becoming crowded
+- Use visuals and atmosphere to communicate ideas instead of adding excessive text
+- Make it look like a professionally generated campaign infographic, not a coded checklist, chart template, or presentation slide
+
+TEXT RULES:
+- Use exactly 3 concise information panels
+- Do not use paragraphs, crowded charts, unsupported statistics, excessive icon rows, or disconnected boxes
+- Include the author or brand name once when provided
+- Keep all text away from the extreme edges
+- Carefully check spelling and readability
+
+IMPORTANT:
+Generate the finished infographic as an image directly in the chat. Do not provide code, instructions, a design specification, or a downloadable HTML-created graphic.
+
+Return only one finished production-ready vertical promotional infographic.`);
+
+      setPrompt('launch8', `Continue in this same ChatGPT chat using the finished report, exact official title, intended reader, must-have hook, promised advantage, distinctive angle, product description, and strongest insights already established.
+
+Write 2 best-and-final Facebook promotional posts for the report.
+
+The two posts must use meaningfully different angles:
+
+POST 1: PROBLEM-RECOGNITION AND CURIOSITY
+- Open with a sharp first line that makes the intended reader immediately recognize the exact frustration, mistake, missed opportunity, or recurring problem
+- Reveal one useful overlooked insight from the report without giving away the entire solution
+- Show why the usual approach often fails
+- Transition naturally to the report as the focused next step
+
+POST 2: DESIRED RESULT AND PRACTICAL ADVANTAGE
+- Open with the result, relief, shortcut, protection, or improvement the reader wants
+- Show how the report helps make that outcome easier, clearer, faster, or less confusing
+- Highlight the distinctive angle and practical usefulness of the product
+- Make it feel like a resource worth saving and adding to their collection
+
+For each post:
+- Start with a strong standalone hook that earns attention in the first one or two lines
+- Use the exact official report title
+- Write in a natural, conversational voice with contractions where they fit
+- Use short paragraphs and mobile-friendly spacing
+- Make the value understandable without requiring prior context
+- Include 3 to 5 concise benefit bullets only when bullets improve the post
+- End with one clear, low-friction call to action
+- Keep each post substantial enough to persuade but tight enough for Facebook
+
+Do not:
+- Use fake urgency, engagement bait, clickbait that the report cannot satisfy, exaggerated hype, or robotic phrases
+- Invent testimonials, statistics, proof, prices, discounts, guarantees, scarcity, or personal experiences
+- Use the same opening, structure, benefits, or wording in both posts
+- Mention prompts, ChatGPT, or the creation process
+- Add hashtags unless they are genuinely relevant and useful; use no more than 3
+
+Final output format:
+## Facebook Post 1
+[Finished post]
+
+## Facebook Post 2
+[Finished post]
+
+Return only the two finished posts.`);
+
+      setPrompt('launch9', `Continue in this same ChatGPT chat using the finished report, exact official title, intended reader, must-have hook, promised advantage, distinctive angle, product description, and strongest report insights already established.
+
+Write 2 best-and-final promotional emails for the report.
+
+Use two distinctly different persuasion angles:
+
+EMAIL 1: THE PROBLEM THEY KEEP RUNNING INTO
+- Make the reader recognize the exact recurring problem, frustration, mistake, wasted effort, or missed opportunity
+- Explain the overlooked reason it keeps happening
+- Position the report as the focused, practical answer
+
+EMAIL 2: THE ADVANTAGE THEY CAN GAIN
+- Lead with the desired result, shortcut, relief, protection, clarity, or improvement
+- Show what becomes easier or more effective after the reader understands the report's core solution
+- Make the report feel useful, easy to consume, and worth keeping
+
+For each email, provide:
+- 3 strong subject line options using different styles: direct benefit, curiosity, and problem recognition
+- 1 concise preview-text option that complements rather than repeats the subject line
+- A compelling opening that earns attention immediately
+- A clear, natural body built around one central idea
+- Specific benefits and useful details drawn from the actual report
+- A smooth transition to the exact official report title
+- One primary call to action
+- A concise closing or P.S. that reinforces the strongest reason to click without introducing fake urgency
+
+EMAIL STANDARDS:
+- Write like a skilled email marketer who knows the finished product deeply
+- Use contractions naturally throughout
+- Keep paragraphs short, readable, and conversational
+- Prioritize clarity, specificity, curiosity, practical value, and emotional recognition
+- Sell the advantage and transformation rather than merely describing the report's sections
+- Keep each email focused on one angle and one action
+- Make the two emails structurally and emotionally different
+
+Do not:
+- Invent testimonials, statistics, research, customers, credentials, personal stories, prices, discounts, deadlines, scarcity, guarantees, bonuses, or income claims
+- Use spammy language, deceptive subject lines, excessive punctuation, fake replies, or unsupported promises
+- Mention prompts, ChatGPT, or the creation process
+- Explain your process or add commentary outside the finished asset
+
+Final output format:
+## Email 1
+**Subject Line Options:**
+1. ...
+2. ...
+3. ...
+**Preview Text:** ...
+
+[Finished email]
+
+## Email 2
+**Subject Line Options:**
+1. ...
+2. ...
+3. ...
+**Preview Text:** ...
+
+[Finished email]
+
+Return only the completed emails.`);
+
+      setPrompt('launch10', `Continue in this same ChatGPT chat using the finished report, exact official title, intended reader, must-have hook, promised advantage, distinctive angle, scope boundary, and strongest expert-level content already established.
+
+Write the best-and-final 1500-word SEO blog post that delivers genuine value and naturally promotes the report.
+
+SEO STRATEGY:
+- Infer one primary search phrase from the report's exact problem and the language the intended reader would realistically search
+- Infer 3 to 5 closely related secondary phrases and semantic topics
+- Use them naturally and sparingly. Do not keyword-stuff or write for a search engine at the expense of the reader
+- Match the likely search intent by helping the reader understand and begin solving the exact problem
+- Stay within the report's established scope boundary
+
+Include at the top:
+- SEO Title, approximately 50 to 60 characters when practical
+- Meta Description, approximately 140 to 160 characters when practical
+- Suggested URL Slug
+- Primary Search Phrase
+
+ARTICLE STRUCTURE:
+1. A strong H1 headline that clearly promises useful help with the exact problem
+2. An opening that immediately reflects the reader's situation and explains what the article will help them do
+3. Clear H2 and H3 subheads that create a logical, skimmable progression
+4. A useful explanation of why the problem happens or why common attempts fail
+5. Practical teaching drawn from the finished report, including overlooked details, expert reasoning, mistakes, examples, and realistic actions
+6. At least one short numbered process, checklist, comparison, or decision framework when it naturally improves usefulness
+7. A section explaining how to recognize progress or avoid common failure points
+8. A natural transition to the report as the complete focused resource for going further
+9. A clear call to action near the end
+10. A concise conclusion that reinforces the most important practical takeaway
+
+WRITING STANDARDS:
+- Make the article valuable enough to deserve search traffic even if the reader never buys
+- Write in a natural, expert, human voice with contractions where they fit
+- Use plain language, short readable paragraphs, concrete examples, and smooth transitions
+- Demonstrate experience through practical distinctions and reasoning, not invented personal stories or credentials
+- Answer the likely search question early, then deepen the explanation
+- Keep the report promotion relevant and proportionate rather than turning the entire article into an advertisement
+- Use the exact official report title when introducing the product
+- Preserve the one-problem, one-solution positioning
+
+Do not:
+- Invent studies, statistics, quotations, experts, case studies, firsthand experience, testimonials, results, prices, guarantees, or claims not established in the report
+- Add fake FAQs purely for keywords
+- Use robotic SEO phrases, filler, repetitive summaries, or generic introductions such as “In today's digital world”
+- Mention prompts, ChatGPT, or the creation process
+- Explain your process or add commentary outside the finished asset
+
+Final output: return only the complete SEO package and polished approximately 1500-word blog post, ready to publish.`);
+
+      setPrompt('launch11', `Continue in this same ChatGPT chat using the finished report, exact official title, intended reader, must-have hook, promised advantage, distinctive angle, product description, and actual report content already established.
+
+Write the best-and-final 1000-word product review that helps a prospective buyer understand the report and make an informed decision.
+
+REVIEW POSITIONING:
+Create a credible, positive, specific review based entirely on the finished product's actual content and usefulness. Do not pretend to have purchased, personally tested, or achieved results from the report unless that firsthand experience was explicitly established in this conversation.
+
+Use this structure:
+1. A strong review headline featuring the exact official report title and its primary advantage
+2. A concise opening explaining the problem the report addresses and why that problem matters to the intended reader
+3. A clear explanation of what the report is and the focused result it is designed to help deliver
+4. A “What It Covers” section that describes the report's progression without turning into a dull chapter-by-chapter summary
+5. A “What Makes It Different” section built around the distinctive angle, overlooked insight, or practical mechanism
+6. A “Most Useful Takeaways” section highlighting specific advantages, decisions, shortcuts, protections, examples, or mistakes the reader will learn
+7. A “Who It Is Best For” section grounded in the intended reader and relevant situations
+8. A “What To Expect” section explaining the depth, style, usability, scope, and realistic limits of the report
+9. A balanced assessment that notes any genuine scope limitation without undermining the product or inventing flaws
+10. A clear final verdict and recommendation
+11. A natural call to action near the end
+
+REVIEW STANDARDS:
+- Write in a natural, confident, human voice with contractions where they fit
+- Be specific enough that the review could only describe this report
+- Focus on practical value, clarity, usefulness, focus, and the promised advantage
+- Explain why the product may save the reader time, uncertainty, effort, or avoidable mistakes
+- Keep the review positive without sounding like an advertisement disguised as independent journalism
+- Use short paragraphs, useful subheads, and smooth transitions
+- Preserve the exact official title and any established author or brand name
+
+Do not:
+- Invent personal use, purchases, results, testimonials, customers, statistics, research, credentials, prices, bonuses, guarantees, refund terms, comparisons, or competitor claims
+- Claim the report is perfect, revolutionary, or guaranteed to work
+- Criticize it for not covering subjects excluded by its established scope boundary
+- Mention prompts, ChatGPT, or the creation process
+- Explain your process or add commentary outside the review
+
+Final output: return only the polished approximately 1000-word product review, ready to publish.`);
+    }
+
+    function loadAllPrompts() {
+      loadReportPrompts();
+      loadLaunchPrompts();
+    }
+
+    async function copyText(id) {
+      const el = document.getElementById(id);
+      try {
+        await navigator.clipboard.writeText(el.value);
+        showToast('Copied to clipboard');
+      } catch (err) {
+        el.select();
+        document.execCommand('copy');
+        showToast('Copied to clipboard');
+      }
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 1800);
+    }
+
+    function clearAll() {
+      document.getElementById('categoryInput').selectedIndex = 0;
+      document.getElementById('keywordInput').value = '';
+      document.getElementById('urlInput').value = '';
+      document.getElementById('brandInput').value = '';
+      document.getElementById('titleInput').value = '';
+      document.getElementById('ideaInput').value = '';
+      document.getElementById('step1Prompt').value = '';
+      document.getElementById('step2Prompt').value = '';
+      showToast('Dashboard cleared');
+    }
+
+    document.getElementById('brandInput').addEventListener('input', loadAllPrompts);
+    document.getElementById('titleInput').addEventListener('input', loadLaunchPrompts);
+
+    loadAllPrompts();
+  </script>
+</body>
+</html>

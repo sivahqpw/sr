@@ -1,0 +1,1993 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Radical Secret Reports</title>
+  <style>
+    :root {
+      --red: #d71920;
+      --deep-red: #a80f16;
+      --soft-red: #fff0f1;
+      --soft-red-2: #ffe3e5;
+      --green: #138d24;
+      --deep-green: #0f6c1c;
+      --ink: #1e1e1e;
+      --muted: #666;
+      --paper: #ffffff;
+      --page-bg: #f7f4f2;
+      --line: #ead8d8;
+      --shadow: 0 18px 45px rgba(113, 16, 20, 0.14);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(215, 25, 32, 0.10), transparent 28%),
+        linear-gradient(180deg, #fff8f8 0%, var(--page-bg) 55%, #fff 100%);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    .page-wrap {
+      width: min(950px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 28px 0 60px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--red), var(--deep-red));
+      color: #fff;
+      border-radius: 30px;
+      padding: 34px 34px 38px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: "REPORT";
+      position: absolute;
+      right: -26px;
+      top: -50px;
+      font-size: 138px;
+      font-weight: 900;
+      letter-spacing: -9px;
+      opacity: 0.08;
+      line-height: 1;
+    }
+
+    .hero-logo {
+      display: block;
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      margin: 0 auto 14px;
+      filter: drop-shadow(0 12px 28px rgba(0,0,0,0.16));
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.34);
+      color: #fff;
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero h1 {
+      margin: 18px auto 12px;
+      font-size: clamp(34px, 6vw, 58px);
+      line-height: 0.97;
+      letter-spacing: -0.05em;
+      max-width: 800px;
+    }
+
+    .subtitle {
+      margin: 0 auto;
+      font-size: 18px;
+      line-height: 1.55;
+      max-width: 780px;
+      color: rgba(255,255,255,0.94);
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.24);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .section-card,
+    .followup-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .section-card { overflow: hidden; }
+
+    .section-head {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 22px 24px;
+      background: linear-gradient(180deg, #fff, var(--soft-red));
+      border-bottom: 1px solid var(--line);
+    }
+
+    .step-number {
+      flex: 0 0 auto;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(180deg, var(--red), var(--deep-red));
+      box-shadow: 0 10px 20px rgba(215,25,32,0.18);
+    }
+
+    .section-head h2,
+    .followup-intro h2,
+    .launch-intro h2 {
+      margin: 0 0 5px;
+      font-size: 30px;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #8e1016;
+    }
+
+    .section-head p,
+    .followup-intro p,
+    .launch-intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .section-body {
+      padding: 24px;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #4a2022;
+    }
+
+    select,
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid #dfc6c8;
+      background: #fff;
+      border-radius: 16px;
+      padding: 14px 16px;
+      font: inherit;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    select:focus,
+    input:focus,
+    textarea:focus {
+      border-color: #ca3c42;
+      box-shadow: 0 0 0 4px rgba(215,25,32,0.10);
+    }
+
+
+    select {
+      appearance: none;
+      min-height: 54px;
+      cursor: pointer;
+      background-image: linear-gradient(45deg, transparent 50%, #8e1016 50%), linear-gradient(135deg, #8e1016 50%, transparent 50%);
+      background-position: calc(100% - 22px) 23px, calc(100% - 16px) 23px;
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      padding-right: 46px;
+    }
+
+    .field-helper {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    textarea {
+      min-height: 210px;
+      resize: vertical;
+    }
+
+    .compact-textarea {
+      min-height: 180px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    button,
+    .link-button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 18px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 800;
+      transition: transform 0.15s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    button:hover,
+    .link-button:hover {
+      transform: translateY(-1px);
+    }
+
+    .primary-btn {
+      color: #fff;
+      background: linear-gradient(180deg, var(--red), var(--deep-red));
+      box-shadow: 0 12px 24px rgba(215,25,32,0.18);
+    }
+
+    .secondary-btn {
+      color: #8e1016;
+      background: #fff;
+      border: 1px solid #e1c4c7;
+      box-shadow: 0 8px 18px rgba(120,33,38,0.06);
+    }
+
+    .green-btn,
+    .copy-btn {
+      color: #fff;
+      background: #128422;
+      box-shadow: 0 12px 24px rgba(18,132,34,0.20);
+    }
+
+    .green-btn:hover,
+    .copy-btn:hover {
+      background: #0f701c;
+    }
+
+    .prompt-box { margin-top: 16px; }
+
+    .micro-note {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--soft-red);
+      color: #8a1b20;
+      font-size: 13px;
+      border: 1px solid #f0cccf;
+    }
+
+    .arrow-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 14px 0;
+    }
+
+    .down-arrow {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 28px;
+      font-weight: 900;
+      background: linear-gradient(180deg, var(--red), var(--deep-red));
+      box-shadow: 0 14px 26px rgba(160, 15, 22, 0.18);
+    }
+
+    .followup-intro,
+    .launch-intro {
+      margin: 28px 0 16px;
+      padding: 22px 24px;
+      background: #B61219;
+      border: 1px solid #B61219;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .followup-intro h2,
+    .launch-intro h2,
+    .followup-intro p,
+    .launch-intro p {
+      color: #FFFFFF;
+    }
+
+    .followup-grid,
+    .launch-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card-top {
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff, #fff7f7);
+    }
+
+    .card-top h3 {
+      margin: 0 0 4px;
+      font-size: 22px;
+      color: #8e1016;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+    }
+
+    .card-top p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .card-body textarea {
+      min-height: 320px;
+      background: #fffdfd;
+    }
+
+    .launch-grid .card-body textarea {
+      min-height: 310px;
+    }
+
+    .footer {
+      margin: 26px 0 0;
+      text-align: center;
+      font-size: 13px;
+      color: #865e62;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(12px);
+      background: #1f1f1f;
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.18s ease, transform 0.18s ease;
+      z-index: 20;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .section-divider {
+      margin-top: 28px;
+    }
+
+    @media (max-width: 780px) {
+      .hero {
+        padding: 26px 22px 30px;
+        border-radius: 24px;
+      }
+
+      .hero h1 {
+        font-size: clamp(30px, 10vw, 46px);
+      }
+
+      .section-head {
+        align-items: flex-start;
+        padding: 20px;
+      }
+
+      .section-body,
+      .followup-intro,
+      .launch-intro {
+        padding: 20px;
+      }
+
+      .followup-grid,
+      .launch-grid {
+        grid-template-columns: 1fr;
+      }
+
+      button,
+      .link-button {
+        width: 100%;
+      }
+
+      .hero-logo {
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <header class="hero">
+
+      <h1>Create Must-Have Secret Reports For ANY Niche In Minutes</h1>
+      <p class="subtitle">Turn any category, topic, keyword, niche, or URL into irresistible Secret Reports that reveal overlooked methods, hidden advantages, unspoken rules, and rarely discussed opportunities. Follow the steps below to create the ideas, finished report, and complete launch material.</p>
+    </header>
+
+    <section class="section-card">
+      <div class="section-head">
+        <div class="step-number">1</div>
+        <div>
+          <h2>Generate 3 Secret Report Ideas</h2>
+          <p>Drop in a category, keyword, topic, niche, or URL. Copy one prompt and get 3 irresistible Secret Report ideas, each with 5 short, curiosity-driven title choices.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <label for="categoryInput">Choose a category</label>
+        <select id="categoryInput"></select>
+        <div class="field-helper">Choose a proven category, or use the keyword or URL fields below.</div>
+
+        <label for="keywordInput" style="margin-top:14px;">Optional keyword, niche, or topic</label>
+        <input id="keywordInput" type="text" placeholder="Example: affiliate bonuses, Etsy printables, local dentist marketing, meal planning" />
+        <div class="field-helper">A keyword, niche, or topic overrides the dropdown category unless you also enter a URL.</div>
+
+        <label for="urlInput" style="margin-top:14px;">Optional URL</label>
+        <input id="urlInput" type="url" placeholder="Example: https://example.com/product-or-sales-page" />
+        <div class="field-helper">A URL takes priority and tells ChatGPT to create report ideas from the page, offer, audience, problems, and topic.</div>
+
+        <label for="brandInput" style="margin-top:14px;">Optional author or brand name</label>
+        <input id="brandInput" type="text" placeholder="Optional. Example: Mark Hess, Secret Advantage, GrowthLab" />
+        <div class="field-helper">Leave this blank if you don't want an author or brand name used. When provided, it can appear naturally on the report, ecover, and promotional images.</div>
+
+        <div class="button-row">
+          <button class="primary-btn" onclick="buildStep1()">Generate Step 1 Prompt</button>
+          <button class="copy-btn" onclick="copyText('step1Prompt')">Copy Step 1 Prompt</button>
+          <a class="link-button secondary-btn" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT</a>
+          <button class="secondary-btn" onclick="clearAll()">Clear All</button>
+        </div>
+        <div class="prompt-box">
+          <label for="step1Prompt">Step 1 Prompt</label>
+          <textarea id="step1Prompt" readonly></textarea>
+        </div>
+      </div>
+    </section>
+
+    <div class="arrow-wrap"><div class="down-arrow">↓</div></div>
+
+    <section class="section-card">
+      <div class="section-head">
+        <div class="step-number">2</div>
+        <div>
+          <h2>Create The Complete Secret Report Outline</h2>
+          <p>Choose the title that grabs you, paste the matching Secret Report idea, and copy one prompt. Step 2 creates a fully aligned five-part outline: The Hidden Advantage, Why It Gets Missed, The Secrets Revealed, How To Use Them, and What To Remember.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <label for="titleInput">Final report title</label>
+        <input id="titleInput" type="text" placeholder="Paste one of the 5 title suggestions from your chosen idea" />
+        <div class="field-helper">Paste the exact title you selected from the 5 suggestions. This becomes the permanent official title used throughout the outline, finished report, ecover, and promotional assets.</div>
+
+        <label for="ideaInput" style="margin-top:14px;">Paste Your Chosen Secret Report Idea</label>
+        <textarea id="ideaInput" class="compact-textarea" placeholder="Paste the complete Secret Report direction from your chosen Step 1 idea here. Step 2 will turn it into the final five-part content outline..."></textarea>
+        <div class="button-row">
+          <button class="primary-btn" onclick="buildStep2()">Generate Step 2 Prompt</button>
+          <button class="copy-btn" onclick="copyText('step2Prompt')">Copy Step 2 Prompt</button>
+        </div>
+        <div class="prompt-box">
+          <label for="step2Prompt">Step 2 Prompt</label>
+          <textarea id="step2Prompt" readonly></textarea>
+        </div>
+      </div>
+    </section>
+
+    <div class="arrow-wrap"><div class="down-arrow">↓</div></div>
+
+    <div class="followup-intro section-divider">
+      <h2>Create The Report</h2>
+      <p>Copy and paste the prompts in order. The report moves through The Hidden Advantage, Why It Gets Missed, The Secrets Revealed, How To Use Them, and What To Remember, with required minimum word counts built into every writing prompt.</p>
+    </div>
+
+    <section class="followup-grid">
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>Copyright, Disclaimer &amp; Change Notice</h3>
+        </div>
+        <div class="card-body">
+          <textarea id="follow0" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('follow0')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>The Hidden Advantage</h3>
+        </div>
+        <div class="card-body">
+          <textarea id="follow1" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('follow1')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>Why It Gets Missed</h3>
+        </div>
+        <div class="card-body">
+          <textarea id="follow2" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('follow2')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>The Secrets Revealed</h3>
+        </div>
+        <div class="card-body">
+          <textarea id="follow3" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('follow3')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>How To Use Them</h3>
+        </div>
+        <div class="card-body">
+          <textarea id="follow4" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('follow4')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>What To Remember</h3>
+        </div>
+        <div class="card-body">
+          <textarea id="follow5" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('follow5')">Copy Prompt</button></div>
+        </div>
+      </article>
+    </section>
+
+    <div class="arrow-wrap"><div class="down-arrow">↓</div></div>
+
+    <div class="launch-intro">
+      <h2>Launch &amp; Promote</h2>
+      <p>Keep copying and pasting. ChatGPT turns the finished report into a complete launch package with a matching 3D cover, sales material, Facebook graphics, emails, blog content, a product review, and more. The same exact 3D cover carries through every promotional image so the whole offer looks like one polished campaign.</p>
+    </div>
+
+    <section class="launch-grid">
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>1. 3D Report Ecover</h3>
+          <p>Creates the actual final product image</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch1" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch1')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>2. Product Description</h3>
+          <p>Headline plus 4 persuasive paragraphs</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch2" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch2')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>3. Sales Page Bonus Graphic</h3>
+          <p>Combines the 3D ecover and description into one finished graphic</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch3" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch3')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>4. Long-Form Sales Letter</h3>
+          <p>Simple, clear, benefit-driven sales copy</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch4" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch4')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>5. Facebook Promo Graphic</h3>
+          <p>Uses the exact official 3D ecover in the final square image</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch5" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch5')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>6. Facebook Cover</h3>
+          <p>Uses the exact official 3D ecover in the final Facebook cover</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch6" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch6')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>7. Advertisement Infographic</h3>
+          <p>Uses the exact official 3D ecover in the final infographic</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch7" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch7')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>8. Two Facebook Posts</h3>
+          <p>Short written promo posts</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch8" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch8')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>9. Two Marketing Emails</h3>
+          <p>Each with 3 subject line options</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch9" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch9')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>10. 1500 Word SEO Blog Post</h3>
+          <p>Informational article with a CTA</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch10" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch10')">Copy Prompt</button></div>
+        </div>
+      </article>
+
+      <article class="followup-card">
+        <div class="card-top">
+          <h3>11. 1000 Word Product Review</h3>
+          <p>Credible review with strong positioning</p>
+        </div>
+        <div class="card-body">
+          <textarea id="launch11" readonly></textarea>
+          <div class="button-row"><button class="copy-btn" onclick="copyText('launch11')">Copy Prompt</button></div>
+        </div>
+      </article>
+    </section>
+
+    <p class="footer">F</p>
+  </div>
+
+  <div id="toast" class="toast">Copied to clipboard</div>
+
+  <script>
+    const categories = [
+      "Free Traffic",
+      "PPC Traffic",
+      "Content Creation",
+      "Content Rewriting",
+      "SEO",
+      "Blogging",
+      "Email Marketing",
+      "Affiliate Promotions",
+      "Sales Page and Sales Funnels",
+      "Facebook Social Media",
+      "Instagram Social Media",
+      "LinkedIn Social Media",
+      "Pinterest Marketing",
+      "YouTube Marketing",
+      "TikTok Marketing",
+      "Webinar and Live Event Promotion",
+      "Market and Customer Research",
+      "Newsletter Creation and Marketing",
+      "Podcast Promotion",
+      "Content Repurposing",
+      "Local Business Marketing",
+      "Faith-Based Content",
+      "Self-Improvement Content",
+      "Health and Wellness Marketing",
+      "Digital Product Creation",
+      "Ecommerce Product Listings",
+      "Coaching and Consulting",
+      "MLM and Network Marketing",
+      "Business Opportunity Marketing"
+    ];
+
+    const categorySelect = document.getElementById('categoryInput');
+    categories.forEach((category) => {
+      const option = document.createElement('option');
+      option.value = category;
+      option.textContent = category;
+      categorySelect.appendChild(option);
+    });
+
+    function getSourceDetails() {
+      const category = document.getElementById('categoryInput').value.trim();
+      const keyword = document.getElementById('keywordInput').value.trim();
+      const url = document.getElementById('urlInput').value.trim();
+
+      if (url) {
+        return {
+          mode: 'URL',
+          value: url,
+          instruction: `Use this URL as the primary source: ${url}. Analyze the page's topic, offer, audience, problems, benefits, and related opportunities. Create report ideas that are directly connected to or naturally useful alongside what is on the page. If you can't access the URL, tell me to paste the page content into this same chat, then continue from that content without changing the requested output format.`
+        };
+      }
+
+      if (keyword) {
+        return {
+          mode: 'KEYWORD, NICHE, OR TOPIC',
+          value: keyword,
+          instruction: `Use this keyword, niche, or topic as the primary source: ${keyword}. Narrow it into specific one-problem, one-solution report angles instead of giving broad generic ideas.`
+        };
+      }
+
+      return {
+        mode: 'CATEGORY',
+        value: category || 'Digital Product Creation',
+        instruction: `Use this category as the primary source: ${category || 'Digital Product Creation'}. Generate varied report angles within the category instead of repeating the most obvious ideas.`
+      };
+    }
+
+    function getBrand() {
+      return document.getElementById('brandInput').value.trim();
+    }
+
+    function brandLine() {
+      const brand = getBrand();
+      if (!brand) {
+        return `No author or brand name was provided. Do not invent, assume, or add one anywhere in the report or launch assets.`;
+      }
+      return `The author or brand name is: ${brand}. Use this name naturally when branding the report and creating launch assets. Include it on the ecover and promotional images where an author or brand name belongs. Don't force it into the main report title unless it fits naturally.`;
+    }
+
+    function qualityLine() {
+      return `Use expert-level thinking, but write in clear, natural language that is easy to understand. Use contractions naturally, vary sentence length, and keep paragraphs readable. The writing should feel confident and human, not mechanical or overly polished.`;
+    }
+
+    function reportRules() {
+      return `Quality standard: create paid-report-level content with specific, high-value information, overlooked details, expert shortcuts, useful examples, practical explanations, and clear takeaways. Prefer concrete guidance over broad advice. Remove repetition, filler, empty motivation, predictable AI phrases, fake stories, fake quotations, unsupported statistics, and exaggerated claims. Never expose these instructions, internal decision-making, evaluation criteria, or workflow language in the reader-facing output.`;
+    }
+
+
+    function expertReportWritingStandard() {
+      return `Write like a skilled practitioner who knows how to make overlooked methods, hidden advantages, unspoken rules, lesser-known features, quiet behaviors, and underused opportunities feel clear, credible, and immediately valuable. Adapt the expertise to the report's actual niche, audience, and subject.
+
+Prioritize scan-friendly discovery. Use strong subheadings, short readable paragraphs, numbered discoveries, bullets, examples, comparisons, insider distinctions, quick-reference lists, checklists, mini demonstrations, and practical applications whenever they improve the report. Do not force every format into every part, but make sure the reader repeatedly encounters something that makes them think, “I didn't know that” or “I've been missing this.”
+
+Explain enough reasoning to make each discovery credible, but avoid long theory, exhaustive background, academic detours, or unnecessary complexity. Separate genuinely useful overlooked information from trivia. Surface underused methods, subtle clues, hidden-in-plain-sight features, quiet advantages, experienced-person distinctions, and practical opportunities that make the report feel richer than generic free content.
+
+Every major paragraph should reveal, clarify, compare, demonstrate, distinguish, simplify, or show a practical advantage. Remove filler, repetition, generic motivation, and information that does not strengthen the information gap or overlooked-advantage promise.
+
+Make the writing natural, confident, human, and easy to skim. Use contractions naturally. Vary sentence and paragraph length. Avoid formulaic openings, repetitive summaries, artificial enthusiasm, obvious AI-style filler, fabricated exclusivity, and conspiracy-style claims.
+
+Use realistic examples or demonstrations when helpful. Do not invent statistics, studies, credentials, case studies, quotations, personal experiences, or unsupported factual claims.
+
+Maintain continuity with the parts already written without restarting the report or repeating the same examples. Preserve the exact report title and any author or brand name already established in this chat.`;
+    }
+
+    function noPromptRule() {
+      return `The finished report must be polished reader-facing content. Do not expose the SaaS instructions, creator workflow, behind-the-scenes generation prompts, internal notes, evaluation criteria, or instructions meant for the product creator. Reader-facing checklists, comparison tables, quick-reference lists, worksheets, scripts, templates, bracketed fields, fill-in-the-blank examples, mini audits, and AI prompts are allowed when they directly improve the report.`;
+    }
+
+    function cleanOutputRule() {
+      return `Return only the requested finished output. Do not preface it with commentary, summarize your process, explain your choices, mention the workflow, or add notes after it.`;
+    }
+
+    function imageQualityRule() {
+      return `Create the actual best-and-final image now with your image generation capabilities. Do not return an image prompt, design brief, plan, code, instructions, or written description. Render one polished final image only.
+
+VISUAL QUALITY STANDARD:
+- Make the finished image feel premium, dramatic, professionally art-directed, and immediately attention-grabbing without becoming cluttered or gimmicky
+- Use a strong visual hierarchy so the main hook, report title, product visual, and supporting details are understood in seconds
+- Use bold composition, confident typography, purposeful contrast, dimensional lighting, depth, texture, and topic-relevant visual storytelling where appropriate
+- Make every design choice feel intentional, cohesive, and sales-page ready rather than like a generic template
+- Keep the image visually rich while preserving clean spacing, legibility, balance, and a clear focal point
+- Avoid weak stock-layout styling, random decorative elements, tiny text, excessive copy, flat presentation, muddy contrast, awkward empty areas, and visual noise
+- Adapt the visual direction to the actual niche and product promise. Do not force the same style, icons, imagery, or layout onto every topic
+
+ACCURACY AND TRUST RULES:
+- Preserve the exact report title and author or brand spelling from this chat
+- Check all visible text for spelling, readability, spacing, cropping, and accuracy before finalizing
+- Keep important text and visuals inside safe margins
+- Do not invent testimonials, prices, statistics, guarantees, badges, awards, endorsements, or claims that were not established in this conversation
+- Do not add filler text, placeholder text, duplicated words, nonsense lettering, accidental logos, or unrelated visual elements`;
+    }
+
+    function secretCampaignStandard() {
+      return `SECRET CAMPAIGN STANDARD:
+- Keep every launch asset centered on one valuable information gap, the overlooked discoveries that close it, the familiar desired result, and the practical advantage gained from knowing them
+- Sell access to overlooked methods, quiet advantages, hidden features, unspoken rules, lesser-known clues, underused opportunities, or experienced-person distinctions
+- Preserve a strong curiosity gap. Reveal enough to make the discovery credible and desirable, but do not give away the complete secret list or full answer in the promotional asset
+- Use credible language such as overlooked, underused, rarely explained, hidden in plain sight, not usually emphasized, or noticed through experience
+- Never claim nobody else knows it, experts are hiding it, the industry is suppressing it, or the information has never been revealed
+- Make the buyer think, “What do other people know that I don't?” and “I need to see what I'm missing”
+- Keep the exact information gap, desired result, intended buyer, overlooked advantage, insider mechanism, and scope boundary established earlier in this chat
+- Make every asset reinforce the same implicit buyer question created by the title: “What am I missing that could give me an advantage?”
+- Make the report feel like a distinct, collectible information product with a compact set of discoveries worth owning, saving, and revisiting
+- Preserve the curiosity gap without misrepresenting what the report contains, and make every hook point toward the exact payoff delivered inside
+- Do not broaden the report into a course, promise a guaranteed result, fabricate exclusivity, or introduce a different core topic.`;
+    }
+
+    function buildStep1() {
+      const source = getSourceDetails();
+      document.getElementById('step1Prompt').value = `You're an expert digital product strategist, direct-response product creator, buyer psychology analyst, product naming specialist, and Secret Report creator.
+
+I want to create a sellable PDF report using the Radical Secret Reports system.
+
+SOURCE TYPE: ${source.mode}
+SOURCE: ${source.value}
+
+${source.instruction}
+
+${brandLine()}
+
+Generate exactly 3 fresh, sales-page-ready Secret Report ideas.
+
+CORE BUYER REACTION:
+Every idea must make a scrolling buyer immediately think:
+“What do other people know that I don't?”
+
+The product must create an information gap, insider curiosity, perceived access, and a strong need to discover the overlooked detail. It should feel like the buyer is gaining an advantage that was hiding in plain sight.
+
+CORE FORMULA:
+Reveal the overlooked [method, clue, advantage, behavior, feature, rule, detail, or opportunity] behind [desired result].
+
+Use this formula internally. Do not print it mechanically or force every title into the same pattern.
+
+CREDIBLE SECRET STANDARD:
+The information does not need to be literally classified, private, or unknown to everyone. It must be genuinely overlooked, underused, rarely emphasized, misunderstood, buried inside a larger topic, noticed mainly through experience, or easy for ordinary buyers to miss.
+
+Never claim:
+- Nobody else knows this
+- Experts are hiding this
+- The industry doesn't want you to know
+- This has never been revealed
+- Only insiders have access
+
+Prefer credible language such as:
+- commonly overlooked
+- rarely explained clearly
+- hidden in plain sight
+- underused
+- quietly effective
+- not usually emphasized
+- often missed
+- noticed by experienced people
+- a small advantage with outsized usefulness
+
+UNIVERSAL SOURCE INTERPRETATION:
+Silently determine whether the source is a category, keyword, topic, niche, audience, product, offer, article, or URL.
+
+Then identify 3 different secret-style opportunities:
+- CATEGORY: Find 3 overlooked methods, advantages, rules, features, behaviors, or opportunities inside the category.
+- KEYWORD OR TOPIC: Reveal 3 underused details or counterintuitive leverage points connected to it.
+- NICHE OR AUDIENCE: Identify 3 things experienced people notice, use, avoid, or understand that newer people often miss.
+- PRODUCT OR OFFER: Create a companion report around a hidden feature, overlooked use, quiet advantage, buyer behavior, or unspoken rule.
+- ARTICLE: Use the topic as context, then create sharper stand-alone Secret Reports rather than summaries.
+- URL: Analyze the page's topic, audience, promise, methods, gaps, and adjacent opportunities. Do not copy or summarize the page.
+
+TOPIC ANCHORING:
+- Preserve the exact keyword, topic, niche, audience, or market wording when natural
+- Make every idea unmistakably connected to the selected market
+- At least 3 of the 5 titles for each idea must contain the source keyword or a clear niche-specific word
+- Make the 3 ideas meaningfully different in desired result, information gap, secret type, and practical advantage
+- Reject generic ideas that could fit unrelated markets without major changes
+
+SECRET PRODUCT TYPES:
+Favor products such as:
+- hidden methods
+- quiet advantages
+- unspoken rules
+- overlooked features
+- insider behaviors
+- buried opportunities
+- little-known clues
+- counterintuitive distinctions
+- underused shortcuts
+- “what experienced people notice” reports
+- “why this quietly works” reports
+
+SECRET REPORT STANDARD:
+Each idea must contain:
+- One familiar desired result
+- One clear information gap
+- One central overlooked advantage, method, clue, behavior, feature, rule, detail, or opportunity
+- A credible reason most people miss it
+- A practical use for the discovery
+- A clear advantage gained from knowing it
+- A connected set of 5 to 9 specific discoveries that all close the same information gap
+- Enough substance for The Hidden Advantage, Why It Gets Missed, The Secrets Revealed, How To Use Them, and What To Remember
+
+The discoveries must feel like parts of one focused reveal, not a random collection of unrelated tips. The report must reveal something concrete. Do not create vague “success secrets,” generic motivation, broad collections of tips, fabricated conspiracies, or empty curiosity without a meaningful payoff.
+
+SHINY-OBJECT PRODUCT STANDARD:
+Every idea must feel like a fresh, collectible discovery the buyer wants to own immediately. It should create the reaction: “I haven’t seen this before, and I need to know what’s inside.”
+
+Each idea must:
+- Feel new, specific, and visually easy to picture on a PDF cover
+- Promise one overlooked advantage, hidden method, underused feature, unusual clue, quiet behavior, or missed opportunity
+- Create an immediate curiosity gap without becoming vague
+- Sound like a small piece of insider knowledge worth saving
+- Be easy to explain in one sentence
+- Feel different from common free articles, broad guides, and predictable tips
+- Give the buyer a sense of access, novelty, and discovery
+- Make the finished PDF feel collectible, shareable, and worth adding to a personal library
+
+Prefer ideas with:
+- A surprising contrast between what most people do and what experienced people notice
+- A lesser-known feature, behavior, or method hiding in plain sight
+- A compact list, rule set, clue set, feature set, or advantage set
+- A familiar desired result approached through an unfamiliar angle
+- A title that produces an instant mental image and a strong “what is that?” reaction
+
+Reject ideas that:
+- Sound like ordinary advice with the word Secret added
+- Could be replaced by a generic blog post
+- Feel broad, educational, safe, or predictable
+- Depend on fake mystery, conspiracy, or unsupported exclusivity
+- Reveal so much in the title that there is no reason to open the PDF
+- Are too abstract to create a clear cover concept or sales-page hook
+
+TITLE-TO-PAYOFF LOCK:
+The title, Must-Know Hook, Information Gap, Insider Mechanism, Secrets To Reveal, outline, finished report, and launch assets must all revolve around the same unanswered question. Do not use a sensational title and then deliver a broader or different report. The core reveal must fully satisfy the exact curiosity created by the selected title while still leaving enough practical context to make each discovery feel valuable.
+
+COLLECTOR PAYOFF RULE:
+Favor compact, named sets of discoveries that feel easy to own, remember, revisit, and display as a PDF product. When natural, use a specific number, unusual category, named behavior, underused feature set, quiet rule set, or clear contrast that makes the product feel distinct from free general information. Never add a number unless the report can genuinely deliver that exact number of meaningful discoveries.
+
+TITLE REQUIREMENTS:
+For each idea, provide exactly 5 final report title options.
+
+Every title must:
+- Be 4 words maximum
+- Create an immediate information gap
+- Suggest hidden access, an overlooked advantage, an unspoken rule, a quiet behavior, a lesser-known feature, or a missing clue
+- Be specific enough to understand at a glance and strong enough for a small PDF cover
+- Remain visibly tied to the source market
+- Avoid bland words such as guide, handbook, manual, basics, introduction, overview, fundamentals, strategies, blueprint, playbook, toolkit, roadmap, vault, masterclass, or system
+- Avoid using “The” unless it materially improves the title
+- Avoid making all 5 titles minor variations of one pattern
+- Use at least 3 genuinely different naming patterns across the 5 titles
+- Use the word “Secret” in no more than 2 titles
+- Use the word “Hidden” in no more than 2 titles
+- Include at least 1 title that creates the information gap without using Secret, Hidden, Insider, or Overlooked
+
+Exactly 2 of the 5 titles for each idea must use natural alliteration.
+
+SHINY-OBJECT TITLE TEST:
+Each title must make the buyer pause and ask a specific question such as “What are they?”, “Which one am I missing?”, “Why does that work?”, or “What do experienced people notice?” All 5 titles must create an unresolved information gap strong enough to make the PDF feel irresistible to inspect. The 3 non-alliterative titles must be direct, curiosity-driven, must-know titles without forced wordplay.
+
+Strong patterns include:
+- 7 Secret Traffic Sources
+- Quiet Buyer Clues
+- Hidden Facebook Features
+- One-Page Profit Secret
+- 9 Unspoken Sales Rules
+- What Buyers Notice
+- The Overlooked Offer Edge
+- Why Simple Posts Convert
+- Insider Email Advantages
+- Buried Traffic Opportunities
+
+Do not copy these examples unless they perfectly fit the source.
+
+OPEN-LOOP TEST:
+Every title must make the buyer silently ask at least one question:
+- What is it?
+- What am I missing?
+- Which rules don't I know?
+- What do experienced people notice?
+- Is there an easier advantage here?
+- Why haven't I heard this before?
+
+Replace any title that explains everything, feels generic, or fails to open a useful curiosity loop.
+
+YOUR SECRET REPORT IDEA:
+Under the 5 title options, provide one complete direction the user can paste directly into Step 2.
+
+Include exactly these fields:
+
+**Topic or Market:** The exact topic, keyword, niche, audience, product, offer, or market.
+
+**Secret Report Promise:** One sentence revealing the type of overlooked information and the desired result it supports.
+
+**Desired Result:** The familiar result the buyer wants.
+
+**Information Gap:** What most people don't notice, understand, use, or know to look for.
+
+**Intended Buyer:** The specific person who feels behind, curious, excluded, or eager for an advantage.
+
+**Must-Know Hook:** One short, sales-page-ready line that creates the urge to discover the missing information.
+
+**Overlooked Advantage:** The central leverage point behind the report.
+
+**Why It's Missed:** Why ordinary advice, assumptions, habits, interfaces, or experience cause people to overlook it.
+
+**Insider Mechanism:** The concrete methods, clues, rules, features, behaviors, details, or opportunities revealed.
+
+**Immediate Use:** How the buyer can recognize, apply, test, or benefit from the information.
+
+**Practical Advantage:** What becomes easier, clearer, faster, more effective, or less wasteful after knowing it.
+
+**Why It Sells:** In 1 or 2 short sentences, explain why a scrolling buyer would feel compelled to own it now.
+
+**Secrets To Reveal:** One concise list-style sentence naming the specific discoveries the report should contain.
+
+**What The Report Must Cover:** One concise list-style sentence covering The Hidden Advantage, Why It Gets Missed, The Secrets Revealed, How To Use Them, and What To Remember.
+
+**Keep It Focused:** State what the report must not expand into.
+
+QUALITY CONTROL:
+Before responding, silently verify that every idea:
+- Creates the reaction “What do other people know that I don't?”
+- Feels like a distinct shiny object rather than ordinary advice
+- Is unmistakably tied to the source and easy to visualize as a compelling PDF cover
+- Contains one real, coherent information gap and one practical overlooked advantage
+- Has a believable reason the information is missed
+- Contains 5 to 9 connected, non-repetitive discoveries that fully reward the title's curiosity promise
+- Feels collectible, specific, easy to explain, and meaningfully different from the other two ideas
+- Offers a clear practical advantage from knowing the information
+- Has exactly 5 titles, exactly 2 naturally alliterative, all 4 words maximum
+- Uses at least 3 different title patterns and avoids repeating Secret or Hidden excessively
+- Keeps the title, hook, mechanism, discoveries, report structure, and eventual launch angle centered on the same unanswered question
+- Can support a focused five-part Secret Report without padding or broadening
+
+Replace anything generic, fabricated, conspiratorial, repetitive, or weak.
+
+Do not invent statistics, studies, testimonials, credentials, guarantees, scarcity, income claims, secret societies, suppressed information, or unsupported proof.
+Do not explain your reasoning, score ideas, or add commentary outside the required format.
+
+${qualityLine()}
+${cleanOutputRule()}
+
+Use this exact structure and include nothing else:
+
+## Secret Report Idea #1
+
+### Final report title options:
+1. [Title, 4 words maximum]
+2. [Title, 4 words maximum]
+3. [Title, 4 words maximum]
+4. [Title, 4 words maximum]
+5. [Title, 4 words maximum]
+
+### Your Secret Report Idea:
+
+**Topic or Market:** [Exact topic, keyword, niche, audience, product, offer, or market]
+
+**Secret Report Promise:** [Overlooked information + desired result]
+
+**Desired Result:** [Familiar result the buyer wants]
+
+**Information Gap:** [What most people don't notice, understand, use, or know to look for]
+
+**Intended Buyer:** [Specific buyer]
+
+**Must-Know Hook:** [Short sales-page-ready curiosity hook]
+
+**Overlooked Advantage:** [Central leverage point]
+
+**Why It's Missed:** [Credible reason it remains overlooked]
+
+**Insider Mechanism:** [Methods, clues, rules, features, behaviors, details, or opportunities]
+
+**Immediate Use:** [How the buyer can use the information]
+
+**Practical Advantage:** [What becomes easier, clearer, faster, or more effective]
+
+**Why It Sells:** [Why the buyer feels compelled to own it]
+
+**Secrets To Reveal:** [Specific discoveries to include]
+
+**What The Report Must Cover:** [Coverage for all five report parts]
+
+**Keep It Focused:** [Subjects it must not expand into]
+
+Repeat this exact structure for ## Secret Report Idea #2 and ## Secret Report Idea #3.`;
+    }
+
+    function buildStep2() {
+      const idea = document.getElementById('ideaInput').value.trim() || '[PASTE THE COMPLETE SECRET REPORT DIRECTION FROM YOUR CHOSEN IDEA HERE]';
+      const chosenTitle = document.getElementById('titleInput').value.trim() || '[PASTE YOUR SELECTED FINAL REPORT TITLE HERE]';
+      document.getElementById('step2Prompt').value = `You're an expert Secret Report creator, information-product designer, direct-response content strategist, developmental editor, and subject-matter synthesizer.
+
+${brandLine()}
+
+Continue working in this same chat.
+
+FINAL REPORT TITLE:
+${chosenTitle}
+
+The title above is the permanent official title for the outline, finished report, ecover, and every promotional asset created later in this chat. Preserve it exactly.
+
+PASTE-READY SECRET REPORT DIRECTION:
+${idea}
+
+Treat the pasted direction as the source of truth. Preserve the exact topic, buyer, Secret Report promise, desired result, information gap, overlooked advantage, reason it is missed, insider mechanism, immediate use, practical advantage, discoveries, required coverage, and focus boundary.
+
+Create the complete final five-part report outline now. There will not be another outline-strengthening step.
+
+CORE PURPOSE:
+Build a desirable, easy-to-consume Secret Report that makes the reader feel better informed, more observant, and newly aware of practical advantages most people overlook. It must reward curiosity with concrete discoveries rather than vague hype.
+
+Do not broaden the topic, introduce a second core result, change the intended buyer, fabricate exclusivity, or turn the report into a complete course.
+
+The outline must contain exactly these 5 structural parts:
+
+1. The Hidden Advantage
+2. Why It Gets Missed
+3. The Secrets Revealed
+4. How To Use Them
+5. What To Remember
+
+Give each part a natural reader-facing title customized to the chosen topic. Do not use the structural labels above, Opening, Main Part, Closing, Conclusion, or Section as the visible reader-facing title unless naturally necessary.
+
+FIVE-PART PROGRESSION:
+- The Hidden Advantage: Enter through the desired result, create the information gap, introduce the overlooked advantage, establish why it matters, and make the reader eager to see the discoveries.
+- Why It Gets Missed: Explain the assumptions, habits, interfaces, common advice, or lack of experience that hide the useful detail. Show why most people look in the wrong place or stop too early.
+- The Secrets Revealed: Deliver the central payoff through specific overlooked methods, clues, rules, features, behaviors, distinctions, or opportunities. This must carry the most substance.
+- How To Use Them: Prioritize the most useful discoveries, show where they apply, provide practical examples, and explain how to use them without overcomplicating or misapplying them.
+- What To Remember: Condense the strongest discoveries, give a compact remember-these-first reference, suggest one small place to use the advantage, and end with the feeling that the reader now sees the topic differently.
+
+All five parts must be distinct, progressive, non-overlapping, and filled with scan-friendly value.
+
+For each of the 5 parts, include only:
+- **Reader-Facing Title**
+- **Purpose**
+- **Key Points To Cover**
+- **Secret Value Elements**
+- **Useful Example, Comparison, Or Demonstration**
+- **Immediate Takeaway**
+- **Natural Transition**
+
+OUTLINE DEPTH:
+- Give enough specific direction for later writing prompts to produce strong content without guessing
+- Keep it concise and usable rather than drafting the report
+- The Hidden Advantage should contain 4 to 6 strong key points
+- Why It Gets Missed should contain 5 to 8 strong key points
+- The Secrets Revealed should contain 7 to 10 strong key points and carry the most substance
+- How To Use Them should contain 5 to 8 strong key points
+- What To Remember should contain 4 to 6 strong key points
+- Include overlooked distinctions, examples, comparisons, checklists, rules, feature explanations, use cases, and ready-made takeaways where appropriate
+- Build enough outline depth to support these mandatory minimums: The Hidden Advantage 400 words, Why It Gets Missed 600 words, The Secrets Revealed 1,000 words, How To Use Them 600 words, and What To Remember 350 words
+
+TITLE-TO-PAYOFF LOCK:
+Read the selected official title as a promise. Identify the exact unanswered question it creates, then make every part of the outline move toward answering that question. The Secrets Revealed section must deliver the precise set, method, clues, rules, features, behaviors, or opportunities implied by the title. Do not substitute a broader lesson, adjacent topic, or generic advice.
+
+SECRET DEVELOPMENT STANDARD:
+The core reveal must contain 5 to 9 connected discoveries that all close the same information gap. Arrange them in a deliberate order, starting with the easiest-to-recognize or most curiosity-satisfying discovery, then moving toward the highest-leverage or most useful advantage. Every discovery must be distinct, concrete, save-worthy, and necessary to the overall reveal. Do not pad the list with renamed versions of the same point.
+
+For every major secret, overlooked advantage, rule, feature, clue, behavior, or opportunity in the core reveal, specify:
+1. What it is
+2. Why it matters
+3. Why most people miss it
+4. What it changes
+5. A realistic example, comparison, or use case
+6. How the reader can recognize, test, or use it
+7. How it connects to the central information gap and the other discoveries
+
+CREDIBILITY STANDARD:
+- Preserve curiosity without fabricating exclusivity
+- Use phrases such as overlooked, underused, rarely emphasized, hidden in plain sight, or noticed through experience when accurate
+- Do not claim nobody knows it, experts are hiding it, or the industry is suppressing it
+- Do not invent facts, statistics, research, credentials, quotations, guarantees, personal experience, or unsupported claims
+
+Do not add bonuses, appendices, launch assets, or extra report parts.
+
+${noPromptRule()}
+${qualityLine()}
+${reportRules()}
+
+FINAL CHECK:
+- Preserve the official title exactly
+- Return exactly 5 report parts in the required order
+- Make the information gap clear and worthwhile
+- Make the core reveal the strongest and longest part
+- Ensure every discovery produces a practical advantage
+- Keep all five parts distinct and progressive
+- Keep every part tied to the same information gap, desired result, and central overlooked advantage
+- Make sure the core reveal fully answers the exact unanswered question created by the title and Step 1 direction
+- Ensure the discoveries feel like one collectible set rather than unrelated tips or padded variations
+- Stay inside the focus boundary
+- Silently replace anything generic, obvious, fabricated, repetitive, disconnected, or overly broad
+
+${cleanOutputRule()}
+
+Return only the complete final report outline.`;
+    }
+
+    function setPrompt(id, text) {
+      document.getElementById(id).value = text;
+    }
+
+    function loadReportPrompts() {
+      setPrompt('follow0', `Create one polished all-in-one copyright, disclaimer, and change notice for the Secret Report we've been building in this same chat. This notice will be placed on the first page of the finished report.
+
+Use the exact final report title already established earlier in this same chat and the author or brand name only if one was provided. If none was provided, do not invent one or leave a placeholder.
+
+The finished notice must:
+- State that the report is protected and provided for the purchaser's or authorized recipient's personal use only
+- Prohibit unauthorized copying, sharing, uploading, reselling, sublicensing, republishing, modifying, translating, distributing, or transmitting
+- State that no ownership, resale, PLR, master resale, redistribution, or reproduction rights are granted unless separately provided in writing
+- Explain that the information is educational and informational, not legal, financial, medical, tax, or other professional advice
+- State that results are not guaranteed and depend on individual circumstances, decisions, effort, and implementation
+- Encourage readers to verify important or time-sensitive information
+- State that the author or publisher may revise, replace, or discontinue the report without notice and has no obligation to provide updates
+- Reasonably limit liability for losses, damages, errors, omissions, outdated information, or actions taken based on the report
+- Avoid fake legal citations, exaggerated threats, and promises of complete legal protection
+
+Formatting rules:
+- Use a strong heading such as Copyright, Disclaimer & Change Notice
+- Write concise professional paragraphs suitable for the first page of a premium PDF
+- Do not include a year, date, placeholders, or process commentary
+- Return only the finished notice
+
+${cleanOutputRule()}`);
+
+      setPrompt('follow1', `We are now writing the finished Secret Report part by part in this same chat.
+
+Write the finished first part now, following The Hidden Advantage portion of the complete final outline and using only its custom reader-facing title.
+
+Purpose:
+- Enter through the familiar desired result
+- Create a clear information gap without resorting to vague hype
+- Introduce the overlooked advantage, method, clue, behavior, feature, rule, or opportunity
+- Explain why knowing it matters
+- Show what the reader will understand or notice differently by the end
+- Build curiosity and transition naturally into why the information gets missed
+
+MANDATORY WORD COUNT:
+- Write a minimum of 400 words
+- This is a hard requirement, not a target or suggestion
+- Do not stop before reaching 400 words
+- Silently verify the part meets or exceeds 400 words before returning it
+
+Important rules:
+- Write only the finished first part
+- Use only the custom reader-facing title assigned in the outline
+- Do not label it The Hidden Advantage, Opening, Introduction, or Section unless naturally part of the custom title
+- Include at least 3 useful distinctions, clues, or immediate takeaways
+- Avoid fake exclusivity, conspiracy language, broad history, dictionary definitions, and generic warm-up language
+- Do not include creator notes, process commentary, word-count commentary, or internal instructions
+
+${expertReportWritingStandard()}
+${qualityLine()}
+${reportRules()}
+${noPromptRule()}
+${cleanOutputRule()}`);
+
+      setPrompt('follow2', `Continue the Secret Report we've been creating in this same chat.
+
+Write the finished second part now, following Why It Gets Missed portion of the final outline and building naturally from the first part.
+
+Purpose:
+- Explain the assumptions, habits, common advice, interfaces, or lack of experience that hide the useful information
+- Show where ordinary explanations stop too early
+- Clarify why the overlooked detail is easy to dismiss or fail to notice
+- Compare the obvious way of viewing the topic with the more useful perspective
+- Prepare the reader to understand and appreciate the core discoveries
+
+MANDATORY WORD COUNT:
+- Write a minimum of 600 words
+- This is a hard requirement, not a target or suggestion
+- Do not stop before reaching 600 words
+- Silently verify the part meets or exceeds 600 words before returning it
+
+Important rules:
+- Write only the finished second part
+- Use only its custom reader-facing title from the outline
+- Do not label it Why It Gets Missed, Main Part 1, or Section unless naturally part of the custom title
+- Make it highly skimmable
+- Include at least 5 useful distinctions, reasons, comparisons, examples, or “most people notice this, experienced people notice that” moments
+- Do not reveal every core secret prematurely
+- Do not include creator notes, process commentary, word-count commentary, or internal instructions
+
+${expertReportWritingStandard()}
+${qualityLine()}
+${reportRules()}
+${noPromptRule()}
+${cleanOutputRule()}`);
+
+      setPrompt('follow3', `Continue the Secret Report we've been creating in this same chat.
+
+Write the finished core reveal now, following The Secrets Revealed portion of the final outline.
+
+Purpose:
+- Deliver the report's central payoff through specific overlooked methods, clues, advantages, behaviors, features, rules, distinctions, details, or opportunities
+- Make each discovery concrete, credible, easy to understand, and practically useful
+- Explain what each secret is, why it matters, why people miss it, what it changes, and how the reader can recognize or use it
+- Include realistic examples, comparisons, demonstrations, checklists, or compact reference material where appropriate
+- Make this the most substantial, valuable, and save-worthy part of the report
+
+MANDATORY WORD COUNT:
+- Write a minimum of 1,000 words
+- This is a hard requirement, not a target or suggestion
+- Do not stop before reaching 1,000 words
+- Silently verify the part meets or exceeds 1,000 words before returning it
+
+Important rules:
+- Write only the finished core reveal
+- Use only its custom reader-facing title from the outline
+- Do not label it The Secrets Revealed, Main Part 2, or Section unless naturally part of the custom title
+- Use clear subheadings for each major discovery when helpful
+- For every major discovery, include: what it is, why it matters, why it is missed, what it changes, one realistic example or comparison, and how to use or recognize it
+- Deliver 5 to 9 connected major discoveries and at least 7 distinct moments of practical value
+- Arrange the discoveries in a deliberate progression rather than presenting them as a random list
+- Keep every discovery tied to the same central information gap and desired result
+- Preserve credibility. Do not claim the information is suppressed, totally unknown, or exclusive when it is simply overlooked
+- Do not include creator notes, process commentary, word-count commentary, or internal instructions
+
+${expertReportWritingStandard()}
+${qualityLine()}
+${reportRules()}
+${noPromptRule()}
+${cleanOutputRule()}`);
+
+      setPrompt('follow4', `Continue the Secret Report we've been creating in this same chat.
+
+Write the finished fourth part now, following How To Use Them portion of the final outline.
+
+Purpose:
+- Prioritize the discoveries with the greatest practical usefulness
+- Show where, when, and why each advantage applies
+- Give realistic examples, decisions, tests, comparisons, or small actions
+- Explain how to avoid overusing, misunderstanding, or misapplying the information
+- Separate the easiest immediate uses from optional deeper applications
+- Turn the discoveries into a useful advantage without expanding into a giant implementation course
+
+MANDATORY WORD COUNT:
+- Write a minimum of 600 words
+- This is a hard requirement, not a target or suggestion
+- Do not stop before reaching 600 words
+- Silently verify the part meets or exceeds 600 words before returning it
+
+Important rules:
+- Write only the finished fourth part
+- Use only its custom reader-facing title from the outline
+- Do not label it How To Use Them, Main Part 3, or Section unless naturally part of the custom title
+- Make it highly skimmable
+- Include at least 5 useful applications, examples, decisions, checks, priorities, or cautions
+- Do not repeat the core reveal or turn this into the recap
+- Do not include creator notes, process commentary, word-count commentary, or internal instructions
+
+${expertReportWritingStandard()}
+${qualityLine()}
+${reportRules()}
+${noPromptRule()}
+${cleanOutputRule()}`);
+
+      setPrompt('follow5', `Continue the Secret Report we've been creating in this same chat.
+
+Write the finished final part now, following What To Remember portion of the final outline and bringing the report to a satisfying conclusion.
+
+Purpose:
+- Reinforce the most valuable discoveries without summarizing every paragraph
+- Condense the strongest overlooked advantages, rules, clues, features, behaviors, or opportunities
+- Include a compact remember-these-first list or quick-reference recap
+- Suggest one small place to notice, test, or apply the advantage
+- Leave the reader feeling that they now see a familiar topic differently
+- End with clarity and insight rather than a generic motivational speech
+
+MANDATORY WORD COUNT:
+- Write a minimum of 350 words
+- This is a hard requirement, not a target or suggestion
+- Do not stop before reaching 350 words
+- Silently verify the part meets or exceeds 350 words before returning it
+
+Important rules:
+- Write only the finished final part
+- Use only the custom reader-facing title assigned in the outline
+- Do not label it What To Remember, Closing, Conclusion, or Section unless naturally part of the custom title
+- Do not introduce a major new discovery, method, or project
+- Do not include creator notes, process commentary, word-count commentary, or internal instructions
+
+${expertReportWritingStandard()}
+${qualityLine()}
+${reportRules()}
+${noPromptRule()}
+${cleanOutputRule()}`);
+    }
+
+    function loadLaunchPrompts() {
+      const title = document.getElementById('titleInput').value.trim() || '[FINAL REPORT TITLE]';
+      const brand = getBrand();
+      const brandInstruction = brand
+        ? `Author or brand name: ${brand}. Use this name naturally where appropriate and preserve the spelling exactly.`
+        : `No author or brand name was provided. Do not invent or add one.`;
+
+      setPrompt('launch1', `Based on the finished report created in this chat, create the actual final 3D report ecover image now. Use the exact final report title already established in this chat and the completed report content.
+
+This standalone 3D report ecover will be the official product visual for this report and must be the exact image reused in later assets created in this same chat, especially the sales page bonus graphic.
+
+Final report title: ${title}
+${brandInstruction}
+
+${imageQualityRule()}
+
+${secretCampaignStandard()}
+
+Design direction:
+- Create a jaw-dropping premium digital PDF report cover mockup that looks professionally designed, highly desirable, and strong enough to anchor an entire sales page
+- Build one bold visual concept around the report's exact problem, promised advantage, and niche rather than using generic topic icons or predictable stock imagery
+- Make the exact report title the dominant focal point with confident, highly readable typography and strong hierarchy
+- Add a concise subtitle only when it clearly strengthens the promise and remains readable at thumbnail size
+- Use sophisticated color relationships, purposeful contrast, crisp composition, dimensional lighting, realistic depth, and polished details that make the report feel valuable and collectible
+- Make the 3D perspective believable and premium. Use clean edges, realistic thickness, controlled shadows, and professional mockup proportions
+- Avoid weak clip art, generic template styling, crowded text, decorative filler, multiple competing focal points, or visuals that don't directly support the product promise
+- Use a solid pure white #FFFFFF background across the entire image canvas
+- Keep the background completely white and clean. Do not use transparency, gradients, colored backdrops, room scenes, dark backgrounds, environmental scenes, desks, shelves, hands, or lifestyle settings
+- Use only a subtle natural product shadow on the white canvas when it improves realism
+
+Before finalizing, verify that the title is exact, the front cover remains readable at thumbnail size, the 3D mockup looks realistic, and the product feels distinctive enough to serve as the official visual for every later asset.
+
+Final output: render one jaw-dropping, production-ready standalone 3D report ecover image on a solid pure #FFFFFF white background. This is the official product visual to carry forward in this same chat. Keep the full product comfortably inside the canvas with generous white space around it, and include no accidental extra text or duplicate objects.`);
+
+      setPrompt('launch2', `Based on the finished report created in this chat, write a strong product description for the sales page. Use the exact final report title already established earlier in this same chat, any author or brand name provided, and the completed report content. This product description will be used again immediately afterward in the same chat as the written source for the sales page bonus graphic, so make it specific, benefit-rich, and easy to pull key callouts from.
+
+${secretCampaignStandard()}
+
+Include:
+- A compelling headline
+- 4 persuasive paragraphs
+
+Important rules:
+- Lead with the information gap, the overlooked discoveries that close it, and the practical advantage the buyer wants to gain
+- Make the reader feel a personal need to discover what they may be missing and how it changes the familiar result
+- Sell access to overlooked methods, insider distinctions, hidden features, unspoken rules, and useful opportunities rather than presenting the report as a broad course
+- Focus on what the buyer will discover, understand, notice, use, approach differently, or gain
+- Keep the writing clear, natural, and easy to follow
+- Use contractions where they fit naturally
+- Make the report feel intriguing, useful, collectible, and difficult to ignore without using fake exclusivity
+- Avoid fake scarcity, manipulative fear, and generic copy
+- Don't mention prompts inside the report
+- Don't explain your process
+- Return only the finished asset with no setup commentary or closing notes`);
+
+      setPrompt('launch3', `Create the actual finished sales page graphic now using ChatGPT's image-generation capability.
+
+Generate the graphic as a polished image directly inside this chat, exactly like you generated the earlier standalone 3D report ecover. Do not use Python, HTML, CSS, SVG, canvas, presentation software, or any other code-based design method.
+
+Use the standalone 3D report ecover created earlier in this same chat as the required official product visual and visual reference for this image.
+
+The ecover must remain clearly recognizable as the same official cover. Preserve its title, subtitle, author name, artwork, colors, overall appearance, and 3D book presentation. Do not invent a different cover, create a second cover design, or replace it with a generic book mockup.
+
+Use the product description written immediately before this prompt to choose the strongest sales message.
+
+Final report title: ${title}
+${brandInstruction}
+
+${imageQualityRule()}
+
+COMPOSITION:
+- Use a wide 16:9 composition
+- Place the official 3D report ecover prominently on the left
+- Keep the full ecover visible with comfortable space around it
+- Use the right side for one bold benefit-driven headline
+- Add one short supporting sentence beneath the headline
+- Add exactly 3 short benefit callouts
+- Keep every callout to approximately 3 to 7 words
+- Use large, readable typography with generous spacing
+- Keep all text comfortably inside the canvas
+- Leave clear space along every edge
+- Make the ecover and headline the two dominant visual elements
+
+VISUAL DIRECTION:
+- Build the surrounding design from the official ecover's established colors, topic, visual atmosphere, and style
+- Create a cohesive campaign graphic rather than placing a plain text box beside the cover
+- Use dimensional lighting, subtle depth, polished visual effects, topic-relevant background details, and strong contrast
+- Make the design feel exciting, modern, substantial, and premium
+- Use visual imagery and atmosphere to communicate the benefits instead of relying on excessive text
+- Make it look like a professionally designed digital product sales graphic, not a presentation slide, web banner template, or coded layout
+
+TEXT RULES:
+- Use the exact report title only where naturally needed
+- Include the author or brand name once when provided
+- Use one headline, one supporting sentence, and exactly 3 benefit callouts
+- Do not use paragraphs
+- Do not repeat the product title unnecessarily
+- Do not place text at the extreme bottom or edges
+- Do not include the word Bonus unless specifically requested
+- Carefully check spelling and readability
+
+IMPORTANT:
+Generate the finished graphic as an image directly in the chat. Do not provide code, instructions, a design specification, or a downloadable HTML-created graphic.
+
+Return only one finished production-ready sales-page image.`);
+
+      setPrompt('launch4', `Continue in this same ChatGPT chat after the report, official title, product direction, finished content, 3D ecover, and product description have already been completed.
+
+Write the complete best-and-final long-form sales letter for the finished report now.
+
+Use the exact product intelligence already established in this conversation, including:
+- The exact information gap the report opens and closes
+- The intended reader and the situation they are in
+- The must-read hook
+- The secret promise
+- The overlooked discoveries and why they are commonly missed
+- The familiar desired result
+- The insider mechanism, practical distinctions, and advantage gained from knowing it
+- The strongest distinctions, examples, practical applications, and practical takeaways from the finished report
+- The product description written earlier in this same chat
+
+Preserve the exact official report title and any author or brand name already established. Do not rename the report, invent a brand, or introduce a different promise.
+
+${secretCampaignStandard()}
+
+SALES-LETTER GOAL:
+Make the reader feel the information gap, recognize what they may be overlooking, see how other people gain an advantage from noticing it, and want immediate access to the missing details. Sell the report as the focused insider resource that reveals what most people overlook, why it gets missed, and how the reader can use the advantage.
+
+Write the sales letter in this natural progression:
+1. A strong, specific headline built around the most desirable advantage or relief
+2. A supporting subheadline that clarifies who it is for and what it helps them accomplish
+3. An opening that enters the reader's current situation without generic warm-up language
+4. An insider-tension section showing how familiar advice leaves an important gap and why the reader may never notice it on their own
+5. A pattern interrupt explaining why the most useful overlooked discoveries are commonly dismissed, underused, buried inside broader advice, or noticed only through experience
+6. A natural introduction of the report as the focused insider resource the reader can use now
+7. A clear explanation of the insider mechanism, overlooked methods, hidden features, unspoken rules, comparisons, or practical distinctions taught inside
+8. A benefit-rich section showing what the buyer will discover, understand, notice sooner, use differently, simplify, or gain
+9. Strong curiosity bullets based on the actual finished report, with each bullet hinting at one overlooked method, hidden feature, unspoken rule, insider behavior, quiet opportunity, or practical advantage without giving away the whole answer
+10. A section that makes the report feel easy to use, practical, focused, and collection-worthy
+11. A who-this-is-for section grounded in the intended reader established earlier
+12. A value section explaining why the report saves more time, effort, frustration, uncertainty, or mistakes than trying to piece the solution together alone
+13. A clear call to action that reinforces the immediate practical payoff
+14. A concise closing section that leaves the reader with one final reason to act
+
+COPY STANDARDS:
+- Write like an elite direct-response copywriter who fully understands the completed product, but keep the language clear enough for an eighth-grade reader
+- Use contractions naturally throughout
+- Lead with hidden information gap, insider curiosity, early recognition, and practical advantages rather than describing chapters or merely listing content
+- Use specificity, contrast, curiosity, emotional recognition, and practical value without forced cleverness
+- Make the sales letter feel human, confident, conversational, and highly readable
+- Use short paragraphs, purposeful subheads, varied sentence length, and strong transitions
+- Make every section earn its place by increasing desire, clarity, trust, or perceived usefulness
+- Pull the strongest hooks and details from the actual product rather than inventing generic sales language
+- Keep the one-problem, one-solution positioning intact
+- Do not broaden the product into a larger promise than the report fulfills
+
+TRUTH AND SAFETY RULES:
+- Do not invent testimonials, customers, case studies, personal experiences, statistics, research findings, credentials, endorsements, bonuses, prices, discounts, scarcity, deadlines, guarantees, refund policies, or income claims
+- Do not claim the reader will definitely achieve a result
+- Do not use fake urgency, false scarcity, manipulative fear, exaggerated hype, or unsupported superlatives
+- Do not mention prompts, this workflow, ChatGPT, or how the asset was created
+- Do not explain your process or add setup commentary
+
+Final output: return only the polished, ready-to-use long-form sales letter with clean formatting, strong headings, persuasive bullets, and a clear call to action.`);
+
+      setPrompt('launch5', `Create the actual finished Facebook promotional graphic now using ChatGPT's image-generation capability.
+
+Generate the graphic as a polished image directly inside this chat. Do not use Python, HTML, CSS, SVG, canvas, presentation software, or any other code-based design method.
+
+Use the standalone 3D report ecover created earlier in this same chat as the required official product visual and visual reference. The ecover must remain clearly recognizable as the same official cover. Preserve its title, subtitle, author name, artwork, colors, overall appearance, and 3D book presentation. Do not invent a different cover, create a second cover design, or replace it with a generic mockup.
+
+Final report title: ${title}
+${brandInstruction}
+
+${imageQualityRule()}
+
+COMPOSITION:
+- Create one square 1080 by 1080 Facebook promotional image
+- Make the official 3D ecover a large, unmistakable hero element
+- Use one dominant scroll-stopping hook
+- Add no more than one short supporting line
+- Include one short call to action only when it improves clarity
+- Keep all important text large and readable on mobile
+- Keep all essential content inside generous safe margins
+- Use one clear focal point and one clear conversion message
+
+VISUAL DIRECTION:
+- Build the surrounding design from the official ecover's established colors, topic, visual atmosphere, and style
+- Use one bold topic-relevant visual idea instead of icon piles or stock-photo collages
+- Use premium lighting, controlled depth, strong contrast, and directional composition
+- Make the graphic feel custom art-directed and campaign-ready
+- Make it look like a professionally generated paid-social image, not a coded social template or presentation slide
+
+TEXT RULES:
+- Keep copy minimal
+- Use the exact report title only where naturally needed
+- Include the author or brand name once when provided
+- Do not use bullet lists, paragraphs, badge spam, fake proof, or multiple competing hooks
+- Do not place text near the extreme edges
+- Carefully check spelling and readability
+
+IMPORTANT:
+Generate the finished graphic as an image directly in the chat. Do not provide code, instructions, a design specification, or a downloadable HTML-created graphic.
+
+Return only one finished production-ready square Facebook promotional image.`);
+
+      setPrompt('launch6', `Create the actual finished Facebook cover image now using ChatGPT's image-generation capability.
+
+Generate the cover as a polished image directly inside this chat. Do not use Python, HTML, CSS, SVG, canvas, presentation software, or any other code-based design method.
+
+Use the standalone 3D report ecover created earlier in this same chat as the required official product visual and visual reference. The ecover must remain clearly recognizable as the same official cover. Preserve its title, subtitle, author name, artwork, colors, overall appearance, and 3D book presentation. Do not invent a different cover, create a second cover design, or replace it with a generic mockup.
+
+Final report title: ${title}
+${brandInstruction}
+
+${imageQualityRule()}
+
+COMPOSITION:
+- Create one wide Facebook cover image
+- Keep the official ecover, exact report title, and main hook inside the mobile-safe center area
+- Use the outer edges only for supporting atmosphere, motion, texture, or background imagery
+- Make the official ecover a clearly visible hero product element
+- Use one strong campaign idea and one short supporting line at most
+- Keep the banner clean, spacious, and readable after desktop and mobile cropping
+- Keep all critical text and focal visuals away from the extreme edges
+
+VISUAL DIRECTION:
+- Build the surrounding design from the official ecover's established colors, topic, visual atmosphere, and style
+- Use cinematic composition, premium typography, polished depth, controlled lighting, and topic-relevant visual storytelling
+- Make the design feel like the hero banner for a premium digital product launch
+- Keep the campaign visually cohesive with the earlier ecover and promotional graphic
+- Make it look like a professionally generated cover image, not a coded header template or presentation slide
+
+TEXT RULES:
+- Keep copy tight and powerful
+- Use the exact report title as the main message anchor
+- Include the author or brand name once when provided
+- Do not use bullet lists, paragraphs, tiny text, scattered focal points, or critical details near the edges
+- Carefully check spelling and readability
+
+IMPORTANT:
+Generate the finished Facebook cover as an image directly in the chat. Do not provide code, instructions, a design specification, or a downloadable HTML-created graphic.
+
+Return only one finished production-ready Facebook cover image.`);
+
+      setPrompt('launch7', `Create the actual finished advertisement infographic now using ChatGPT's image-generation capability.
+
+Generate the infographic as a polished image directly inside this chat. Do not use Python, HTML, CSS, SVG, canvas, presentation software, or any other code-based design method.
+
+Use the standalone 3D report ecover created earlier in this same chat as the required official product visual and visual reference. The ecover must remain clearly recognizable as the same official cover. Preserve its title, subtitle, author name, artwork, colors, overall appearance, and 3D book presentation. Do not invent a different cover, create a second cover design, or replace it with a generic mockup.
+
+Final report title: ${title}
+${brandInstruction}
+
+${imageQualityRule()}
+
+COMPOSITION:
+- Create one vertical 1080 by 1350 promotional infographic
+- Use the top section for one strong hook, the exact report title, and the official 3D ecover
+- Use exactly 3 short information panels below the hero section
+- Give each panel one brief heading and one concise supporting line
+- Create a clear top-to-bottom reading path
+- Keep all text large enough to read on mobile
+- Use generous spacing and safe margins throughout
+- Make the ecover and main hook the dominant visual elements
+
+CONTENT FLOW:
+- Panel 1: the recognizable problem or missed opportunity
+- Panel 2: the overlooked insight or distinctive mechanism
+- Panel 3: the practical advantage, result, or next step
+
+VISUAL DIRECTION:
+- Build the entire design from the official ecover's established colors, topic, visual atmosphere, and style
+- Use premium editorial composition, connecting flow, confident typography, subtle depth, and topic-relevant visual reinforcement
+- Make it substantial enough to save and share without becoming crowded
+- Use visuals and atmosphere to communicate ideas instead of adding excessive text
+- Make it look like a professionally generated campaign infographic, not a coded checklist, chart template, or presentation slide
+
+TEXT RULES:
+- Use exactly 3 concise information panels
+- Do not use paragraphs, crowded charts, unsupported statistics, excessive icon rows, or disconnected boxes
+- Include the author or brand name once when provided
+- Keep all text away from the extreme edges
+- Carefully check spelling and readability
+
+IMPORTANT:
+Generate the finished infographic as an image directly in the chat. Do not provide code, instructions, a design specification, or a downloadable HTML-created graphic.
+
+Return only one finished production-ready vertical promotional infographic.`);
+
+      setPrompt('launch8', `Continue in this same ChatGPT chat using the finished report, exact official title, intended reader, must-have hook, promised advantage, distinctive angle, product description, and strongest insights already established.
+
+Write 2 best-and-final Facebook promotional posts for the report.
+
+${secretCampaignStandard()}
+
+The two posts must use meaningfully different secret-based angles:
+
+POST 1: “WHAT ARE YOU MISSING?”
+- Open with a sharp first line that suggests the reader may be missing a useful detail other people already notice
+- Mention one overlooked clue, method, feature, behavior, or rule without revealing the complete secret list
+- Explain why the discovery is easy to overlook, dismiss, or never encounter
+- Transition naturally to the report as the focused way to discover the missing advantage
+
+POST 2: “THE QUIET ADVANTAGE”
+- Open with the desired result or advantage the reader wants
+- Show how small overlooked details can change how experienced people approach the familiar problem
+- Highlight the report's overlooked methods, comparisons, quick-reference list, hidden features, or insider distinctions
+- Make it feel like a must-save resource that helps the reader finally see what others notice
+
+For each post:
+- Start with a strong standalone hook that earns attention in the first one or two lines
+- Use the exact official report title
+- Write in a natural, conversational voice with contractions where they fit
+- Use short paragraphs and mobile-friendly spacing
+- Make the value understandable without requiring prior context
+- Include 3 to 5 concise benefit bullets only when bullets improve the post
+- End with one clear, low-friction call to action
+- Keep each post substantial enough to persuade but tight enough for Facebook
+
+Do not:
+- Use fake urgency, engagement bait, clickbait that the report cannot satisfy, exaggerated hype, or robotic phrases
+- Invent testimonials, statistics, proof, prices, discounts, guarantees, scarcity, or personal experiences
+- Use the same opening, structure, benefits, or wording in both posts
+- Mention prompts, ChatGPT, or the creation process
+- Add hashtags unless they are genuinely relevant and useful; use no more than 3
+
+Final output format:
+## Facebook Post 1
+[Finished post]
+
+## Facebook Post 2
+[Finished post]
+
+Return only the two finished posts.`);
+
+      setPrompt('launch9', `Continue in this same ChatGPT chat using the finished report, exact official title, intended reader, must-have hook, promised advantage, distinctive angle, product description, and strongest report insights already established.
+
+Write 2 best-and-final promotional emails for the report.
+
+${secretCampaignStandard()}
+
+Use two distinctly different secret-based persuasion angles:
+
+EMAIL 1: THE DETAIL THEY MAY BE MISSING
+- Make the reader wonder whether one overlooked detail could change how they approach the topic
+- Explain why that detail is commonly dismissed, underused, buried inside broader advice, or noticed only through experience
+- Position the report as the focused way to uncover the complete overlooked pattern
+
+EMAIL 2: THE ADVANTAGE OTHERS NOTICE
+- Lead with the desired result, shortcut, leverage point, or advantage the reader wants
+- Show how recognizing the overlooked detail changes what they notice, choose, or do next
+- Highlight the report's secret list, comparisons, hidden features, insider questions, or quick-reference material
+- Make the report feel intriguing, easy to consume, collectible, and worth keeping
+
+For each email, provide:
+- 3 strong subject line options using different styles: direct benefit, curiosity, and information-gap recognition
+- 1 concise preview-text option that complements rather than repeats the subject line
+- A compelling opening that earns attention immediately
+- A clear, natural body built around one central idea
+- Specific benefits and useful details drawn from the actual report
+- A smooth transition to the exact official report title
+- One primary call to action
+- A concise closing or P.S. that reinforces the strongest reason to click without introducing fake urgency
+
+EMAIL STANDARDS:
+- Write like a skilled email marketer who knows the finished product deeply
+- Use contractions naturally throughout
+- Keep paragraphs short, readable, and conversational
+- Prioritize clarity, specificity, curiosity, practical value, and emotional recognition
+- Sell the value of closing the information gap, understanding the overlooked discoveries, and using the advantage rather than merely describing the report's sections
+- Keep each email focused on one angle and one action
+- Make the two emails structurally and emotionally different
+
+Do not:
+- Invent testimonials, statistics, research, customers, credentials, personal stories, prices, discounts, deadlines, scarcity, guarantees, bonuses, or income claims
+- Use spammy language, deceptive subject lines, excessive punctuation, fake replies, or unsupported promises
+- Mention prompts, ChatGPT, or the creation process
+- Explain your process or add commentary outside the finished asset
+
+Final output format:
+## Email 1
+**Subject Line Options:**
+1. ...
+2. ...
+3. ...
+**Preview Text:** ...
+
+[Finished email]
+
+## Email 2
+**Subject Line Options:**
+1. ...
+2. ...
+3. ...
+**Preview Text:** ...
+
+[Finished email]
+
+Return only the completed emails.`);
+
+      setPrompt('launch10', `Continue in this same ChatGPT chat using the finished report, exact official title, intended reader, must-have hook, promised advantage, distinctive angle, scope boundary, and strongest expert-level content already established.
+
+Write the best-and-final 1500-word SEO blog post that delivers genuine value and naturally promotes the report.
+
+${secretCampaignStandard()}
+
+SEO STRATEGY:
+- Infer one primary search phrase from the report's exact topic, desired result, or overlooked opportunity and the language the intended reader would realistically search
+- Infer 3 to 5 closely related secondary phrases and semantic topics
+- Use them naturally and sparingly. Do not keyword-stuff or write for a search engine at the expense of the reader
+- Match the likely search intent by helping the reader understand the familiar topic and discover a useful overlooked angle
+- Stay within the report's established scope boundary
+
+Include at the top:
+- SEO Title, approximately 50 to 60 characters when practical
+- Meta Description, approximately 140 to 160 characters when practical
+- Suggested URL Slug
+- Primary Search Phrase
+
+ARTICLE STRUCTURE:
+1. A strong H1 headline that clearly promises useful help with the exact topic or desired result
+2. An opening that immediately reflects the reader's situation and explains what overlooked angle the article will help them understand
+3. Clear H2 and H3 subheads that create a logical, skimmable progression
+4. A useful explanation of why the information gap exists, why the overlooked discoveries are missed, and what people usually focus on instead
+5. Practical teaching drawn from the finished report, including selected overlooked discoveries, expert distinctions, realistic examples, comparisons, and practical applications without revealing the complete insider list
+6. At least one short discovery checklist, comparison, quick-reference list, or decision framework when it naturally improves usefulness
+7. A section explaining which overlooked discoveries offer the most leverage, where they apply, and what should not be overinterpreted
+8. A natural transition to the report as the complete focused insider resource
+9. A clear call to action near the end
+10. A concise conclusion that reinforces the most important practical takeaway
+
+WRITING STANDARDS:
+- Make the article valuable enough to deserve search traffic even if the reader never buys
+- Write in a natural, expert, human voice with contractions where they fit
+- Use plain language, short readable paragraphs, concrete examples, and smooth transitions
+- Demonstrate experience through practical distinctions and reasoning, not invented personal stories or credentials
+- Answer the likely search question early, then deepen the explanation
+- Keep the report promotion relevant and proportionate rather than turning the entire article into an advertisement
+- Use the exact official report title when introducing the product
+- Preserve the one-problem, one-solution positioning
+
+Do not:
+- Invent studies, statistics, quotations, experts, case studies, firsthand experience, testimonials, results, prices, guarantees, or claims not established in the report
+- Add fake FAQs purely for keywords
+- Use robotic SEO phrases, filler, repetitive summaries, or generic introductions such as “In today's digital world”
+- Mention prompts, ChatGPT, or the creation process
+- Explain your process or add commentary outside the finished asset
+
+Final output: return only the complete SEO package and polished approximately 1500-word blog post, ready to publish.`);
+
+      setPrompt('launch11', `Continue in this same ChatGPT chat using the finished report, exact official title, intended reader, must-have hook, promised advantage, distinctive angle, product description, and actual report content already established.
+
+Write the best-and-final 1000-word product review that helps a prospective buyer understand the report and make an informed decision.
+
+${secretCampaignStandard()}
+
+REVIEW POSITIONING:
+Create a credible, positive, specific review based entirely on the finished product's actual content and usefulness. Do not pretend to have purchased, personally tested, or achieved results from the report unless that firsthand experience was explicitly established in this conversation.
+
+Use this structure:
+1. A strong review headline featuring the exact official report title and its primary advantage
+2. A concise opening explaining the familiar topic or desired result and why the information gap matters to the intended reader
+3. A clear explanation of the information gap the report examines, the overlooked pattern it reveals, and the practical advantage the reader gains from understanding it
+4. A “What It Covers” section that describes the insider progression without turning into a dull chapter-by-chapter summary or giving away the complete secret list
+5. A “What Makes It Different” section built around the overlooked methods, hidden features, unspoken rules, experienced-person distinctions, and practical insider mechanism
+6. A “Most Useful Takeaways” section highlighting specific hidden clues, underused methods, insider distinctions, practical advantages, examples, and applications the reader will gain
+7. A “Who It Is Best For” section grounded in the intended reader and relevant situations
+8. A “What To Expect” section explaining the depth, style, usability, scope, and realistic limits of the report
+9. A balanced assessment that notes any genuine scope limitation without undermining the product or inventing flaws
+10. A clear final verdict and recommendation
+11. A natural call to action near the end
+
+REVIEW STANDARDS:
+- Write in a natural, confident, human voice with contractions where they fit
+- Be specific enough that the review could only describe this report
+- Focus on practical value, clarity, usefulness, focus, and the promised advantage
+- Explain why the product may save the reader time, uncertainty, effort, or avoidable mistakes
+- Keep the review positive without sounding like an advertisement disguised as independent journalism
+- Use short paragraphs, useful subheads, and smooth transitions
+- Preserve the exact official title and any established author or brand name
+
+Do not:
+- Invent personal use, purchases, results, testimonials, customers, statistics, research, credentials, prices, bonuses, guarantees, refund terms, comparisons, or competitor claims
+- Claim the report is perfect, revolutionary, or guaranteed to work
+- Criticize it for not covering subjects excluded by its established scope boundary
+- Mention prompts, ChatGPT, or the creation process
+- Explain your process or add commentary outside the review
+
+Final output: return only the polished approximately 1000-word product review, ready to publish.`);
+    }
+
+    function loadAllPrompts() {
+      loadReportPrompts();
+      loadLaunchPrompts();
+    }
+
+    async function copyText(id) {
+      const el = document.getElementById(id);
+      try {
+        await navigator.clipboard.writeText(el.value);
+        showToast('Copied to clipboard');
+      } catch (err) {
+        el.select();
+        document.execCommand('copy');
+        showToast('Copied to clipboard');
+      }
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 1800);
+    }
+
+    function clearAll() {
+      document.getElementById('categoryInput').selectedIndex = 0;
+      document.getElementById('keywordInput').value = '';
+      document.getElementById('urlInput').value = '';
+      document.getElementById('brandInput').value = '';
+      document.getElementById('titleInput').value = '';
+      document.getElementById('ideaInput').value = '';
+      document.getElementById('step1Prompt').value = '';
+      document.getElementById('step2Prompt').value = '';
+      showToast('Dashboard cleared');
+    }
+
+    document.getElementById('brandInput').addEventListener('input', loadAllPrompts);
+    document.getElementById('titleInput').addEventListener('input', loadLaunchPrompts);
+
+    loadAllPrompts();
+  </script>
+</body>
+</html>
