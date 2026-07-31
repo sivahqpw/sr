@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Siva's Report Genie Tools</title>
+  <style>
+    :root {
+      /* COLOUR PALETTE FROM RR-TEMPLATE */
+      --primary: #204d4f;      /* Deep Teal - Primary */
+      --secondary: #426a6c;    /* Muted Teal - Secondary */
+      --accent: #739395;       /* Sage Teal - Accent */
+      --border-clr: #a9c1c2;   /* Soft Mint - Borders */
+      --light-bg: #dbeeef;     /* Pale Mint - Background */
+      
+      --ink: #1e2b2c;
+      --muted: #426a6c;
+      --paper: #ffffff;
+      --page-bg: var(--light-bg);
+      --line: var(--border-clr);
+      --shadow: 0 10px 30px rgba(32, 77, 79, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--page-bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .page-wrap {
+      width: min(900px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 40px 0 80px;
+    }
+
+    /* HERO HEADER */
+    .hero {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-clr);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--primary);
+    }
+
+    .subtitle {
+      margin: 0 auto;
+      font-size: 16px;
+      max-width: 700px;
+      color: var(--secondary);
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    /* GROUP HEADERS */
+    .group-header {
+      margin: 40px 0 20px;
+      padding-left: 15px;
+      border-left: 4px solid var(--accent);
+    }
+    .group-header h2 { 
+      margin: 0; 
+      font-size: 20px; 
+      color: var(--primary); 
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* GRID FOR BUTTONS */
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    /* BUTTON STYLES */
+    .button {
+      appearance: none;
+      border: 1px solid var(--border-clr);
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      background: var(--paper);
+      color: var(--primary);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .button:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      .tool-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrap">
+    <header class="hero">
+      <h1>Siva's Report Genie Tools</h1>
+      <p class="subtitle">Quick Access to All Siva's Report Genie Utilities</p>
+    </header>
+
+    <!-- UTILITIES SECTION -->
+    <div class="tool-grid">
+      <a class="button" href="https://sivahqpw.github.io/sr/colour-scheme-override.html" target="_blank" rel="noopener">Color Hex</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/bengali-localization-layer.html" target="_blank" rel="noopener">Bangla Layer</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/hindi-localization-layer.html" target="_blank" rel="noopener">Hindi Localization Layer</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/hindi-script.html" target="_blank" rel="noopener">Hindi script</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/toc-to-pdf.html" target="_blank" rel="noopener">TOC > Idea</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/radical-reports-premium-unlimited-plan.html" target="_blank" rel="noopener">Radical Reports</a>
+    </div>
+
+    <!-- MARK HESS SECTION -->
+    <div class="group-header">
+      <h2>Tools of Mark Hess</h2>
+    </div>
+    <div class="tool-grid">
+      <a class="button" href="https://sivahqpw.github.io/sr/tez.html" target="_blank" rel="noopener">Radical Reports</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/tez2.html" target="_blank" rel="noopener">Quick Win</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/tez3.html" target="_blank" rel="noopener">Warning Reports</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/tez4.html" target="_blank" rel="noopener">Secret Reports</a>
+    </div>
+
+    <!-- MEMBERSHIP SECTION -->
+    <div class="group-header">
+      <h2>Membership</h2>
+    </div>
+    <div class="tool-grid">
+      <a class="button" href="https://sivahqpw.github.io/spm/membership-with-low-ticket-pdf-product.html" target="_blank" rel="noopener">Membership</a>
+    </div>
+
+    <!-- COURSE SECTION -->
+    <div class="group-header">
+      <h2>Course</h2>
+    </div>
+    <div class="tool-grid">
+      <a class="button" href="https://sivahqpw.github.io/spm/chatgpt-work-step-1.html" target="_blank" rel="noopener">Method Extractor & Execution Process</a>
+      <a class="button" href="https://sivahqpw.github.io/spm/chatgpt-work-step-2.html" target="_blank" rel="noopener">To Do</a>
+      <a class="button" href="https://sivahqpw.github.io/spm/chatgpt-work-step-3.html" target="_blank" rel="noopener">One Step</a>
+      <a class="button" href="https://sivahqpw.github.io/spm/chatgpt-work-step-4.html" target="_blank" rel="noopener">Lesson of A Step</a>
+      <a class="button" href="https://sivahqpw.github.io/spm/course-title-genie.html" target="_blank" rel="noopener">Course Title</a>
+      <a class="button" href="https://sivahqpw.github.io/spm/course-assets.html" target="_blank" rel="noopener">Course Assets</a>
+    </div>
+
+    <!-- IDEAS SECTION -->
+    <div class="group-header">
+      <h2>Ideas</h2>
+    </div>
+    <div class="tool-grid">
+      <a class="button" href="https://sivahqpw.github.io/sr/activity-to-topic.html" target="_blank" rel="noopener">Idea Keywords Genie</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/AiRadicalContentUnlimited.html" target="_blank" rel="noopener">Generate Content Topic</a>
+    </div>
+
+    <!-- GRAPHY SECTION -->
+    <div class="group-header">
+      <h2>Graphy.com</h2>
+    </div>
+    <div class="tool-grid">
+      <a class="button" href="https://sivahqpw.github.io/sr/graphy-dot-com-sales-copy.html" target="_blank" rel="noopener">Graphy.com</a>
+    </div>
+
+    <!-- SIDE HUSTLE SECTION -->
+    <div class="group-header">
+      <h2>Side Hustle</h2>
+    </div>
+    <div class="tool-grid">
+      <a class="button" href="https://sivahqpw.github.io/sr/side-hustle-idea-builder.html" target="_blank" rel="noopener">Side Hustle Idea Genie</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/side-hustle-builder.html" target="_blank" rel="noopener">Side Hustle Builder</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/easy-digital-asset-creator.html" target="_blank" rel="noopener">EASY DIGITAL ASSET CREATOR</a>
+    </div>
+
+    <!-- SIDE PINTEREST KEYWORDS SECTION -->
+    <div class="group-header">
+      <h2>Pinterest Keywords</h2>
+    </div>
+    <div class="tool-grid">
+      <a class="button" href="https://sivahqpw.github.io/sr/seo-keyword-selection-engine.html" target="_blank" rel="noopener">Keyword</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/seo-positioning-engine.html" target="_blank" rel="noopener">Strategically position your product or content</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/pinterest-image-seo-metadata-generator.html" target="_blank" rel="noopener">Image SEO Meta Data</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/pinterest-business-profile.html" target="_blank" rel="noopener">Profile</a>
+    </div>
+
+    <!-- SIDE PINTEREST PRODUCTS SECTION -->
+    <div class="group-header">
+      <h2>Pinterest Products</h2>
+    </div>
+    <div class="tool-grid">
+      <a class="button" href="https://sivahqpw.github.io/sr/product-creation-step1.html" target="_blank" rel="noopener">Step#1</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/product-creation-step2.html" target="_blank" rel="noopener">Step#2</a>
+      <a class="button" href="https://sivahqpw.github.io/sr/product-creation-step3.html" target="_blank" rel="noopener">Step#3</a>
+    </div>
+
+    <footer>
+      Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.
+    </footer>
+  </div>
+
+</body>
+</html>
