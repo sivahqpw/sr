@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEO POSITIONING ENGINE</title>
+  <style>
+    :root {
+      /* RADICAL REPORTS COLOUR PALETTE */
+      --primary: #204d4f;      /* Deep Teal */
+      --secondary: #426a6c;    /* Muted Teal */
+      --accent: #739395;       /* Sage Teal */
+      --border-clr: #a9c1c2;   /* Soft Mint */
+      --light-bg: #dbeeef;     /* Pale Mint */
+      
+      --ink: #1e2b2c;
+      --muted: #426a6c;
+      --paper: #ffffff;
+      --page-bg: var(--light-bg);
+      --line: var(--border-clr);
+      --shadow: 0 10px 30px rgba(32, 77, 79, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--page-bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .page-wrap {
+      width: min(900px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 40px 0 80px;
+    }
+
+    /* HEADER */
+    .hero {
+      text-align: left;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-clr);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--primary);
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 16px;
+      max-width: 700px;
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+
+    /* CARDS */
+    .section-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .section-head {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 24px;
+      background: #fcfdfe;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .step-icon {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      background: var(--primary);
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+
+    .section-head p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section-body { padding: 24px; }
+
+    label {
+      display: block;
+      margin: 0 0 6px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--secondary);
+    }
+
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border-clr);
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font: inherit;
+      color: var(--ink);
+      outline: none;
+      transition: all 0.2s ease;
+      margin-bottom: 20px;
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(32, 77, 79, 0.08);
+    }
+
+    #finalPrompt {
+      background: #f9fbfc;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 13px;
+      min-height: 400px;
+    }
+
+    /* BUTTONS */
+    .button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+
+    button, .link-button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .primary-btn { color: #fff; background: var(--primary); }
+    .primary-btn:hover { background: var(--secondary); transform: translateY(-1px); }
+
+    .secondary-btn { color: var(--primary); background: #fff; border: 1px solid var(--border-clr); }
+    .secondary-btn:hover { background: #f0f6f6; }
+
+    .copy-btn { color: #fff; background: var(--accent); }
+    .copy-btn:hover { background: var(--secondary); }
+
+    .toast {
+      position: fixed;
+      left: 50%; bottom: 30px; transform: translateX(-50%);
+      background: var(--primary); color: #fff;
+      padding: 8px 16px; border-radius: 8px; font-size: 13px;
+      opacity: 0; transition: 0.3s; pointer-events: none;
+      z-index: 1000;
+    }
+    .toast.show { opacity: 1; }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--accent);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrap">
+    <header class="hero">
+      <h1>SEO POSITIONING ENGINE</h1>
+      <p class="subtitle">Strategically position your product or content to satisfy search intent and build long-term brand trust.</p>
+    </header>
+
+    <section class="section-card">
+      <div class="section-head">
+        <div class="step-icon">⚡</div>
+        <div>
+          <h2>Input Parameters</h2>
+          <p>Define your target keyword and content details below.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <label for="keywordInput">Target SEO Keyword</label>
+        <textarea id="keywordInput" placeholder="Enter your target SEO keyword..."></textarea>
+
+        <label for="descInput">Product / Content Description</label>
+        <textarea id="descInput" placeholder="Describe what the product or content genuinely delivers..."></textarea>
+
+        <div class="button-row">
+          <button class="primary-btn" onclick="generatePrompt()">Generate Positioning Prompt</button>
+          <button class="copy-btn" onclick="copyText()">Copy Final Prompt</button>
+          <a class="link-button secondary-btn" href="https://chatgpt.com/" target="_blank">Open ChatGPT</a>
+          <button class="secondary-btn" onclick="clearAll()">Clear</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-head">
+        <div class="step-icon">📋</div>
+        <div>
+          <h2>Final Strategy Prompt</h2>
+          <p>This prompt is ready to be used with your preferred AI model.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <textarea id="finalPrompt" readonly placeholder="The generated prompt will appear here..."></textarea>
+      </div>
+    </section>
+
+    <footer>
+      Copyright &copy; <script>document.write(new Date().getFullYear())</script> SEO Positioning Engine.
+    </footer>
+  </div>
+
+  <div id="toast" class="toast">Copied to clipboard</div>
+
+  <script>
+    function generatePrompt() {
+      const keyword = document.getElementById('keywordInput').value;
+      const desc = document.getElementById('descInput').value;
+
+      // PROMPT CONTENT PRESERVED EXACTLY
+      const promptTemplate = `ROLE
+
+You are an expert SEO Strategist, Search Intent Analyst, Product Positioning Strategist, Messaging Expert, Brand Strategist, and Content Architect.
+
+Your job is NOT to simply generate SEO copy.
+
+Your job is to strategically position a product or content so that:
+
+- it satisfies the target search intent,
+- accurately represents the actual delivery,
+- creates the correct expectations,
+- and produces SEO assets that are truthful, persuasive, and highly relevant.
+
+Always think strategically before writing.
+
+---
+
+OBJECTIVE
+
+Transform a product or content into a search-optimized asset by aligning:
+
+- Search Demand
+- User Intent
+- User Expectations
+- Actual Delivery
+- Strategic Positioning
+- SEO Messaging
+
+Every recommendation must be based on what the product/content genuinely delivers.
+
+Never optimize for clicks at the expense of trust.
+
+---
+
+INPUT
+
+Target SEO Keyword
+
+[Target SEO Keyword]
+
+---
+
+Product / Content Description
+
+[Product / Content Description]
+
+---
+
+PROCESS
+
+Follow this process exactly.
+
+Phase 1 — Search Analysis
+
+Understand the keyword.
+
+Identify:
+
+- search intent
+- user awareness level
+- user expectations
+- desired outcome
+
+---
+
+Phase 2 — Delivery Analysis
+
+Study the product/content.
+
+Identify:
+
+- actual transformation
+- actual promise
+- limitations
+- strengths
+- differentiators
+
+Never invent benefits.
+
+---
+
+Phase 3 — Alignment Analysis
+
+Compare:
+
+Search Intent
+
+vs
+
+Actual Delivery
+
+Evaluate:
+
+- alignment
+- expectation gaps
+- over-promises
+- under-communicated strengths
+
+Recommend improvements whenever necessary.
+
+---
+
+Phase 4 — Strategic Positioning
+
+Position the product/content specifically for people searching this keyword.
+
+Create positioning that clearly communicates:
+
+- who it is for
+- who it is NOT for
+- what problem it solves
+- what transformation it provides
+- why it is different
+- why someone should trust it
+
+---
+
+Phase 5 — SEO Messaging
+
+Create messaging that is:
+
+- keyword relevant
+- human friendly
+- trustworthy
+- specific
+- naturally persuasive
+
+---
+
+OUTPUT
+
+SEARCH ANALYSIS
+
+Primary SEO Keyword
+
+---
+
+Related SEO Keywords
+
+(10–20)
+
+---
+
+Search Intent
+
+Explain the intent.
+
+---
+
+User Awareness Level
+
+Choose one:
+
+- Unaware
+- Problem Aware
+- Solution Aware
+- Product Aware
+- Most Aware
+
+Explain briefly.
+
+---
+
+User Desired Outcome
+
+Describe what success looks like for the searcher.
+
+---
+
+DELIVERY ANALYSIS
+
+Actual Delivery
+
+---
+
+Core Promise
+
+---
+
+Key Benefits
+
+---
+
+Limitations
+
+Be honest.
+
+---
+
+ALIGNMENT ANALYSIS
+
+Keyword–Delivery Alignment
+
+Explain how well the delivery matches the keyword.
+
+---
+
+User Expectations
+
+List what the searcher expects.
+
+---
+
+Expectation Gap
+
+Explain any mismatch.
+
+---
+
+Alignment Score
+
+0–100
+
+---
+
+Recommendations
+
+Improve alignment if necessary.
+
+---
+
+POSITIONING
+
+Positioning Statement
+
+---
+
+Ideal Audience
+
+---
+
+Not Intended For
+
+---
+
+Problem Solved
+
+---
+
+Desired Transformation
+
+---
+
+Differentiation
+
+---
+
+Why Choose This
+
+---
+
+MESSAGING ASSETS
+
+Core Promise
+
+---
+
+Value Proposition
+
+---
+
+Unique Selling Proposition (USP)
+
+---
+
+Elevator Pitch
+
+---
+
+One-Line Positioning
+
+---
+
+Call-to-Action
+
+---
+
+SEO DESCRIPTION
+
+Write an SEO-friendly description that naturally includes the keyword while accurately representing the delivery.
+
+---
+
+SEO ASSETS
+
+SEO Title
+
+---
+
+Alternative Titles
+
+Generate five using different angles:
+
+- Educational
+- Benefit-driven
+- Curiosity
+- Problem-solving
+- Authority
+
+---
+
+URL Slug
+
+---
+
+Meta Description
+
+---
+
+Image Alt Text
+
+---
+
+Social Headline
+
+---
+
+FINAL EVALUATION
+
+Explain briefly why the final positioning is strategically strong.
+
+Evaluate how well it aligns:
+
+- Search Intent
+- User Expectations
+- Actual Delivery
+- SEO Relevance
+- Long-Term Brand Trust
+
+---
+
+RULES
+
+- Think before writing.
+- Never exaggerate.
+- Never invent benefits.
+- Never create clickbait.
+- Optimize for humans first.
+- Use SEO naturally.
+- Every section must support the same positioning.
+- Every asset must communicate the same promise.
+- Prioritize long-term trust over short-term clicks.
+- Return only the requested output.`;
+
+      const finalPrompt = promptTemplate
+        .replace('[Target SEO Keyword]', keyword)
+        .replace('[Product / Content Description]', desc);
+
+      document.getElementById('finalPrompt').value = finalPrompt;
+    }
+
+    async function copyText() {
+      const el = document.getElementById('finalPrompt');
+      if (!el.value) return;
+      await navigator.clipboard.writeText(el.value);
+      const t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    function clearAll() {
+      document.getElementById('keywordInput').value = '';
+      document.getElementById('descInput').value = '';
+      document.getElementById('finalPrompt').value = '';
+    }
+  </script>
+</body>
+</html>

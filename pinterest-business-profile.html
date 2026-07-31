@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strategic AI Engine: Demand → Pinterest Business</title>
+  <style>
+    :root {
+      /* RADICAL REPORTS COLOUR PALETTE */
+      --primary: #204d4f;      /* Deep Teal - Primary */
+      --secondary: #426a6c;    /* Muted Teal - Secondary */
+      --accent: #739395;       /* Sage Teal - Accent */
+      --border-clr: #a9c1c2;   /* Soft Mint - Borders */
+      --light-bg: #dbeeef;     /* Pale Mint - Background */
+      
+      --ink: #1e2b2c;
+      --muted: #426a6c;
+      --paper: #ffffff;
+      --page-bg: var(--light-bg);
+      --line: var(--border-clr);
+      --shadow: 0 10px 30px rgba(32, 77, 79, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--page-bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .page-wrap {
+      width: min(900px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 40px 0 80px;
+    }
+
+    /* HEADER */
+    .hero {
+      text-align: left;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-clr);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--primary);
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 16px;
+      max-width: 700px;
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+
+    /* CARDS */
+    .section-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .section-head {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 24px;
+      background: #fcfdfe;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .step-icon {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      background: var(--primary);
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+
+    .section-head p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section-body { padding: 24px; }
+
+    label {
+      display: block;
+      margin: 0 0 6px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--secondary);
+    }
+
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border-clr);
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font: inherit;
+      color: var(--ink);
+      outline: none;
+      transition: all 0.2s ease;
+      margin-bottom: 20px;
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(32, 77, 79, 0.08);
+    }
+
+    #finalPrompt {
+      background: #f9fbfc;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 13px;
+      min-height: 450px;
+      color: var(--primary);
+    }
+
+    /* BUTTONS */
+    .button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+
+    button, .link-button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .primary-btn { color: #fff; background: var(--primary); }
+    .primary-btn:hover { background: var(--secondary); transform: translateY(-1px); }
+
+    .secondary-btn { color: var(--primary); background: #fff; border: 1px solid var(--border-clr); }
+    .secondary-btn:hover { background: #f0f6f6; }
+
+    .copy-btn { color: #fff; background: var(--accent); }
+    .copy-btn:hover { background: var(--secondary); }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      left: 50%; bottom: 30px; transform: translateX(-50%);
+      background: var(--primary); color: #fff;
+      padding: 8px 16px; border-radius: 8px; font-size: 13px;
+      opacity: 0; transition: 0.3s; pointer-events: none;
+      z-index: 1000;
+    }
+    .toast.show { opacity: 1; }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--accent);
+    }
+
+    /* GRID FOR INPUTS */
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 700px) {
+      .input-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrap">
+    <header class="hero">
+      <h1>Strategic AI Engine: Demand → Pinterest Business</h1>
+      <p class="subtitle">Turn validated market demand and product portfolios into a laser-focused Pinterest business strategy for solo creators.</p>
+    </header>
+
+    <!-- INPUT SECTION -->
+    <section class="section-card">
+      <div class="section-head">
+        <div class="step-icon">💡</div>
+        <div>
+          <h2>Strategy Configuration</h2>
+          <p>Input your business variables to generate the tailored Pinterest strategy prompt.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="input-grid">
+          <div>
+            <label for="demand">Demand</label>
+            <textarea id="demand" placeholder="Describe the validated market demand..."></textarea>
+          </div>
+          <div>
+            <label for="audience">Target Audience</label>
+            <textarea id="audience" placeholder="Who are you building this for?"></textarea>
+          </div>
+        </div>
+        
+        <div class="input-grid">
+          <div>
+            <label for="portfolio">Product Portfolio</label>
+            <textarea id="portfolio" placeholder="List your digital products..."></textarea>
+          </div>
+          <div>
+            <label for="bizName">Business Name</label>
+            <textarea id="bizName" placeholder="Current business name (Optional)"></textarea>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button class="primary-btn" onclick="buildPrompt()">Generate Strategy Prompt</button>
+          <button class="copy-btn" onclick="copyText()">Copy Final Prompt</button>
+          <a class="link-button secondary-btn" href="https://chatgpt.com/" target="_blank">Open ChatGPT</a>
+          <button class="secondary-btn" onclick="clearAll()">Clear</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- OUTPUT SECTION -->
+    <section class="section-card">
+      <div class="section-head">
+        <div class="step-icon">📋</div>
+        <div>
+          <h2>Final Strategy Prompt</h2>
+          <p>This prompt is designed to produce a professional solopreneur strategy.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <textarea id="finalPrompt" readonly placeholder="Your generated prompt will appear here..."></textarea>
+      </div>
+    </section>
+
+    <footer>
+      Copyright &copy; <script>document.write(new Date().getFullYear())</script> Siva Prasad Mukherjee. All Rights Reserved.
+    </footer>
+  </div>
+
+  <div id="toast" class="toast">Copied to clipboard</div>
+
+  <script>
+    function buildPrompt() {
+      const demandVal = document.getElementById('demand').value || "[EMPTY DEMAND]";
+      const audienceVal = document.getElementById('audience').value || "[EMPTY AUDIENCE]";
+      const portfolioVal = document.getElementById('portfolio').value || "[EMPTY PORTFOLIO]";
+      const bizNameVal = document.getElementById('bizName').value || "[EMPTY BUSINESS NAME]";
+
+      // THE PROMPT TEMPLATE - PRESERVED EXACTLY
+      const promptTemplate = `ROLE
+
+You are an expert Pinterest Strategist, Brand Positioning Expert, Pinterest SEO Specialist, and Digital Product Marketing Consultant.
+
+Your job is to transform a validated market demand and product portfolio into a complete Pinterest business strategy for a solo digital product creator.
+
+Do not invent random branding ideas.
+
+Derive every recommendation directly from the provided inputs.
+
+Always prioritize practicality, simplicity, and execution.
+
+---
+
+INPUTS
+
+Validated Demand
+
+${demandVal}
+
+Target Audience
+
+${audienceVal}
+
+Product Portfolio
+
+${portfolioVal}
+
+Business Name (Optional)
+
+${bizNameVal}
+
+---
+
+TASK
+
+Based only on the supplied inputs, create a Pinterest business strategy that is completely aligned with the identified demand and products.
+
+Your recommendations should be realistic for a solo creator building a Pinterest-driven digital product business.
+
+Avoid generic advice.
+
+Avoid unnecessary explanations.
+
+Think like a strategist first and a marketer second.
+
+---
+
+OUTPUT
+
+1. Brand Positioning
+
+Provide:
+
+- One-sentence Brand Positioning
+- Unique Value Proposition (UVP)
+- Brand Promise
+
+---
+
+2. Pinterest Profile
+
+Provide:
+
+- Business Name (if improvement is needed)
+- Display Name
+- Username Suggestions
+- Pinterest Bio
+
+---
+
+3. Pinterest SEO
+
+Provide:
+
+- Primary Keywords
+- Secondary Keywords
+
+---
+
+4. Pinterest Boards
+
+Recommend the most important boards.
+
+For each board provide:
+
+- Board Name
+- Purpose
+- Target Keywords
+
+---
+
+5. Pin Strategy
+
+Recommend:
+
+- Core Content Pillars
+- Types of Pins to Create
+- CTA Style
+
+---
+
+6. Product Promotion Strategy
+
+Recommend:
+
+- Which product should be promoted first
+- Which products should be promoted together
+- Which products should be promoted later
+
+---
+
+7. Next Action Plan
+
+List the next 10 practical steps in the correct order so the business can start immediately.
+
+---
+
+RULES
+
+- Derive every recommendation from the validated demand.
+- Never recommend anything unrelated to the products.
+- Keep the strategy simple and practical.
+- Think like a successful solopreneur, not a large company.
+- Prioritize execution over perfection.
+- Avoid fluff and unnecessary theory.
+- If important information is missing, make a reasonable assumption and clearly mention it.
+- The final strategy should feel actionable, focused, and ready to implement.`;
+
+      document.getElementById('finalPrompt').value = promptTemplate;
+    }
+
+    async function copyText() {
+      const el = document.getElementById('finalPrompt');
+      if (!el.value) return;
+      await navigator.clipboard.writeText(el.value);
+      const t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    function clearAll() {
+      ['demand','audience','portfolio','bizName','finalPrompt'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+    }
+  </script>
+</body>
+</html>

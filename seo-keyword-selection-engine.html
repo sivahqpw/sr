@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEO KEYWORD SELECTION ENGINE</title>
+  <style>
+    :root {
+      /* COLOUR PALETTE - Radical Reports Style */
+      --primary: #204d4f;      /* Deep Teal - Primary */
+      --secondary: #426a6c;    /* Muted Teal - Secondary */
+      --accent: #739395;       /* Sage Teal - Accent */
+      --border-clr: #a9c1c2;   /* Soft Mint - Borders */
+      --light-bg: #dbeeef;     /* Pale Mint - Background */
+      
+      --ink: #1e2b2c;
+      --muted: #426a6c;
+      --paper: #ffffff;
+      --page-bg: var(--light-bg);
+      --line: var(--border-clr);
+      --shadow: 0 10px 30px rgba(32, 77, 79, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--page-bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .page-wrap {
+      width: min(900px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 40px 0 80px;
+    }
+
+    /* HEADER */
+    .hero {
+      text-align: left;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-clr);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--primary);
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 16px;
+      max-width: 700px;
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+
+    /* CARDS */
+    .section-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .section-head {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 24px;
+      background: #fcfdfe;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .step-icon {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      background: var(--primary);
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+
+    .section-head p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section-body { padding: 24px; }
+
+    label {
+      display: block;
+      margin: 0 0 6px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--secondary);
+    }
+
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border-clr);
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font: inherit;
+      color: var(--ink);
+      outline: none;
+      transition: all 0.2s ease;
+      margin-bottom: 20px;
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(32, 77, 79, 0.08);
+    }
+
+    #finalPrompt {
+      background: #f9fbfc;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 13px;
+      min-height: 400px;
+    }
+
+    /* BUTTONS */
+    .button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+
+    button, .link-button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .primary-btn { color: #fff; background: var(--primary); }
+    .primary-btn:hover { background: var(--secondary); transform: translateY(-1px); }
+
+    .secondary-btn { color: var(--primary); background: #fff; border: 1px solid var(--border-clr); }
+    .secondary-btn:hover { background: #f0f6f6; }
+
+    .copy-btn { color: #fff; background: var(--accent); }
+    .copy-btn:hover { background: var(--secondary); }
+
+    .toast {
+      position: fixed;
+      left: 50%; bottom: 30px; transform: translateX(-50%);
+      background: var(--primary); color: #fff;
+      padding: 8px 16px; border-radius: 8px; font-size: 13px;
+      opacity: 0; transition: 0.3s; pointer-events: none;
+      z-index: 1000;
+    }
+    .toast.show { opacity: 1; }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--accent);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrap">
+    <header class="hero">
+      <h1>SEO KEYWORD SELECTION ENGINE</h1>
+      <p class="subtitle">Evaluate and select the most strategic keyword that your content can genuinely own based on search intent and positioning strength.</p>
+    </header>
+
+    <section class="section-card">
+      <div class="section-head">
+        <div class="step-icon">🎯</div>
+        <div>
+          <h2>Input Configuration</h2>
+          <p>Provide your product details and keyword shortlist below.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <label for="descInput">Product / Content Description</label>
+        <textarea id="descInput" placeholder="Describe what the product or content actually delivers..."></textarea>
+
+        <label for="keywordsInput">Shortlisted SEO Keywords</label>
+        <textarea id="keywordsInput" placeholder="List your potential SEO keywords here..."></textarea>
+
+        <div class="button-row">
+          <button class="primary-btn" onclick="generatePrompt()">Generate Strategy Prompt</button>
+          <button class="copy-btn" onclick="copyText()">Copy Final Prompt</button>
+          <a class="link-button secondary-btn" href="https://chatgpt.com/" target="_blank">Open ChatGPT</a>
+          <button class="secondary-btn" onclick="clearAll()">Clear</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-head">
+        <div class="step-icon">📋</div>
+        <div>
+          <h2>Final Strategy Prompt</h2>
+          <p>Copy this prompt and paste it into your AI tool.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <textarea id="finalPrompt" readonly placeholder="The generated prompt will appear here..."></textarea>
+      </div>
+    </section>
+
+    <footer>
+      Copyright &copy; <script>document.write(new Date().getFullYear())</script> SEO Keyword Selection Engine.
+    </footer>
+  </div>
+
+  <div id="toast" class="toast">Copied to clipboard</div>
+
+  <script>
+    function generatePrompt() {
+      const desc = document.getElementById('descInput').value;
+      const keywords = document.getElementById('keywordsInput').value;
+
+      // PROMPT CONTENT PRESERVED EXACTLY AS PROVIDED
+      const promptTemplate = `ROLE
+
+You are an expert SEO Strategist, Search Intent Analyst, Product Positioning Strategist, and Decision-Making Consultant.
+
+Your job is NOT to perform keyword research.
+
+Your job is to evaluate a shortlisted list of SEO keywords and determine which keyword is the best strategic choice for the given product or content.
+
+Think like an experienced SEO consultant making a long-term positioning decision.
+
+---
+
+OBJECTIVE
+
+Select the keyword that best aligns with:
+
+- what the product/content genuinely delivers
+- user search intent
+- user expectations
+- long-term topical authority
+- positioning strength
+- content scalability
+
+Do NOT recommend a keyword simply because it appears broader or more popular.
+
+The winning keyword is the one that the product/content can genuinely own.
+
+---
+
+INPUT
+
+Product / Content Description
+
+[Product / Content Description]
+
+---
+
+Shortlisted SEO Keywords
+
+[Shortlisted SEO Keywords]
+
+---
+
+PROCESS
+
+Follow this process exactly.
+
+Phase 1 — Understand the Product / Content
+
+Identify:
+
+- actual delivery
+- transformation
+- core promise
+- strengths
+- limitations
+- ideal audience
+
+Never invent benefits.
+
+---
+
+Phase 2 — Evaluate Every Keyword
+
+For EACH keyword, evaluate:
+
+Search Intent
+
+What is the searcher actually looking for?
+
+---
+
+User Expectation
+
+What would the searcher expect to receive?
+
+---
+
+Delivery Match
+
+How well does the product/content satisfy that expectation?
+
+---
+
+Positioning Potential
+
+Can this keyword clearly differentiate the product/content?
+
+---
+
+Authority Potential
+
+Would consistently creating content around this keyword help build topical authority?
+
+---
+
+Content Expansion Potential
+
+Can this keyword naturally support many future articles, videos, guides, FAQs, tutorials, and resources?
+
+---
+
+Risk Analysis
+
+Identify risks such as:
+
+- over-promising
+
+- attracting the wrong audience
+
+- weak relevance
+
+- unclear positioning
+
+---
+
+Keyword Score
+
+Score each keyword (0–100) using:
+
+- Delivery Match
+- Search Intent Match
+- Positioning Strength
+- Authority Potential
+- Content Scalability
+- Trustworthiness
+
+---
+
+Phase 3 — Compare All Keywords
+
+Rank every keyword from strongest to weakest.
+
+Explain WHY.
+
+---
+
+Phase 4 — Make the Decision
+
+Recommend ONE primary keyword.
+
+Recommend supporting secondary keywords.
+
+Explain the strategic reasoning.
+
+---
+
+OUTPUT
+
+PRODUCT UNDERSTANDING
+
+Actual Delivery
+
+---
+
+Core Promise
+
+---
+
+Ideal Audience
+
+---
+
+KEYWORD EVALUATION
+
+Evaluate EVERY shortlisted keyword using this format.
+
+Keyword
+
+Search Intent
+
+User Expectation
+
+Delivery Match
+
+Positioning Potential
+
+Authority Potential
+
+Content Expansion Potential
+
+Risk Analysis
+
+Overall Score (0–100)
+
+Recommendation
+
+---
+
+FINAL RANKING
+
+Rank every keyword from strongest to weakest.
+
+---
+
+RECOMMENDED PRIMARY KEYWORD
+
+Explain why this is the strongest long-term strategic keyword.
+
+---
+
+RECOMMENDED SECONDARY KEYWORDS
+
+List supporting keywords.
+
+Explain how each supports the primary keyword.
+
+---
+
+CONTENT CLUSTER OPPORTUNITY
+
+Suggest future content categories that can strengthen authority around the recommended primary keyword.
+
+---
+
+FINAL STRATEGIC DECISION
+
+Summarize:
+
+- Why this keyword should become the primary SEO focus.
+- Why the other keywords were not selected as the primary keyword.
+- How the selected keyword supports long-term SEO growth and brand positioning.
+
+---
+
+RULES
+
+- Think strategically before deciding.
+- Never prioritize search volume alone.
+- Never recommend a keyword the product/content cannot genuinely satisfy.
+- Prioritize long-term topical authority over short-term traffic.
+- Prioritize trust over clicks.
+- Return only the requested output.`;
+
+      const finalPrompt = promptTemplate
+        .replace('[Product / Content Description]', desc)
+        .replace('[Shortlisted SEO Keywords]', keywords);
+
+      document.getElementById('finalPrompt').value = finalPrompt;
+    }
+
+    async function copyText() {
+      const el = document.getElementById('finalPrompt');
+      if (!el.value) return;
+      await navigator.clipboard.writeText(el.value);
+      const t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    function clearAll() {
+      document.getElementById('descInput').value = '';
+      document.getElementById('keywordsInput').value = '';
+      document.getElementById('finalPrompt').value = '';
+    }
+  </script>
+</body>
+</html>

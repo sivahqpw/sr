@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Creation - Product Communication Engine</title>
+  <style>
+    :root {
+      /* RADICAL REPORTS COLOUR PALETTE */
+      --primary: #204d4f;      /* Deep Teal - Primary */
+      --secondary: #426a6c;    /* Muted Teal - Secondary */
+      --accent: #739395;       /* Sage Teal - Accent */
+      --border-clr: #a9c1c2;   /* Soft Mint - Borders */
+      --light-bg: #dbeeef;     /* Pale Mint - Background */
+      
+      --ink: #1e2b2c;
+      --muted: #426a6c;
+      --paper: #ffffff;
+      --page-bg: var(--light-bg);
+      --line: var(--border-clr);
+      --shadow: 0 10px 30px rgba(32, 77, 79, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--page-bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .page-wrap {
+      width: min(1000px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 40px 0 80px;
+    }
+
+    /* HEADER */
+    .hero {
+      text-align: left;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-clr);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--primary);
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 16px;
+      max-width: 700px;
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+
+    /* CARDS */
+    .section-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .section-head {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 24px;
+      background: #fcfdfe;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .step-icon {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      background: var(--primary);
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+
+    .section-body { padding: 24px; }
+
+    /* INPUT GRID */
+    .input-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .full-width {
+      grid-column: span 2;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 6px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--secondary);
+    }
+
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border-clr);
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font: inherit;
+      color: var(--ink);
+      outline: none;
+      transition: all 0.2s ease;
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(32, 77, 79, 0.08);
+    }
+
+    #generatedPrompt {
+      min-height: 450px;
+      background: #f9fbfc;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 13px;
+      color: var(--primary);
+    }
+
+    /* BUTTONS */
+    .button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+
+    button, .link-button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .primary-btn { color: #fff; background: var(--primary); }
+    .primary-btn:hover { background: var(--secondary); transform: translateY(-1px); }
+
+    .secondary-btn { color: var(--primary); background: #fff; border: 1px solid var(--border-clr); }
+    .secondary-btn:hover { background: #f0f6f6; }
+
+    .copy-btn { color: #fff; background: var(--accent); }
+    .copy-btn:hover { background: var(--secondary); }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      left: 50%; bottom: 30px; transform: translateX(-50%);
+      background: var(--primary); color: #fff;
+      padding: 8px 16px; border-radius: 8px; font-size: 13px;
+      opacity: 0; transition: 0.3s; pointer-events: none;
+      z-index: 1000;
+    }
+    .toast.show { opacity: 1; }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .input-grid { grid-template-columns: 1fr; }
+      .full-width { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrap">
+    <header class="hero">
+      <h1>Product Creation - Step 3 - Product Communication Engine</h1>
+      <p class="subtitle">Ensure your product messaging, titles, and sales copy remain perfectly faithful to the core Search Demand and Required Delivery.</p>
+    </header>
+
+    <section class="section-card">
+      <div class="section-head">
+        <div class="step-icon">📣</div>
+        <div>
+          <h2>Input Product Data</h2>
+          <p>Provide the data identified in Steps 1 & 2 to generate your communication strategy.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="input-grid">
+          <div>
+            <label for="keywordInput">[Search Keyword]</label>
+            <textarea id="keywordInput" placeholder="Paste the Search Keyword..."></textarea>
+          </div>
+          <div>
+            <label for="questionInput">[The Question]</label>
+            <textarea id="questionInput" placeholder="Paste The Question..."></textarea>
+          </div>
+          <div>
+            <label for="reasonInput">[The Reason]</label>
+            <textarea id="reasonInput" placeholder="Paste The Reason..."></textarea>
+          </div>
+          <div>
+            <label for="needInput">[The Need]</label>
+            <textarea id="needInput" placeholder="Paste The Need..."></textarea>
+          </div>
+          <div>
+            <label for="deliveryInput">[The Required Delivery]</label>
+            <textarea id="deliveryInput" placeholder="Paste The Required Delivery..."></textarea>
+          </div>
+          <div>
+            <label for="productInput">[Product]</label>
+            <textarea id="productInput" placeholder="Paste the Product definition from Step 2..."></textarea>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button class="primary-btn" onclick="buildPrompt()">Generate Communication Prompt</button>
+          <button class="copy-btn" onclick="copyText()">Copy Prompt</button>
+          <a class="link-button secondary-btn" href="https://chatgpt.com/" target="_blank">Open ChatGPT</a>
+          <button class="secondary-btn" onclick="clearAll()">Clear</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-head">
+        <div class="step-icon">📋</div>
+        <div>
+          <h2>Communication Assets Prompt</h2>
+          <p>Copy this prompt into your AI to generate names, descriptions, and sales copy.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <textarea id="generatedPrompt" readonly placeholder="Your generated prompt will appear here..."></textarea>
+      </div>
+    </section>
+
+    <footer>
+      Copyright &copy; <script>document.write(new Date().getFullYear())</script> Product Communication Engine.
+    </footer>
+  </div>
+
+  <div id="toast" class="toast">Copied to clipboard</div>
+
+  <script>
+    function buildPrompt() {
+      const keyword = document.getElementById('keywordInput').value;
+      const question = document.getElementById('questionInput').value;
+      const reason = document.getElementById('reasonInput').value;
+      const need = document.getElementById('needInput').value;
+      const delivery = document.getElementById('deliveryInput').value;
+      const product = document.getElementById('productInput').value;
+
+      // PROMPT PRESERVED EXACTLY AS PROVIDED
+      const fullPrompt = `Core Principle
+
+The demand hidden within a search keyword determines the required delivery.
+The required delivery determines the product.
+
+Every communication element must faithfully communicate the Required Delivery.
+
+---
+
+ROLE
+
+You are an expert Product Positioning Strategist, Product Naming Specialist, Brand Messaging Expert, and Conversion Copywriter.
+
+Your responsibility is NOT to redesign the product.
+
+Your responsibility is to communicate the product so that every element consistently reinforces the Required Delivery.
+
+---
+
+INPUT
+
+Search Keyword
+
+${keyword}
+
+The Question
+
+${question}
+
+The Reason
+
+${reason}
+
+The Need
+
+${need}
+
+The Required Delivery
+
+${delivery}
+
+Product
+
+${product}
+
+---
+
+TASK
+
+Generate the following communication assets.
+
+1. Product Positioning
+
+State why this product is the appropriate solution for the demand revealed by the search keyword.
+
+Keep it concise, clear and customer-focused.
+
+---
+
+2. Product Name
+
+Create a memorable product name that identifies the product.
+
+---
+
+3. Product Title
+
+Write a benefit-driven title that promises the Required Delivery.
+
+---
+
+4. Product Subtitle
+
+Write a subtitle that clarifies the Required Delivery and complements the title.
+
+---
+
+5. Product Description
+
+Write a compelling product description that explains:
+
+- what the product delivers
+- how it delivers it
+- who it is for
+- why it effectively satisfies the identified need
+
+---
+
+6. Product Features
+
+List the key features of the product.
+
+Every feature must directly support the Required Delivery.
+
+---
+
+7. Product Benefits
+
+Explain what each feature enables the customer to achieve.
+
+Focus on outcomes rather than functions.
+
+---
+
+8. Sales Page Message
+
+Write persuasive sales copy that reinforces belief that this product provides the Required Delivery.
+
+The copy should build confidence, reduce hesitation, and motivate action without exaggeration or misleading claims.
+
+---
+
+OUTPUT FORMAT
+
+Product Positioning
+
+...
+
+Product Name
+
+...
+
+Product Title
+
+...
+
+Product Subtitle
+
+...
+
+Product Description
+
+...
+
+Product Features
+
+...
+
+Product Benefits
+
+...
+
+Sales Page Message
+
+...
+
+---
+
+MANDATORY RULES
+
+- Every output must remain faithful to the Required Delivery.
+- Never introduce promises beyond the Required Delivery.
+- Every communication element must consistently reinforce the same promise.
+- The Product Title must promise the Required Delivery.
+- The Subtitle must clarify the promise.
+- The Description must explain the promise.
+- The Features must support the promise.
+- The Benefits must express the value of the promise.
+- The Sales Page must strengthen belief in the promise.
+- Do not change the Search Keyword, Need, Required Delivery, or Product.
+- Think from the customer's perspective while remaining faithful to the Required Delivery.`;
+
+      document.getElementById('generatedPrompt').value = fullPrompt;
+    }
+
+    async function copyText() {
+      const el = document.getElementById('generatedPrompt');
+      if (!el.value) return;
+      await navigator.clipboard.writeText(el.value);
+      const t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    function clearAll() {
+      ['keywordInput', 'questionInput', 'reasonInput', 'needInput', 'deliveryInput', 'productInput', 'generatedPrompt'].forEach(id => {
+        document.getElementById(id).value = '';
+      });
+    }
+  </script>
+</body>
+</html>

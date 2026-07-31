@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Creation - Search Demand Decoder</title>
+  <style>
+    :root {
+      /* RADICAL REPORTS COLOUR PALETTE */
+      --primary: #204d4f;      /* Deep Teal */
+      --secondary: #426a6c;    /* Muted Teal */
+      --accent: #739395;       /* Sage Teal */
+      --border-clr: #a9c1c2;   /* Soft Mint */
+      --light-bg: #dbeeef;     /* Pale Mint */
+      
+      --ink: #1e2b2c;
+      --muted: #426a6c;
+      --paper: #ffffff;
+      --page-bg: var(--light-bg);
+      --line: var(--border-clr);
+      --shadow: 0 10px 30px rgba(32, 77, 79, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--page-bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .page-wrap {
+      width: min(900px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 40px 0 80px;
+    }
+
+    /* HEADER */
+    .hero {
+      text-align: left;
+      margin-bottom: 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-clr);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--primary);
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 16px;
+      max-width: 700px;
+      color: var(--secondary);
+      line-height: 1.6;
+    }
+
+    /* CARDS */
+    .section-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .section-head {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 24px;
+      background: #fcfdfe;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .step-icon {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      background: var(--primary);
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+
+    .section-head p {
+      margin: 2px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section-body { padding: 24px; }
+
+    label {
+      display: block;
+      margin: 0 0 6px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--secondary);
+    }
+
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border-clr);
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font: inherit;
+      color: var(--ink);
+      outline: none;
+      transition: all 0.2s ease;
+      margin-bottom: 20px;
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(32, 77, 79, 0.08);
+    }
+
+    #finalPrompt {
+      background: #f9fbfc;
+      font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      font-size: 13px;
+      min-height: 400px;
+      color: var(--primary);
+    }
+
+    /* BUTTONS */
+    .button-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+
+    button, .link-button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.2s ease;
+    }
+
+    .primary-btn { color: #fff; background: var(--primary); }
+    .primary-btn:hover { background: var(--secondary); transform: translateY(-1px); }
+
+    .secondary-btn { color: var(--primary); background: #fff; border: 1px solid var(--border-clr); }
+    .secondary-btn:hover { background: #f0f6f6; }
+
+    .copy-btn { color: #fff; background: var(--accent); }
+    .copy-btn:hover { background: var(--secondary); }
+
+    .toast {
+      position: fixed;
+      left: 50%; bottom: 30px; transform: translateX(-50%);
+      background: var(--primary); color: #fff;
+      padding: 8px 16px; border-radius: 8px; font-size: 13px;
+      opacity: 0; transition: 0.3s; pointer-events: none;
+      z-index: 1000;
+    }
+    .toast.show { opacity: 1; }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: var(--accent);
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrap">
+    <header class="hero">
+      <h1>Product Creation - Step1 - Search Demand Decoder</h1>
+      <p class="subtitle">Discover the hidden demand behind a search keyword to determine the required delivery for your next product.</p>
+    </header>
+
+    <section class="section-card">
+      <div class="section-head">
+        <div class="step-icon">🔍</div>
+        <div>
+          <h2>Input Configuration</h2>
+          <p>Paste your search keyword to decode the underlying intent.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <label for="keywordInput">[Paste the Search Keyword here]</label>
+        <textarea id="keywordInput" placeholder="e.g. Etsy SEO for beginners, Budget meal planning..."></textarea>
+
+        <div class="button-row">
+          <button class="primary-btn" onclick="generatePrompt()">Generate Demand Prompt</button>
+          <button class="copy-btn" onclick="copyText()">Copy Final Prompt</button>
+          <a class="link-button secondary-btn" href="https://chatgpt.com/" target="_blank">Open ChatGPT</a>
+          <button class="secondary-btn" onclick="clearAll()">Clear</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-head">
+        <div class="step-icon">📋</div>
+        <div>
+          <h2>Final Search Decoder Prompt</h2>
+          <p>Use this prompt to identify the Question, Reason, Need, and Required Delivery.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <textarea id="finalPrompt" readonly placeholder="The generated prompt will appear here..."></textarea>
+      </div>
+    </section>
+
+    <footer>
+      Copyright &copy; <script>document.write(new Date().getFullYear())</script> Search Demand Decoder.
+    </footer>
+  </div>
+
+  <div id="toast" class="toast">Copied to clipboard</div>
+
+  <script>
+    function generatePrompt() {
+      const keyword = document.getElementById('keywordInput').value;
+
+      // PROMPT CONTENT PRESERVED EXACTLY AS PROVIDED
+      const promptTemplate = `Core Principle
+
+The demand hidden within a search keyword determines the required delivery. The required delivery determines the product.
+
+ROLE
+
+You are an expert Search Demand Analyst.
+
+Your responsibility is to discover the hidden demand behind a search keyword.
+
+Do NOT think about products, services, business ideas, marketing, SEO optimization, branding, positioning, titles, descriptions, pricing, implementation, or solutions.
+
+Your responsibility ends after identifying the Required Delivery.
+
+---
+
+INPUT
+
+Search Keyword:
+
+[Paste the Search Keyword here]
+
+---
+
+TASK
+
+Analyze the search keyword from the searcher's perspective.
+
+Identify the following four layers.
+
+1. The Question
+
+What question is the searcher actually asking?
+
+Write the question naturally as the searcher would ask it.
+
+---
+
+2. The Reason
+
+Why is the searcher asking this question?
+
+Explain the situation, frustration, challenge, objective, or circumstance that motivated the search.
+
+---
+
+3. The Need
+
+What does the searcher really want?
+
+Describe the underlying need the searcher wants fulfilled.
+
+Focus on the need—not on products or solutions.
+
+---
+
+4. The Required Delivery
+
+Based on the identified need,
+
+What must be delivered to completely satisfy that need?
+
+Describe only the required delivery.
+
+Do NOT mention products, courses, ebooks, prompts, software, tools, services, business ideas, or implementation methods.
+
+---
+
+OUTPUT FORMAT
+
+Search Keyword
+
+...
+
+The Question
+
+...
+
+The Reason
+
+...
+
+The Need
+
+...
+
+The Required Delivery
+
+...
+
+---
+
+MANDATORY RULES
+
+- Think only from the searcher's perspective.
+- Stay faithful to the search keyword.
+- Follow the logical sequence:
+  - Search Keyword
+  - The Question
+  - The Reason
+  - The Need
+  - The Required Delivery
+- Do NOT skip any step.
+- Do NOT jump directly from the search keyword to the required delivery.
+- Do NOT think about products or implementations.
+- The Required Delivery must describe what must be provided, not how it will be provided.
+- If the search keyword has multiple possible interpretations, identify the dominant search intent and explain your reasoning briefly.
+- Stop after identifying the Required Delivery.`;
+
+      const finalPrompt = promptTemplate.replace('[Paste the Search Keyword here]', keyword);
+      document.getElementById('finalPrompt').value = finalPrompt;
+    }
+
+    async function copyText() {
+      const el = document.getElementById('finalPrompt');
+      if (!el.value) return;
+      await navigator.clipboard.writeText(el.value);
+      const t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    function clearAll() {
+      document.getElementById('keywordInput').value = '';
+      document.getElementById('finalPrompt').value = '';
+    }
+  </script>
+</body>
+</html>
